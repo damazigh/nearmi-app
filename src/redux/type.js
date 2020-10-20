@@ -1,0 +1,1 @@
+export const LNG_CHANGE = 'LNG_CHANGE';

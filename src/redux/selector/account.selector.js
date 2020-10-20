@@ -1,0 +1,1 @@
+export const currentLngSelector = state => state.accountReducer.currentLanguage;

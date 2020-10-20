@@ -1,0 +1,52 @@
+.dropdown {
+  position: absolute;
+  top: 47px;
+  width: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 0, 0, 0.05) !important;
+  transform: translateX(-45%);
+  background-color: #fff !important;
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  margin-bottom: 17px;
+}
+
+.menu {
+  width: 100%;
+}
+
+/* CSSTransition classes  */
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
+button.title-bg-color {
+  background-color: var(--color-bg-alt-1);
+}
+.little-right {
+  margin-right: var(--margin-alt-1);
+}
