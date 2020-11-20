@@ -1,11 +1,13 @@
-stage:
+stages:
   - build
-  script: 
+docker-img:
+  stage: build
+  script:
     - >
-       ENV=${TARGET_ENV};
-       if [[ -z ${ENV} ]];
-       then
-         ENV="dev";
-       fi
-       docker build -f ./docker/Dockerfile -t nearmi-${ENV}:app;
-       echo "built image nearmi-${ENV}:app";
+      ENV=${TARGET_ENV};
+      if [[ -z ${ENV} ]];
+      then
+        ENV="dev";
+      fi
+      docker build -f ./docker/Dockerfile -t nearmi-${ENV}:app;
+      echo "built image nearmi-${ENV}:app";
