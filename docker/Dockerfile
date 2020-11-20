@@ -1,14 +1,15 @@
 # build environment
-FROM node:13.12.0-alpine as build
+FROM node:lts as build
+LABEL stage=builder
 WORKDIR /app
 ENV TARGET_ENV=dev
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-COPY .. ./
-RUN npm run start:${TARGET_ENV}
+RUN npm  install react-scripts@3.4.1 -g --silent
+COPY . ./.
+RUN npm run build:${TARGET_ENV}
 
 # production environment
 FROM nginx:stable-alpine

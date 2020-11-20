@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 docker-img:
   stage: build
   script:
@@ -9,7 +10,14 @@ docker-img:
       then
         ENV="dev";
       fi
-      docker build -f ./docker/Dockerfile -t nearmi-${ENV}:app;
-      echo "built image nearmi-${ENV}:app";
+      export TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
+      echo "building image nearmi-${ENV}/app:${TAG}";
+      eval docker build -f ./docker/Dockerfile -t nearmi-${ENV}/app:${TAG} .;
+      echo "Cleaning dangling images";
+      eval docker image rmi -f $(docker images -f "dangling=true" -q);
   tags:
     - shell
+docker-pull:
+  stage: deploy
+  script:
+    -
