@@ -1,1 +1,3 @@
 export const LNG_CHANGE = 'LNG_CHANGE';
+export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
+export const ANONYMOUS = 'ANONYMOUS';
