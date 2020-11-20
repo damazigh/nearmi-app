@@ -11,3 +11,5 @@ docker-img:
       fi
       docker build -f ./docker/Dockerfile -t nearmi-${ENV}:app;
       echo "built image nearmi-${ENV}:app";
+  tags:
+    - shell

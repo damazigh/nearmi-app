@@ -5,7 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import AmplifyBridge from './redux/amplify-bridge';
 
 ReactDOM.render(
   <React.StrictMode>
