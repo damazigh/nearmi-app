@@ -1,26 +1,22 @@
 stages:
   - build
-  - deploy
 docker-img:
   stage: build
   script:
-    - >
+    - |
       ENV=${TARGET_ENV};
       if [[ -z ${ENV} ]];
       then
         ENV="dev";
-        export TARGET_ENV=${ENV}
       fi
-      export TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
+      TARGET_ENV=${ENV};
+      TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
       echo "building image nearmi-${ENV}/app:${TAG}";
-      eval docker build -f ./docker/Dockerfile -t nearmi-${ENV}/app:${TAG} .;
-      eval docker image tag nearmi-${ENV}/app:${TAG} nearmi.io/nearmi-dev/app;
+      docker build -f ./Dockerfile -t nearmi-${ENV}/app:${TAG} .;
+      docker tag nearmi-${ENV}/app:${TAG} nearmi.io/nearmi-${ENV}/app:${TAG};
+      echo "push built image"
+      docker push nearmi.io/nearmi-${ENV}/app:${TAG};
       echo "Cleaning dangling images";
-      eval docker image rmi -f $(docker images -f "dangling=true" -q);
+      docker image rmi -f $(docker images -f "dangling=true" -q);
   tags:
     - shell
-docker-pull:
-  stage: deploy
-  script:
-    - echo "pull image to nearmi-hub..."
-    - eval docker pull nearmi.io/nearmi-${TARGET_ENV}/app
