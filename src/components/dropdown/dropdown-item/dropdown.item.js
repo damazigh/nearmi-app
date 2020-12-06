@@ -12,7 +12,11 @@ function DropdownItem(props) {
   };
   const render = () => {
     if (props.byPassWrapper) {
-      return <div onClick={handleClick}>{props.children}</div>;
+      return (
+        <div className="menu-item" onClick={handleClick}>
+          {props.children}
+        </div>
+      );
     } else {
       return (
         <a href="#" className="menu-item" onClick={handleClick}>

@@ -1,29 +1,40 @@
-import React from 'react'
-import Navbar from './components/navbar/navbar'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-
-import './App.css'
+import React from 'react';
+import Navbar from './components/navbar/navbar';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import './App.css';
+import Main from './pages/main';
+import { Grid } from '@material-ui/core';
 const theme = createMuiTheme({
-    palette: {
-        primary: {
-            light: '#fafafa',
-            main: '#fafafa',
-            dark: '#c7c7c7',
-        },
-        secondary: {
-            light: '#379683',
-            main: '#05386B',
-            dark: '#05386B',
-        },
+  palette: {
+    primary: {
+      light: '#64d8cb',
+      main: '#26a69a',
+      dark: '#00766c',
     },
-})
+    secondary: {
+      light: '#379683',
+      main: '#05386B',
+      dark: '#05386B',
+    },
+  },
+});
 function App() {
-    return (
-        <div>
-            <ThemeProvider theme={theme}>
-                <Navbar />
-            </ThemeProvider>
-        </div>
-    )
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Navbar />
+          <Grid className="container">
+            <Switch>
+              <Route exact path="/home">
+                <Main />
+              </Route>
+            </Switch>
+          </Grid>
+        </BrowserRouter>
+      </ThemeProvider>
+    </div>
+  );
 }
-export default App
+export default App;

@@ -1,49 +1,51 @@
 .icon-right {
-    margin-left: auto;
+  margin-left: auto;
 }
-.left-icon, .left-icon-secondary {
-    color: #455a64    ;
-    margin-right: 5px;
+.left-icon,
+.left-icon-secondary {
+  color: #455a64;
+  margin-right: 5px;
 }
 /**primary svg icon size and color*/
 .left-icon svg {
-    fill: #9e9e9e;
-    width: 30px;
-    height: 30px;
+  fill: #9e9e9e;
+  width: 30px;
+  height: 30px;
 }
 /*secondary menu icon size and color*/
 .left-icon-secondary svg,
 .right-icon-secondary svg {
-    fill: #9e9e9e;
-    width: auto;
-    height: auto;
+  fill: #9e9e9e;
+  width: auto;
+  height: auto;
 }
 .item-text {
-    font-size: small;
+  font-size: small;
 }
 .menu-item .icon-button {
-    margin-right: 0.5rem;
-}  
+  margin-right: 0.5rem;
+}
 .menu-item .icon-button:hover {
-    filter: none;
-} 
+  filter: none;
+}
 .menu-item:hover {
-    background-color: #e0e0e0;
-}  
+  background-color: #e0e0e0;
+}
 .menu-item {
-    height: auto;
-    display: flex;
-    align-items: center;
-    border-radius: var(--border-radius);
-    transition: background var(--speed);
-    padding-inline-start: 0.5rem;
-    padding-inline-end: 0.5rem;
-    margin-right: 17px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.5rem;
+  margin-right: 17px;
+  color: rgba(0, 0, 0, 0.94);
 }
 a.menu-item {
-    color: black;
-    text-decoration: none;
+  color: rgba(0, 0, 0, 0.94);
+  text-decoration: none;
 }
 a.menu-item:hover {
-    text-decoration: none;
+  text-decoration: none;
 }

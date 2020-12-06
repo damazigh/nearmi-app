@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     display: 'flex',
+    color: 'var(--color-primary)',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -25,22 +26,20 @@ const useStyles = makeStyles((theme) => ({
 function Navbar() {
   const classes = useStyles();
   const buildIconBtn = (icon) => {
-    return (
-      <IconButton>
-        {icon}
-      </IconButton>
-    );
+    return <IconButton>{icon}</IconButton>;
   };
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{ backgroundColor: 'var(--color-appbar)' }}
+      >
         <Toolbar>
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <IconButton
                 edge="start"
                 className={classes.menuButton}
-                color="inherit"
                 aria-label="menu"
               >
                 <MenuIcon />
@@ -48,8 +47,8 @@ function Navbar() {
             </Grid>
 
             <Grid item xs={6} className="flex justify-end">
-              <NavItem icon={buildIconBtn(<PersonIcon/>)}>
-                  <Account/>
+              <NavItem icon={buildIconBtn(<PersonIcon />)}>
+                <Account />
               </NavItem>
             </Grid>
           </Grid>

@@ -1,0 +1,25 @@
+@media (min-width: 768px) {
+  .root {
+    width: 50%;
+    margin-top: var(--margin-alt-3);
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 100%;
+    margin-top: var(--margin-alt-2);
+  }
+}
+
+.icon-button {
+  background-color: var(--color-primary) !important;
+}
+
+.divider {
+  height: inherit !important;
+}
+.wrapper {
+  background-color: var(--color-primary) !important;
+  padding: 3%;
+}
