@@ -4,6 +4,12 @@ const initialState = {
   loggedIn: false,
   currentLanguage: 'en',
   user: null,
+  address: {
+    coords: {
+      latitude: 0.0,
+      longitude: 0.0,
+    },
+  },
 };
 
 let newState = null;

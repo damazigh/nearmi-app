@@ -1,7 +1,14 @@
 {
-    "components": {
-        "account": {
-            "lng": "Language"
-        }
+  "components": {
+    "account": {
+      "lng": "Language"
     }
+  },
+  "pages": {
+    "main": {
+      "seachAddrPlaceholder": "Search address",
+      "geoLocateBtnTitle": "Geo locate me",
+      "searchBtnTitle": "Search"
+    }
+  }
 }

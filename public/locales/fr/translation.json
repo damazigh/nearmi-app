@@ -3,5 +3,12 @@
     "account": {
       "lng": "Langues"
     }
+  },
+  "pages": {
+    "main": {
+      "seachAddrPlaceholder": "Rechercher une adresse",
+      "geoLocateBtnTitle": "Géo localisez moi",
+      "searchBtnTitle": "Rechercher"
+    }
   }
 }

@@ -3,6 +3,10 @@
     width: 50%;
     margin-top: var(--margin-alt-3);
   }
+  #menu-addr div:nth-child(3) {
+    width: 40% !important;
+    top: 138px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -10,16 +14,27 @@
     width: 100%;
     margin-top: var(--margin-alt-2);
   }
+  #menu-addr div:nth-child(3) {
+    width: 90% !important;
+    top: 130px !important;
+  }
 }
 
 .icon-button {
   background-color: var(--color-primary) !important;
 }
 
-.divider {
+.divider-h {
   height: inherit !important;
+}
+.divider-h-w {
+  width: inherit !important;
 }
 .wrapper {
   background-color: var(--color-primary) !important;
   padding: 3%;
+}
+.input {
+  flex: 1;
+  margin: 16px;
 }
