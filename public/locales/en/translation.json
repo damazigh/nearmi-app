@@ -12,6 +12,8 @@
     }
   },
   "feedback": {
-    "userDeniedGeolocation":"Geolocation error: you denied geolocation"
+    "userDeniedGeolocation": "Geolocation error: you denied geolocation",
+    "searchAddressUnavailable": "Search address service is unavailable, please try later",
+    "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field"
   }
 }

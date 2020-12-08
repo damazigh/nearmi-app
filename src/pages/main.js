@@ -30,10 +30,19 @@ export default function Main() {
   const geolocate = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        console.log('success !');
-        console.log(pos);
+        AddressService.searchReverseLocalisation(
+          pos.coords.longitude,
+          pos.coords.latitude
+        ).then((res) => {
+          if (res.data.features && res.data.features.length > 0) {
+            const feature = res.data.features[0];
+            setAddr(feature.properties.label);
+          } else {
+            showSnack(t('feedback.unknownGeolocation'), 'warn');
+          }
+        });
       },
-      (err) => {
+      () => {
         showSnack(t('feedback.userDeniedGeolocation'), 'error');
       }
     );
@@ -48,13 +57,16 @@ export default function Main() {
     setAddr(val);
     setAnchorEl(e.currentTarget);
     if (val && val.length > 5) {
-      AddressService.searchLocalisation(e.target.value).then((res) => {
-        if (res && res.data.features) {
-          setData(res.data.features);
-          setOpen(true);
-          console.log(data);
-        }
-      });
+      AddressService.searchLocalisation(e.target.value)
+        .then((res) => {
+          if (res && res.data.features) {
+            setData(res.data.features);
+            setOpen(true);
+          }
+        })
+        .catch(() =>
+          showSnack(t('feedback.searchAddressUnavailable', 'error'))
+        );
     }
   };
 

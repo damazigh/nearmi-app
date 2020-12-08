@@ -12,6 +12,8 @@
     }
   },
   "feedback": {
-    "userDeniedGeolocation":"Erreur de géolocation: vous avez refusé la géolocalisation"
+    "userDeniedGeolocation":"Erreur de géolocalisation: vous avez refusé la géolocalisation",
+    "searchAddressUnavailable": "Le service de recherche d'adresse est indisponible, veuillez réessayer ultérieurement",
+    "unknownGeolocation": "Géolocalisation inconnue, essayez de recherche votre adresse avec le champ de recherche d'adresse"
   }
 }
