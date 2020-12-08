@@ -9,18 +9,21 @@ import {
   Fade,
   MenuItem,
   Menu,
+  Backdrop,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOn from '@material-ui/icons/LocationOn';
 import './main.css';
 import { useTranslation } from 'react-i18next';
 import AddressService from '../service/address.service';
+import Autocomplete from '../components/autocomplete/autocomplete';
 
 export default function Main() {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [addr, setAddr] = useState('');
   /**
    * use navigator geolocaliation
    */
@@ -37,12 +40,17 @@ export default function Main() {
     );
   };
 
+  const backdrop = () => {
+    return <Backdrop open={false} role="menu" invisible={false}></Backdrop>;
+  };
+
   /**
    * when input trigger http call to autocomplete addresses
    * @param {*} e
    */
   const handleInput = (e) => {
     const val = e.target.value;
+    setAddr(val);
     setAnchorEl(e.currentTarget);
     if (val && val.length > 5) {
       AddressService.searchLocalisation(e.target.value).then((res) => {
@@ -55,17 +63,22 @@ export default function Main() {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (item) => {
     setAnchorEl(null);
     setOpen(false);
     setData([]);
+    if (item && item.properties && item.properties.label) {
+      setAddr(item.properties.label);
+    }
   };
   const buildItems = () => {
     console.log(data.length);
     const result = [];
     data.forEach((item) => {
       result.push(
-        <MenuItem onClick={handleClose}>{item.properties.label}</MenuItem>
+        <MenuItem onClick={() => handleClose(item)}>
+          {item.properties.label}
+        </MenuItem>
       );
     });
     return result;
@@ -81,6 +94,7 @@ export default function Main() {
             inputProps={{
               'aria-label': t('pages.main.seachAddrPlaceholder'),
             }}
+            value={addr}
             onInput={handleInput}
           />
           {(() => {
@@ -111,18 +125,16 @@ export default function Main() {
           </IconButton>
         </div>
       </Paper>
+      <div id="popper-container"></div>
       <div>
-        <Menu
-          id="menu-addr"
-          className="addr-menu"
-          anchorEl={anchorEl}
-          keepMounted
+        <Autocomplete
           open={open}
-          onClose={handleClose}
-          TransitionComponent={Fade}
+          anchorEl={anchorEl}
+          container={document.querySelector('#popper-container')}
+          className="root"
         >
           {buildItems()}
-        </Menu>
+        </Autocomplete>
       </div>
     </Grid>
   );

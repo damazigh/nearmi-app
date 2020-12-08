@@ -3,9 +3,8 @@
     width: 50%;
     margin-top: var(--margin-alt-3);
   }
-  #menu-addr div:nth-child(3) {
+  .menu-addr {
     width: 40% !important;
-    top: 138px !important;
   }
 }
 
@@ -14,9 +13,8 @@
     width: 100%;
     margin-top: var(--margin-alt-2);
   }
-  #menu-addr div:nth-child(3) {
+  .menu-addr {
     width: 90% !important;
-    top: 130px !important;
   }
 }
 
