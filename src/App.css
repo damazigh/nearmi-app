@@ -30,7 +30,21 @@
 .pointer {
   cursor: pointer;
 }
+.jc-center {
+  justify-content: center;
+}
 .container {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .m-t-alt1 {
+    margin-top: var(--margin-alt-3);
+  }
+}
+@media (max-width: 768px) {
+  .m-t-alt1 {
+    margin-top: var(--margin-alt-2);
+  }
 }

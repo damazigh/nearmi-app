@@ -10,6 +10,7 @@ import {
   MenuItem,
   Menu,
   Backdrop,
+  Chip,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOn from '@material-ui/icons/LocationOn';
@@ -40,10 +41,6 @@ export default function Main() {
     );
   };
 
-  const backdrop = () => {
-    return <Backdrop open={false} role="menu" invisible={false}></Backdrop>;
-  };
-
   /**
    * when input trigger http call to autocomplete addresses
    * @param {*} e
@@ -63,6 +60,10 @@ export default function Main() {
     }
   };
 
+  /**
+   * handle popper close event (selection or dismiss event)
+   * @param {*} item
+   */
   const handleClose = (item) => {
     setAnchorEl(null);
     setOpen(false);
@@ -71,6 +72,9 @@ export default function Main() {
       setAddr(item.properties.label);
     }
   };
+  /**
+   * build menu item
+   */
   const buildItems = () => {
     console.log(data.length);
     const result = [];
@@ -83,9 +87,33 @@ export default function Main() {
     });
     return result;
   };
+
+  /**
+   * reset search field
+   */
+  const handleDeleteChip = () => {
+    setAddr('');
+    if (open) {
+      setOpen(false);
+      setData([]);
+      setAnchorEl(null);
+    }
+  };
+  /**
+   * render function
+   */
   return (
-    <Grid xs={12}>
-      <Paper elevation={5} className="root">
+    <Grid xs={12} className="root">
+      <div className="flex jc-center">
+        {(() => {
+          if (addr) {
+            return (
+              <Chip label={addr} onDelete={handleDeleteChip} color="primary" />
+            );
+          }
+        })()}
+      </div>
+      <Paper elevation={5} className="m-t-alt1">
         <div className="flex addr">
           <InputBase
             id="input-addr"
