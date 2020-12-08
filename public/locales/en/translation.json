@@ -10,5 +10,8 @@
       "geoLocateBtnTitle": "Geo locate me",
       "searchBtnTitle": "Search"
     }
+  },
+  "feedback": {
+    "userDeniedGeolocation":"Geolocation error: you denied geolocation"
   }
 }

@@ -10,5 +10,8 @@
       "geoLocateBtnTitle": "Géo localisez moi",
       "searchBtnTitle": "Rechercher"
     }
+  },
+  "feedback": {
+    "userDeniedGeolocation":"Erreur de géolocation: vous avez refusé la géolocalisation"
   }
 }

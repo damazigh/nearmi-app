@@ -4,7 +4,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Main from './pages/main';
-import { Grid } from '@material-ui/core';
+import { Grid, Snackbar } from '@material-ui/core';
+import { SnackBarProvider } from './components/snackbar/snackbar-provider';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -23,16 +24,18 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Navbar />
-          <Grid className="container">
-            <Switch>
-              <Route exact path="/home">
-                <Main />
-              </Route>
-            </Switch>
-          </Grid>
-        </BrowserRouter>
+        <SnackBarProvider>
+          <BrowserRouter>
+            <Navbar />
+            <Grid className="container">
+              <Switch>
+                <Route exact path="/home">
+                  <Main />
+                </Route>
+              </Switch>
+            </Grid>
+          </BrowserRouter>
+        </SnackBarProvider>
       </ThemeProvider>
     </div>
   );

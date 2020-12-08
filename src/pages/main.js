@@ -6,10 +6,7 @@ import {
   Paper,
   IconButton,
   Grid,
-  Fade,
   MenuItem,
-  Menu,
-  Backdrop,
   Chip,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -18,6 +15,7 @@ import './main.css';
 import { useTranslation } from 'react-i18next';
 import AddressService from '../service/address.service';
 import Autocomplete from '../components/autocomplete/autocomplete';
+import useSnackBars from '../components/snackbar/use-snackbar';
 
 export default function Main() {
   const { t } = useTranslation();
@@ -25,6 +23,7 @@ export default function Main() {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [addr, setAddr] = useState('');
+  const { showSnack } = useSnackBars();
   /**
    * use navigator geolocaliation
    */
@@ -35,8 +34,7 @@ export default function Main() {
         console.log(pos);
       },
       (err) => {
-        console.log('error !');
-        console.log(err);
+        showSnack(t('feedback.userDeniedGeolocation'), 'error');
       }
     );
   };
