@@ -17,7 +17,7 @@ docker-img:
       echo "push built image"
       docker push nearmi.io/nearmi-${ENV}/app:${TAG};
       echo "Cleaning dangling images";
-      docker image rmi -f $(docker images -f "dangling=true" -q);
+      docker image prune -af;
       echo "Au revoir !";
   tags:
     - shell
