@@ -35,11 +35,12 @@ docker-run:
       if [[ ${TARGET_ENV}="dev" ]];
       then
         x=$(docker container ls -a | grep ${APP_CONTAINER_NAME});
+        echo "testing if container is running..."
         if [[ ! -z ${x} ]];
-      then;
-        echo "stopping container "${APP_CONTAINER_NAME};
-        docker container stop ${APP_CONTAINER_NAME};
-      fi
+        then
+          echo "stopping container "${APP_CONTAINER_NAME};
+          docker container stop ${APP_CONTAINER_NAME};
+        fi
         echo "pulling new images for ${APP_CONTAINER_NAME}:${TAG}";
         docker pull ${APP_IMAGE_NAME}:${TAG};
         docker run -d -p ${APP_PORTS} --name ${APP_CONTAINER_NAME} ${APP_IMAGE_NAME}:${TAG};
