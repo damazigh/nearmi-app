@@ -2,6 +2,7 @@ variables:
   APP_CONTAINER_NAME: react-app
   APP_IMAGE_NAME: 'nearmi.io/nearmi-dev/app'
   APP_PORTS: '8081:80'
+  TAG: ''
 stages:
   - deploy
 docker-img:
@@ -29,7 +30,8 @@ docker-run:
   stage: deploy
   script:
     - |
-      if [[ ${ENV} = 'dev' ]];
+      echo "TAG : ${TAG} - TARGET_ENV : ${TARGET_ENV}"
+      if [[ ${ENV}="dev" ]];
       then
         x=$(docker container ls -a | grep ${APP_CONTAINER_NAME});
         if [[ ! -z ${x} ]];
