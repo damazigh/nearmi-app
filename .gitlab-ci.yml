@@ -3,9 +3,9 @@ variables:
   APP_IMAGE_NAME: 'nearmi.io/nearmi-dev/app'
   APP_PORTS: '8081:80'
 stages:
-  - build
+  - deploy
 docker-img:
-  stage: build
+  stage: deploy
   script:
     - |
       ENV=${TARGET_ENV};
@@ -22,14 +22,21 @@ docker-img:
       docker push nearmi.io/nearmi-${ENV}/app:${TAG};
       echo "Cleaning dangling images";
       docker image prune -af;
-      if [ ${ENV} = 'dev' ];
+
+  tags:
+    - shell
+docker-run:
+  stage: deploy
+  script:
+    - |
+      if [[ ${ENV} = 'dev' ]];
       then
         x=$(docker container ls -a | grep ${APP_CONTAINER_NAME});
-        if [ -z ${x} ];
-        then;
-          echo "stopping container "${APP_CONTAINER_NAME};
-          docker container stop ${APP_CONTAINER_NAME};
-        fi
+        if [[ ! -z ${x} ]];
+      then;
+        echo "stopping container "${APP_CONTAINER_NAME};
+        docker container stop ${APP_CONTAINER_NAME};
+      fi
         echo "pulling new images for ${APP_CONTAINER_NAME}:${TAG}";
         docker pull ${APP_IMAGE_NAME}:${TAG};
         docker run -d -p ${APP_PORTS} --name ${APP_CONTAINER_NAME} ${APP_IMAGE_NAME}:${TAG};
