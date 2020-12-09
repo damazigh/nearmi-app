@@ -30,8 +30,9 @@ docker-run:
   stage: deploy
   script:
     - |
-      echo "TAG : ${TAG} - TARGET_ENV : ${TARGET_ENV}"
-      if [[ ${ENV}="dev" ]];
+      echo "TARGET_ENV : ${TARGET_ENV}"
+      TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
+      if [[ ${TARGET_ENV}="dev" ]];
       then
         x=$(docker container ls -a | grep ${APP_CONTAINER_NAME});
         if [[ ! -z ${x} ]];
