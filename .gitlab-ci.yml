@@ -40,6 +40,7 @@ docker-run:
         then
           echo "stopping container "${APP_CONTAINER_NAME};
           docker container stop ${APP_CONTAINER_NAME};
+          docker container rm ${APP_CONTAINER_NAME};
         fi
         echo "pulling new images for ${APP_CONTAINER_NAME}:${TAG}";
         docker pull ${APP_IMAGE_NAME}:${TAG};
