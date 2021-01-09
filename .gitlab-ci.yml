@@ -1,51 +1,36 @@
+image: node:latest
 variables:
-  APP_CONTAINER_NAME: react-app
-  APP_IMAGE_NAME: 'nearmi.io/nearmi-dev/app'
-  APP_PORTS: '8081:80'
-  TAG: ''
-stages:
-  - deploy
-docker-img:
-  stage: deploy
-  script:
-    - |
-      ENV=${TARGET_ENV};
-      if [[ -z ${ENV} ]];
-      then
-        ENV="dev";
-      fi
-      TARGET_ENV=${ENV};
-      TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
-      echo "building image nearmi-${ENV}/app:${TAG}";
-      docker build -f ./Dockerfile -t nearmi-${ENV}/app:${TAG} .;
-      docker tag nearmi-${ENV}/app:${TAG} nearmi.io/nearmi-${ENV}/app:${TAG};
-      echo "push built image"
-      docker push nearmi.io/nearmi-${ENV}/app:${TAG};
-      echo "Cleaning dangling images";
-      docker image prune -af;
+  APP_IMAGE_NAME: 'nearmi.registry/nearmi/app'
+cache:
+  paths:
+    - ./node_modules
+  key: 'nearmi_app_node'
 
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - echo "running test for app..."
+    - npm install
+    - npm run test
   tags:
-    - shell
-docker-run:
+    - kubernetes
+deploy:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
   stage: deploy
+  before_script:
+    - cp /conf/rootCA.crt /kaniko/ssl/certs/
   script:
     - |
-      echo "TARGET_ENV : ${TARGET_ENV}"
-      TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json);
-      if [[ ${TARGET_ENV}="dev" ]];
-      then
-        x=$(docker container ls -a | grep ${APP_CONTAINER_NAME});
-        echo "testing if container is running..."
-        if [[ ! -z ${x} ]];
-        then
-          echo "stopping container "${APP_CONTAINER_NAME};
-          docker container stop ${APP_CONTAINER_NAME};
-          docker container rm ${APP_CONTAINER_NAME};
-        fi
-        echo "pulling new images for ${APP_CONTAINER_NAME}:${TAG}";
-        docker pull ${APP_IMAGE_NAME}:${TAG};
-        docker run -d -p ${APP_PORTS} --name ${APP_CONTAINER_NAME} ${APP_IMAGE_NAME}:${TAG};
-      fi
-      echo "Au revoir !";
+      echo "building and deploying image to nexus"
+      TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"nearmi.registry\":{\"username\":\"${NEXUS_LOGIN}\",\"password\":\"${NEXUS_PASSWORD}\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --build-arg VERSION="${TAG}" --destination ${APP_IMAGE_NAME}:${TAG}
   tags:
-    - shell
+    - kubernetes
