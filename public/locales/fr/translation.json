@@ -9,6 +9,34 @@
       "seachAddrPlaceholder": "Rechercher une adresse",
       "geoLocateBtnTitle": "Géo localisez moi",
       "searchBtnTitle": "Rechercher"
+    },
+    "createShop": {
+      "steps": {
+        "step1": "Infromations générales",
+        "step2": "Horaire d'ouverture",
+        "step3": "Adresse",
+        "completed": "Toutes les étapes ont été complétées"
+
+      },
+      "actions": {
+        "reset": "Réinitialiser",
+        "next": "Suivant",
+        "back": "Précédent",
+        "upload": "Sélectionner un fichier"
+      },
+      "components": {
+        "generalStep": {
+          "shopName": "Nom de votre commerce",
+          "shopNamePlaceholder": "Boulangerie Léo",
+          "shortDesc": "Déscription courte",
+          "shortDescPlaceholder": "Boulangerie traditionnelle",
+          "longDesc": "Déscription détaillée",
+          "longDescPlaceholder": "Vous pouvez décrire votre commerce plus en détails (remarque ce champ est optionnel)",
+          "registrationNumber": "Numéro siret du commerce",
+          "registrationNumberPlaceholder": "362 521 879 00034",
+          "rootImage": "Image de couverture"
+        }
+      }
     }
   },
   "feedback": {

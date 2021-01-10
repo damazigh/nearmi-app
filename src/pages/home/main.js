@@ -13,9 +13,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import LocationOn from '@material-ui/icons/LocationOn';
 import './main.css';
 import { useTranslation } from 'react-i18next';
-import AddressService from '../service/address.service';
-import Autocomplete from '../components/autocomplete/autocomplete';
-import useSnackBars from '../components/snackbar/use-snackbar';
+import AddressService from '../../service/address.service';
+import Autocomplete from '../../components/autocomplete/autocomplete';
+import useSnackBars from '../../components/snackbar/use-snackbar';
 
 export default function Main() {
   const { t } = useTranslation();

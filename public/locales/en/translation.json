@@ -9,6 +9,33 @@
       "seachAddrPlaceholder": "Search address",
       "geoLocateBtnTitle": "Geo locate me",
       "searchBtnTitle": "Search"
+    },
+    "createShop": {
+      "steps": {
+        "step1": "General information",
+        "step2": "Shop openning hours",
+        "step3": "address",
+        "completed": "All steps are completed"
+      },
+      "actions": {
+        "reset": "Reset",
+        "next": "Next",
+        "back": "Back",
+        "upload": "Select file"
+      },
+      "components": {
+        "generalStep": {
+          "shopName": "Shop's name",
+          "shopNamePlaceholder": "My stunning shop",
+          "shortDesc": "Short descrption",
+          "shortDescPlaceholder": "Best stuff ever !",
+          "longDesc": "Detailed description",
+          "longDescPlaceholder": "Detailed description about your shop (this field is optional)",
+          "registrationNumber": "Shop registration number",
+          "registrationNumberPlaceholder": "362 521 879 00034",
+          "rootImage": "Select presntation image"
+        }
+      }
     }
   },
   "feedback": {

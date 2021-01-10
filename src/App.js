@@ -3,9 +3,11 @@ import Navbar from './components/navbar/navbar';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Main from './pages/main';
+import Main from './pages/home/main';
 import { Grid, Snackbar } from '@material-ui/core';
 import { SnackBarProvider } from './components/snackbar/snackbar-provider';
+import CreateShop from './pages/shop/create.shop';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -31,6 +33,9 @@ function App() {
               <Switch>
                 <Route exact path="/home">
                   <Main />
+                </Route>
+                <Route exact path="/shop/create">
+                  <CreateShop />
                 </Route>
               </Switch>
             </Grid>

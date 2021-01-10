@@ -1,0 +1,24 @@
+@media (min-width: 768px) {
+  .root {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 85%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 414px) {
+  .root {
+    width: 100%;
+    margin: auto;
+  }
+}
+.spacing {
+  margin-bottom: var(--margin-alt-2) !important;
+  margin-top: var(--margin-alt-2) !important;
+}
