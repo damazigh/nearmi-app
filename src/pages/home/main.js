@@ -113,7 +113,7 @@ export default function Main() {
    * render function
    */
   return (
-    <Grid xs={12} className="root">
+    <Grid className="root">
       <div className="flex jc-center">
         {(() => {
           if (addr) {

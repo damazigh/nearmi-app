@@ -43,5 +43,14 @@
     "userDeniedGeolocation":"Erreur de géolocalisation: vous avez refusé la géolocalisation",
     "searchAddressUnavailable": "Le service de recherche d'adresse est indisponible, veuillez réessayer ultérieurement",
     "unknownGeolocation": "Géolocalisation inconnue, essayez de recherche votre adresse avec le champ de recherche d'adresse"
+  },
+  "validation":
+  {
+    "commons": {
+      "required": "Champ requis",
+      "minLength": "taille minmum: {0}",
+      "numeric": "Seul les caractères numériques sont autorisés",
+      "length": "Vous devez saisir {0} caractères"
+    }
   }
 }

@@ -42,5 +42,15 @@
     "userDeniedGeolocation": "Geolocation error: you denied geolocation",
     "searchAddressUnavailable": "Search address service is unavailable, please try later",
     "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field"
+  },
+  "validation":
+  {
+    "commons": {
+      "errorLabel": "Error",
+      "required": "Required field",
+      "minLength": "Minumum length: {0}",
+      "numeric": "Only numeric character allowed",
+      "length": "You need to enter {0} character"
+    }
   }
 }
