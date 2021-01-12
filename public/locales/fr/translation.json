@@ -35,6 +35,10 @@
           "registrationNumber": "Numéro siret du commerce",
           "registrationNumberPlaceholder": "362 521 879 00034",
           "rootImage": "Choisir image"
+        },
+        "openningStep": {
+          "opensAt": "Ouvre à",
+          "closesAt": "Ferme à"
         }
       }
     }
@@ -50,7 +54,12 @@
       "required": "Champ requis",
       "minLength": "taille minmum: {0}",
       "numeric": "Seul les caractères numériques sont autorisés",
-      "length": "Vous devez saisir {0} caractères"
+      "length": "Vous devez saisir {0} caractères",
+      "askLunchClosure": "Fermeture le midi",
+      "closedAtLunch": "Fermé le midi",
+      "openedAtLunch": "ouvert le midi",
+      "lunchClosure": "Ferme le midi à",
+      "lunchReopen": "Ouvrer le midi à"
     },
     "createShop": {
       "invalidRegNum": "Votre siret est invalide"

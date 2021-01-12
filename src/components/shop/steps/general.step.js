@@ -1,10 +1,9 @@
-import { Button, Grid, Paper } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { format } from '../../../utils/utils';
 import './step.css';
-import { DevTool } from '@hookform/devtools';
 import TextFieldControl from '../../control/text-field.ctrl';
 import { useState } from 'react';
 import {

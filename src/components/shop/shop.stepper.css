@@ -1,17 +1,26 @@
+/*minimu : small device*/
 @media (min-width: 768px) {
   .root {
     width: 70%;
     margin: auto;
   }
+  .action-margin {
+    margin-right: 7.5%;
+  }
 }
-
-@media (max-width: 768px) {
+@media screen and (min-width: 768px) AND (max-width: 960px) {
+  .action-margin {
+    margin-right: 5%;
+  }
+}
+/*max : small device*/
+@media screen and (max-width: 768px) and (min-width: 414px) {
   .root {
     width: 85%;
     margin: auto;
   }
 }
-
+/*x small device*/
 @media (max-width: 414px) {
   .root {
     width: 100%;
@@ -26,4 +35,9 @@
 .no-side-padding {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+.action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--margin-alt-3);
 }

@@ -34,6 +34,18 @@
           "registrationNumber": "Shop registration number",
           "registrationNumberPlaceholder": "362 521 879 00034",
           "rootImage": "Select image"
+        },
+        "openningStep": {
+          "opensAt": "Opens at",
+          "closesAt": "Closes at",
+          "askLunchClosure": "Lunch closure",
+          "closedAtLunch": "Shop is closed at lunch",
+          "openedAtLunch": "Shop is opened at lunch",
+          "lunchClosure": "Closes (for lunch) at",
+          "lunchReopen": "Re-opens (for lunch) at",
+          "otherSettings": "Other settings",
+          "notSchedulingAppointment": "Shop don't schedule customer appointement",
+          "schedulingAppointment": "Shop schedule customer appointement"
         }
       }
     }

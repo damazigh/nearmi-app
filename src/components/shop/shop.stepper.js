@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import GeneralStep from './steps/general.step';
+import OpenningStep from './steps/openning.step';
 import './shop.stepper.css';
 
 export default function ShopStepper() {
@@ -30,6 +31,8 @@ export default function ShopStepper() {
       case 0:
         setCompiledForm({ ...compiledForm, general: form });
         break;
+      case 1:
+        setCompiledForm({ ...compiledForm, openning: form });
     }
 
     if (canContinue) {
@@ -48,7 +51,7 @@ export default function ShopStepper() {
       case 0:
         return <GeneralStep {...{ formContent }} />;
       case 1:
-        return "je suis l'étape 2";
+        return <OpenningStep {...{ formContent }} />;
       case 2:
         return "je suis l'étape 3";
     }
@@ -89,7 +92,7 @@ export default function ShopStepper() {
               {getStepContent(activeStep, compiledForm)}
             </Typography>
 
-            <div>
+            <div className="action action-margin">
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
