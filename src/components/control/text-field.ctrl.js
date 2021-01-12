@@ -14,28 +14,43 @@ import { Controller, useFormContext } from 'react-hook-form';
  * </pre>
  */
 export default function TextFieldControl(props) {
-  const { control, errors } = useFormContext();
+  const { errors } = useFormContext();
   const { name } = props;
   const hasError = () => {
-    console.log(errors);
     return !!errors[name];
   };
   const errorMsg = () => {
+    console.log(errors);
     if (errors[name] && errors[name].type && props.messages) {
       return props.messages[errors[name].type];
     }
   };
 
+  const changeHandler = (e) => {
+    if (props.onChange) {
+      props.onChange(e);
+    }
+    //
+  };
+
   return (
     <Controller
       name={props.name}
-      as={<TextField />}
-      control={control}
-      error={hasError()}
-      defaultValue={props.defaultValue ? props.defaultValue : ''}
-      helperText={errorMsg()}
-      {...props}
       rules={props.rules}
+      defaultValue={props.defaultValue ? props.defaultValue : ''}
+      render={(p) => (
+        <TextField
+          {...props}
+          error={hasError()}
+          helperText={errorMsg()}
+          {...p}
+          onChange={(e) => {
+            p.onChange(e);
+            changeHandler(e);
+          }}
+          value={props.value ? props.value : p.value}
+        />
+      )}
     />
   );
 }

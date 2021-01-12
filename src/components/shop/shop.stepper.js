@@ -19,7 +19,7 @@ export default function ShopStepper() {
     t('pages.createShop.steps.step2'),
     t('pages.createShop.steps.step3'),
   ];
-  const { watch, errors } = useFormContext();
+  const { watch } = useFormContext();
   const [compiledForm, setCompiledForm] = useState({});
   const form = watch();
 

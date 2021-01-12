@@ -34,7 +34,7 @@
           "longDescPlaceholder": "Vous pouvez décrire votre commerce plus en détails (remarque ce champ est optionnel)",
           "registrationNumber": "Numéro siret du commerce",
           "registrationNumberPlaceholder": "362 521 879 00034",
-          "rootImage": "Image de couverture"
+          "rootImage": "Choisir image"
         }
       }
     }
@@ -51,6 +51,9 @@
       "minLength": "taille minmum: {0}",
       "numeric": "Seul les caractères numériques sont autorisés",
       "length": "Vous devez saisir {0} caractères"
+    },
+    "createShop": {
+      "invalidRegNum": "Votre siret est invalide"
     }
   }
 }

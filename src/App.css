@@ -8,7 +8,7 @@
   --color-secondary: #05386b;
   --color-appbar: #fafafa;
   --color-bg-alt-1: #efeff1; /*header title in sub menu*/
-  --pading-alt-1: 2%;
+  --padding-alt-1: 2%;
 }
 .flex {
   display: flex;

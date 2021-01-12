@@ -4,7 +4,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Main from './pages/home/main';
-import { Grid, Snackbar } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { SnackBarProvider } from './components/snackbar/snackbar-provider';
 import CreateShop from './pages/shop/create.shop';
 
@@ -16,9 +16,9 @@ const theme = createMuiTheme({
       dark: '#00766c',
     },
     secondary: {
-      light: '#379683',
-      main: '#05386B',
-      dark: '#05386B',
+      light: '#Light',
+      main: '#80d8ff',
+      dark: '#49a7cc',
     },
   },
 });

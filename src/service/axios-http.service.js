@@ -7,11 +7,9 @@ const userAxios = axios.create({
 
 const shopAxios = axios.create({
   baseURL:  process.env.REACT_APP_SHOP_ENDPOINT,
-  baseURL: process.env.REACT_APP_ADDR_ENDPOINT,
 });
 
 const addrAxios = axios.create({
-  baseURL: process.env.REACT_APP_ADDR_ENDPOINT,
   baseURL: process.env.REACT_APP_ADDR_ENDPOINT,
 });
 

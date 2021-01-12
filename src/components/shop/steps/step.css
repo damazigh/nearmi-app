@@ -1,17 +1,28 @@
 .paper-spacing {
-  padding-left: var(--pading-alt-1);
+  padding-left: var(--padding-alt-1);
   padding-right: var(--padding-alt-1);
-  padding-bottom: var(--pading-alt-1);
+  padding-bottom: var(--padding-alt-1);
   padding-top: 5px;
 }
-@media (min-width: 991.98px) {
+@media screen and (min-width: 960px) {
   .paper-width {
     width: 80%;
     margin: auto;
   }
 }
-
-.upload {
-  display: flex;
-  justify-content: flex-end;
+@media screen and (min-width: 768px) AND (max-width: 960px) {
+  .paper-width {
+    width: 85%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 600px) {
+  .center-xs {
+    justify-content: center;
+  }
+  .upload {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0px !important;
+  }
 }

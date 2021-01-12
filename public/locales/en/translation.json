@@ -33,7 +33,7 @@
           "longDescPlaceholder": "Detailed description about your shop (this field is optional)",
           "registrationNumber": "Shop registration number",
           "registrationNumberPlaceholder": "362 521 879 00034",
-          "rootImage": "Select presntation image"
+          "rootImage": "Select image"
         }
       }
     }
@@ -46,11 +46,13 @@
   "validation":
   {
     "commons": {
-      "errorLabel": "Error",
       "required": "Required field",
       "minLength": "Minumum length: {0}",
       "numeric": "Only numeric character allowed",
       "length": "You need to enter {0} character"
+    },
+    "createShop": {
+      "invalidRegNum": "Your registration number is invalid"
     }
   }
 }

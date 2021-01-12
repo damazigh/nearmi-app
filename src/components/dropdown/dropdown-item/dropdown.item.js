@@ -19,7 +19,7 @@ function DropdownItem(props) {
       );
     } else {
       return (
-        <a href="#" className="menu-item" onClick={handleClick}>
+        <a href="/#" className="menu-item" onClick={handleClick}>
           {props.leftIcon && (
             <span
               className={

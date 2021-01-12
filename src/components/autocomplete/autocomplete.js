@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, Paper, Popper } from '@material-ui/core';
+import { Paper, Popper } from '@material-ui/core';
 import './autocomplete.css';
 /**
  *

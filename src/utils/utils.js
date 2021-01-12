@@ -4,3 +4,7 @@ export function format(str, args) {
   }
   return str;
 }
+
+export function isNumeric(str) {
+  return /^\d+$/.test(str);
+}
