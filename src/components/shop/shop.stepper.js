@@ -61,7 +61,7 @@ export default function ShopStepper() {
 
   return (
     <div>
-      <Stepper activeStep={activeStep} className="root">
+      <Stepper activeStep={activeStep} className="root no-side-padding">
         {steps.map((label) => {
           return (
             <Step key={label}>

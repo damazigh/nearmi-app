@@ -16,7 +16,7 @@ import { Upload } from '../../upload/upload';
 
 export default function GeneralStep({ formContent }) {
   const methods = useFormContext();
-  const { reset, control } = methods;
+  const { reset } = methods;
   const [regNumVal, setRegNumVal] = useState('');
   const { t } = useTranslation();
 
@@ -46,7 +46,6 @@ export default function GeneralStep({ formContent }) {
 
   return (
     <form noValidate>
-      <DevTool control={control} />
       <Paper elevation={5} className="paper-spacing paper-width">
         <Grid container spacing={4} className="center-xs">
           <Grid item md={6} sm={6} xs={11}>
