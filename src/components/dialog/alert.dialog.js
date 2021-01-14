@@ -50,7 +50,6 @@ export function AlertDialog(props) {
       props.onCancel();
       console.info('canceled');
     }
-    console.info(props.isOpen);
     onCloseHandler();
   };
 

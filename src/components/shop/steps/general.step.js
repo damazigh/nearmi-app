@@ -39,7 +39,10 @@ export default function GeneralStep(props) {
   }, []);
 
   const insertSpaceAt = (val, at) => {
-    if (val && val.length >= at + 1 && val.charAt(at + 1) !== ' ') {
+    if (
+      val &&
+      (val.length === at || (val.charAt(at) !== ' ' && val.length > at))
+    ) {
       val = val.substring(0, at) + ' ' + val.substring(at, val.length);
       return val;
     }
@@ -48,8 +51,8 @@ export default function GeneralStep(props) {
 
   const formatRegistration = (e) => {
     let newVal = e.target.value;
-    console.info(props);
-    if (e.target.value) {
+    const isDelete = regNumVal.length > newVal.length;
+    if (e.target.value && !isDelete) {
       newVal = insertSpaceAt(newVal, 3);
       newVal = insertSpaceAt(newVal, 7);
       newVal = insertSpaceAt(newVal, 11);
