@@ -11,6 +11,13 @@ import { useTranslation } from 'react-i18next';
 import GeneralStep from './steps/general.step';
 import OpenningStep from './steps/openning.step';
 import './shop.stepper.css';
+import useSnackBars from '../snackbar/use-snackbar';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  startedNavigationToNextShopStep,
+  stepHasWarn,
+} from '../../redux/action/shop.actions';
+import { shopCreactionIgnoreWarnSelector } from '../../redux/selector/shop.selector';
 
 export default function ShopStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -20,13 +27,16 @@ export default function ShopStepper() {
     t('pages.createShop.steps.step2'),
     t('pages.createShop.steps.step3'),
   ];
-  const { watch } = useFormContext();
+  const { watch, errors, formState } = useFormContext();
   const [compiledForm, setCompiledForm] = useState({});
   const form = watch();
+  const { showSnack } = useSnackBars();
+
+  const dispatch = useDispatch();
 
   // go to next step
   const handleNext = () => {
-    let canContinue = true;
+    let canContinue = !errors || Object.keys(errors).length === 0;
     switch (activeStep) {
       case 0:
         setCompiledForm({ ...compiledForm, general: form });
@@ -36,7 +46,9 @@ export default function ShopStepper() {
     }
 
     if (canContinue) {
-      setActiveStep(activeStep + 1);
+      dispatch(startedNavigationToNextShopStep());
+    } else {
+      showSnack(t('feedback.formWithError'), 'error');
     }
   };
 
@@ -49,12 +61,21 @@ export default function ShopStepper() {
   const getStepContent = (step, formContent) => {
     switch (step) {
       case 0:
-        return <GeneralStep {...{ formContent }} />;
+        return (
+          <GeneralStep
+            {...{ formContent }}
+            continueCallback={continueCallback}
+          />
+        );
       case 1:
         return <OpenningStep {...{ formContent }} />;
       case 2:
         return "je suis l'étape 3";
     }
+  };
+
+  const continueCallback = () => {
+    setActiveStep(activeStep + 1);
   };
 
   // reset form
@@ -78,11 +99,9 @@ export default function ShopStepper() {
         {activeStep === steps.length ? (
           /** stepper completed */
           <div>
-            <Typography className="spacing">
-              {t('pages.createShop.steps.completed')}
-            </Typography>
+            <Typography className="spacing">{t('.completed')}</Typography>
             <Button onClick={handleReset} className="button-m-r">
-              {t('pages.createShop.actions.reset')}
+              {t('actions.reset')}
             </Button>
           </div>
         ) : (
@@ -98,17 +117,18 @@ export default function ShopStepper() {
                 onClick={handleBack}
                 className="button-m-r"
               >
-                {t('pages.createShop.actions.back')}
+                {t('actions.back')}
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleNext}
+                onClick={(e) => handleNext()}
                 className="button-m-r"
+                disabled={!formState.isValid}
               >
                 {activeStep === steps.length - 1
-                  ? t('pages.createShop.actions.save')
-                  : t('pages.createShop.actions.next')}
+                  ? t('actions.save')
+                  : t('actions.next')}
               </Button>
             </div>
           </div>

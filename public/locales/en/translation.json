@@ -2,6 +2,9 @@
   "components": {
     "account": {
       "lng": "Language"
+    },
+    "alertDialog": {
+      "defaultTitle": "Are you sure you want to continue ?"
     }
   },
   "pages": {
@@ -16,12 +19,6 @@
         "step2": "Shop openning hours",
         "step3": "address",
         "completed": "All steps are completed"
-      },
-      "actions": {
-        "reset": "Reset",
-        "next": "Next",
-        "back": "Back",
-        "upload": "Select file"
       },
       "components": {
         "generalStep": {
@@ -53,7 +50,9 @@
   "feedback": {
     "userDeniedGeolocation": "Geolocation error: you denied geolocation",
     "searchAddressUnavailable": "Search address service is unavailable, please try later",
-    "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field"
+    "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field",
+    "formWithError": "There are errors in actual form",
+    "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section"
   },
   "validation":
   {
@@ -66,5 +65,13 @@
     "createShop": {
       "invalidRegNum": "Your registration number is invalid"
     }
+  },
+  "actions": {
+    "reset": "Reset",
+    "next": "Next",
+    "back": "Back",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "upload": "Select file"
   }
 }

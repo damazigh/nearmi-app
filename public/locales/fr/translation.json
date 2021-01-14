@@ -2,6 +2,9 @@
   "components": {
     "account": {
       "lng": "Langues"
+    },
+    "alertDialog": {
+      "defaultTitle": "Etes vous certains de vouloir continuer ?" 
     }
   },
   "pages": {
@@ -17,12 +20,6 @@
         "step3": "Adresse",
         "completed": "Toutes les étapes ont été complétées"
 
-      },
-      "actions": {
-        "reset": "Réinitialiser",
-        "next": "Suivant",
-        "back": "Précédent",
-        "upload": "Sélectionner un fichier"
       },
       "components": {
         "generalStep": {
@@ -46,7 +43,9 @@
   "feedback": {
     "userDeniedGeolocation":"Erreur de géolocalisation: vous avez refusé la géolocalisation",
     "searchAddressUnavailable": "Le service de recherche d'adresse est indisponible, veuillez réessayer ultérieurement",
-    "unknownGeolocation": "Géolocalisation inconnue, essayez de recherche votre adresse avec le champ de recherche d'adresse"
+    "unknownGeolocation": "Géolocalisation inconnue, essayez de recherche votre adresse avec le champ de recherche d'adresse",
+    "formWithError": "There are errors in actual form",
+    "shopWithoutImage": "Un commerce sans image de couverture ou logo est beaucoup moins attractif envers les clients.<br/> Si vous décidez toute fois de continuer, vous pourrez ajouter une image ultérieurement dans la section d'administration"
   },
   "validation":
   {
@@ -59,10 +58,18 @@
       "closedAtLunch": "Fermé le midi",
       "openedAtLunch": "ouvert le midi",
       "lunchClosure": "Ferme le midi à",
-      "lunchReopen": "Ouvrer le midi à"
+      "lunchReopen": "Ré-ouvre l'après midi à"
     },
     "createShop": {
       "invalidRegNum": "Votre siret est invalide"
     }
+  },
+  "actions": {
+    "reset": "Réinitialiser",
+    "next": "Suivant",
+    "back": "Précédent",
+    "continue": "Continuer",
+    "cancel": "Annuler",
+    "upload": "Selectionner un fichier"
   }
 }

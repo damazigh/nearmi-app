@@ -20,7 +20,6 @@ export default function TextFieldControl(props) {
     return !!errors[name];
   };
   const errorMsg = () => {
-    console.log(errors);
     if (errors[name] && errors[name].type && props.messages) {
       return props.messages[errors[name].type];
     }
