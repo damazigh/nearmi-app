@@ -11,13 +11,13 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOn from '@material-ui/icons/LocationOn';
-import './main.css';
 import { useTranslation } from 'react-i18next';
+import './address.css';
+import useSnackBars from '../snackbar/use-snackbar';
 import AddressService from '../../service/address.service';
-import Autocomplete from '../../components/autocomplete/autocomplete';
-import useSnackBars from '../../components/snackbar/use-snackbar';
+import Autocomplete from '../autocomplete/autocomplete';
 
-export default function Main() {
+export default function Address() {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);

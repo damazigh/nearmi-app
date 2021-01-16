@@ -1,0 +1,38 @@
+@media (min-width: 768px) {
+  .root {
+    width: 50%;
+    margin-top: var(--margin-alt-3);
+  }
+  .menu-addr {
+    width: 40% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 100%;
+    margin-top: var(--margin-alt-2);
+  }
+  .menu-addr {
+    width: 90% !important;
+  }
+}
+
+.icon-button {
+  background-color: var(--color-primary) !important;
+}
+
+.divider-h {
+  height: inherit !important;
+}
+.divider-h-w {
+  width: inherit !important;
+}
+.wrapper {
+  background-color: var(--color-primary) !important;
+  padding: 3%;
+}
+.input {
+  flex: 1;
+  margin: 16px;
+}

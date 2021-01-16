@@ -16,26 +16,29 @@ import { AlertDialog } from '../../dialog/alert.dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   shopCreationNextStepSelector,
-  stepHasWarnSelector,
+  shopCreationRestoreValues,
 } from '../../../redux/selector/shop.selector';
-import {
-  handledNextStep,
-  handleNextStep,
-  ignoreWarnNextStep,
-  stepHasWarn,
-} from '../../../redux/action/shop.actions';
+import { handledNextStep } from '../../../redux/action/shop.actions';
 
 export default function GeneralStep(props) {
   const methods = useFormContext();
-  const { reset } = methods;
+  const { reset, setValue } = methods;
   const [regNumVal, setRegNumVal] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
   const { t } = useTranslation();
-  let nextStep = useSelector(shopCreationNextStepSelector);
+  const nextStep = useSelector(shopCreationNextStepSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    reset({ ...props.general }, { errors: true });
+    const valuesAsString = sessionStorage.getItem('step_0');
+    if (valuesAsString) {
+      const values = JSON.parse(valuesAsString);
+      Object.keys(values).forEach((key) => {
+        const val = values[key];
+        if (val) {
+          setValue(key, val, { shouldValidate: true });
+        }
+      });
+    }
   }, []);
 
   const insertSpaceAt = (val, at) => {
@@ -48,7 +51,6 @@ export default function GeneralStep(props) {
     }
     return val;
   };
-
   const formatRegistration = (e) => {
     let newVal = e.target.value;
     const isDelete = regNumVal.length > newVal.length;

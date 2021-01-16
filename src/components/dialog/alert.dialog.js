@@ -57,7 +57,7 @@ export function AlertDialog(props) {
     <Dialog
       open={props.isOpen}
       onClose={onCloseHandler()}
-      aria-labelled-by="alert"
+      aria-labelledby="alert"
       TransitionComponent={transition}
       keepMounted
     >

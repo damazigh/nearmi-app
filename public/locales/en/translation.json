@@ -1,7 +1,8 @@
 {
   "components": {
     "account": {
-      "lng": "Language"
+      "lng": "Language",
+      "logout": "Logout"
     },
     "alertDialog": {
       "defaultTitle": "Are you sure you want to continue ?"
@@ -42,7 +43,9 @@
           "lunchReopen": "Re-opens (for lunch) at",
           "otherSettings": "Other settings",
           "notSchedulingAppointment": "Shop don't schedule customer appointement",
-          "schedulingAppointment": "Shop schedule customer appointement"
+          "schedulingAppointment": "Shop schedule customer appointement",
+          "automaticConfirmationOrder": "Order are accepted automatically",
+          "manualConfrimationOrder": "Order have to be accepted manually"
         }
       }
     }

@@ -10,20 +10,35 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { useTranslation } from 'react-i18next';
 import TimeControl from '../../control/time.ctrl';
 import './step.css';
 
 export default function OpenningStep(formContent) {
   const methods = useFormContext();
-  const { reset, register, control } = methods;
+  const { setValue, register, getValues } = methods;
   const { t } = useTranslation();
-  const [lunchClosure, setLunchClosure] = useState(true);
+  const [lunchClosure, setLunchClosure] = useState(false);
   const [schedulingAppointment, setSchedulingAppointment] = useState(false);
+  const [automaticConfrimationOrder, setAutomaticConfrimationOrder] = useState(
+    false
+  );
 
   useEffect(() => {
-    reset({ ...formContent.openning }, { errors: true });
+    const valAsString = sessionStorage.getItem('step_1');
+    if (valAsString) {
+      const values = JSON.parse(valAsString);
+      Object.keys(values).forEach((key) => {
+        const val = values[key];
+        if (val) {
+          setValue(key, val, { shouldValidate: true });
+        }
+      });
+    }
+    /**
+     * particular case set state from form variable for lunch closure
+     */
+    setLunchClosure(!!getValues('lunchClosure'));
   }, []);
 
   const displayClosureTime = () => {
@@ -129,6 +144,25 @@ export default function OpenningStep(formContent) {
                           )
                         : t(
                             'pages.createShop.components.openningStep.notSchedulingAppointment'
+                          )
+                    }
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Switch name="automaticConfirmationOrder" />}
+                    onChange={() =>
+                      setAutomaticConfrimationOrder(!automaticConfrimationOrder)
+                    }
+                    checked={automaticConfrimationOrder}
+                    label={
+                      automaticConfrimationOrder
+                        ? t(
+                            'pages.createShop.components.openningStep.automaticConfirmationOrder'
+                          )
+                        : t(
+                            'pages.createShop.components.openningStep.manualConfrimationOrder'
                           )
                     }
                   />

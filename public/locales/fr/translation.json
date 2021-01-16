@@ -1,7 +1,9 @@
 {
   "components": {
     "account": {
-      "lng": "Langues"
+      "lng": "Langues",
+      "logout": "Se déconnecter"
+
     },
     "alertDialog": {
       "defaultTitle": "Etes vous certains de vouloir continuer ?" 
@@ -35,7 +37,17 @@
         },
         "openningStep": {
           "opensAt": "Ouvre à",
-          "closesAt": "Ferme à"
+          "closesAt": "Ferme à",
+          "askLunchClosure": "Femeture le midi",
+          "closedAtLunch": "Le commerce est fermé le midi",
+          "openedAtLunch": "Le commerce est ouvert le midi",
+          "lunchClosure": "Ferme le midi à",
+          "lunchReopen": "Re-ouvre l'après midi à",
+          "otherSettings": "Autres options",
+          "notSchedulingAppointment": "Prise de rendez vous en ligne désactivée",
+          "schedulingAppointment": "Prise de rendez vous en ligne activée",
+          "automaticConfirmationOrder": "Accepter les commandes automatiquement",
+          "manualConfrimationOrder": "Valider les commandes avant des les accepter"
         }
       }
     }

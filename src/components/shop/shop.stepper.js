@@ -5,7 +5,7 @@ import {
   Stepper,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import GeneralStep from './steps/general.step';
@@ -17,7 +17,7 @@ import {
   startedNavigationToNextShopStep,
   stepHasWarn,
 } from '../../redux/action/shop.actions';
-import { shopCreactionIgnoreWarnSelector } from '../../redux/selector/shop.selector';
+import AddressStep from './steps/address.step';
 
 export default function ShopStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -27,11 +27,11 @@ export default function ShopStepper() {
     t('pages.createShop.steps.step2'),
     t('pages.createShop.steps.step3'),
   ];
-  const { watch, errors, formState } = useFormContext();
+  const { watch, errors, formState, getValues, setValue } = useFormContext();
   const [compiledForm, setCompiledForm] = useState({});
+
   const form = watch();
   const { showSnack } = useSnackBars();
-
   const dispatch = useDispatch();
 
   // go to next step
@@ -46,7 +46,9 @@ export default function ShopStepper() {
     }
 
     if (canContinue) {
-      dispatch(startedNavigationToNextShopStep());
+      stepHasAlert()
+        ? dispatch(startedNavigationToNextShopStep())
+        : continueCallback();
     } else {
       showSnack(t('feedback.formWithError'), 'error');
     }
@@ -70,17 +72,26 @@ export default function ShopStepper() {
       case 1:
         return <OpenningStep {...{ formContent }} />;
       case 2:
-        return "je suis l'étape 3";
+        return <AddressStep />;
     }
+  };
+  const stepHasAlert = () => {
+    return activeStep === 0 || activeStep === 2;
   };
 
   const continueCallback = () => {
+    saveValues();
     setActiveStep(activeStep + 1);
   };
 
   // reset form
   const handleReset = () => {
     setActiveStep(0);
+  };
+
+  const saveValues = () => {
+    const values = getValues();
+    sessionStorage.setItem('step_' + activeStep, JSON.stringify(values));
   };
 
   return (
