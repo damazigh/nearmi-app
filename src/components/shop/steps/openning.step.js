@@ -14,13 +14,13 @@ import { useTranslation } from 'react-i18next';
 import TimeControl from '../../control/time.ctrl';
 import './step.css';
 
-export default function OpenningStep(formContent) {
+export default function OpenningStep() {
   const methods = useFormContext();
   const { setValue, register, getValues } = methods;
   const { t } = useTranslation();
   const [lunchClosure, setLunchClosure] = useState(false);
   const [schedulingAppointment, setSchedulingAppointment] = useState(false);
-  const [automaticConfrimationOrder, setAutomaticConfrimationOrder] = useState(
+  const [automaticOrderConfirmation, setAutomaticOrderConfirmation] = useState(
     false
   );
 
@@ -132,7 +132,12 @@ export default function OpenningStep(formContent) {
                 </FormLabel>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Switch name="schedulingAppointement" />}
+                    control={
+                      <Switch
+                        name="schedulingAppointement"
+                        inputRef={register}
+                      />
+                    }
                     onChange={() =>
                       setSchedulingAppointment(!schedulingAppointment)
                     }
@@ -151,13 +156,18 @@ export default function OpenningStep(formContent) {
 
                 <FormGroup>
                   <FormControlLabel
-                    control={<Switch name="automaticConfirmationOrder" />}
-                    onChange={() =>
-                      setAutomaticConfrimationOrder(!automaticConfrimationOrder)
+                    control={
+                      <Switch
+                        name="automaticOrderConfirmation"
+                        inputRef={register}
+                      />
                     }
-                    checked={automaticConfrimationOrder}
+                    onChange={() =>
+                      setAutomaticOrderConfirmation(!automaticOrderConfirmation)
+                    }
+                    checked={automaticOrderConfirmation}
                     label={
-                      automaticConfrimationOrder
+                      automaticOrderConfirmation
                         ? t(
                             'pages.createShop.components.openningStep.automaticConfirmationOrder'
                           )

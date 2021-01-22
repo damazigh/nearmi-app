@@ -1,4 +1,6 @@
 import {
+  ADDRESS_UPDATED,
+  CREATE_SHOP,
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
   RESTORE_FORM_VALUE,
@@ -9,7 +11,9 @@ const initialState = {
   creation: {
     navigationNextShop: false,
     restoreFormValues: false,
+    submitCreation: false,
   },
+  address: null,
 };
 let newState = null;
 export default function shopReducer(state = initialState, action) {
@@ -23,13 +27,13 @@ export default function shopReducer(state = initialState, action) {
       newState = Object.assign({}, state);
       newState.creation.navigationNextShop = false;
       return newState;
-    case RESTORE_FORM_VALUE:
+    case ADDRESS_UPDATED:
       newState = Object.assign({}, state);
-      newState.creation.restoreFormValues = true;
+      newState.address = action.address;
       return newState;
-    case RESTORE_FORM_VALUE_COMPLETED:
+    case CREATE_SHOP:
       newState = Object.assign({}, state);
-      newState.creation.restoreFormValues = false;
+      newState.creation.submitCreation = true;
       return newState;
     default:
       return initialState;

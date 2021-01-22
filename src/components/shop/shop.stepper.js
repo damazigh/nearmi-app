@@ -5,7 +5,7 @@ import {
   Stepper,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import GeneralStep from './steps/general.step';
@@ -13,11 +13,9 @@ import OpenningStep from './steps/openning.step';
 import './shop.stepper.css';
 import useSnackBars from '../snackbar/use-snackbar';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  startedNavigationToNextShopStep,
-  stepHasWarn,
-} from '../../redux/action/shop.actions';
+import { startedNavigationToNextShopStep } from '../../redux/action/shop.actions';
 import AddressStep from './steps/address.step';
+import ShopService from '../../service/shop.service';
 
 export default function ShopStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -27,9 +25,8 @@ export default function ShopStepper() {
     t('pages.createShop.steps.step2'),
     t('pages.createShop.steps.step3'),
   ];
-  const { watch, errors, formState, getValues, setValue } = useFormContext();
+  const { watch, errors, formState, getValues } = useFormContext();
   const [compiledForm, setCompiledForm] = useState({});
-
   const form = watch();
   const { showSnack } = useSnackBars();
   const dispatch = useDispatch();
@@ -43,6 +40,10 @@ export default function ShopStepper() {
         break;
       case 1:
         setCompiledForm({ ...compiledForm, openning: form });
+        break;
+      case 2:
+        handleCreate();
+        break;
     }
 
     if (canContinue) {
@@ -52,6 +53,12 @@ export default function ShopStepper() {
     } else {
       showSnack(t('feedback.formWithError'), 'error');
     }
+  };
+
+  const handleCreate = () => {
+    ShopService.create()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   // go to previous step
@@ -70,7 +77,7 @@ export default function ShopStepper() {
           />
         );
       case 1:
-        return <OpenningStep {...{ formContent }} />;
+        return <OpenningStep />;
       case 2:
         return <AddressStep />;
     }
@@ -135,10 +142,9 @@ export default function ShopStepper() {
                 color="primary"
                 onClick={(e) => handleNext()}
                 className="button-m-r"
-                disabled={!formState.isValid}
               >
                 {activeStep === steps.length - 1
-                  ? t('actions.save')
+                  ? t('actions.create')
                   : t('actions.next')}
               </Button>
             </div>

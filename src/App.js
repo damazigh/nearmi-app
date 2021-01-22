@@ -27,11 +27,26 @@ const theme = createMuiTheme({
   },
 });
 function App() {
+  const handleKcEvents = (event, error) => {
+    switch (event) {
+      case 'onAuthSuccess':
+      case 'onAuthRefreshSuccess':
+        localStorage.setItem('accessToken', keycloak.token);
+        break;
+      case 'onReady':
+        if (keycloak.authenticated) {
+          localStorage.setItem('accessToken', keycloak.token);
+        }
+        break;
+    }
+  };
+
   return (
     <div>
       <ReactKeycloakProvider
         authClient={keycloak}
         LoadingComponent={<Loading />}
+        onEvent={handleKcEvents}
       >
         <ThemeProvider theme={theme}>
           <SnackBarProvider>

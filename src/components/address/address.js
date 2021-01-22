@@ -16,6 +16,10 @@ import './address.css';
 import useSnackBars from '../snackbar/use-snackbar';
 import AddressService from '../../service/address.service';
 import Autocomplete from '../autocomplete/autocomplete';
+import { useDispatch } from 'react-redux';
+import { addressUpdated } from '../../redux/action/shop.actions';
+import { mapToAddress } from '../../utils/utils';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 export default function Address() {
   const { t } = useTranslation();
@@ -24,6 +28,17 @@ export default function Address() {
   const [data, setData] = useState([]);
   const [addr, setAddr] = useState('');
   const { showSnack } = useSnackBars();
+  const dispatch = useDispatch();
+
+  const showAlert = (e) => {
+    if (!addr) {
+      <Alert severity="warning">
+        <AlertTitle>{t('alert.warn.title')}</AlertTitle>
+        {t('alert.warn.unslectedAddress')}
+      </Alert>;
+    }
+  };
+
   /**
    * use navigator geolocaliation
    */
@@ -78,6 +93,7 @@ export default function Address() {
     setAnchorEl(null);
     setOpen(false);
     setData([]);
+    dispatch(addressUpdated(mapToAddress(item)));
     if (item && item.properties && item.properties.label) {
       setAddr(item.properties.label);
     }
@@ -86,12 +102,11 @@ export default function Address() {
    * build menu item
    */
   const buildItems = () => {
-    console.log(data.length);
     const result = [];
     data.forEach((item) => {
       result.push(
         <MenuItem onClick={() => handleClose(item)}>
-          {item.properties.label}
+          <span class="pre-wrap">{item.properties.label}</span>
         </MenuItem>
       );
     });
@@ -134,6 +149,7 @@ export default function Address() {
             }}
             value={addr}
             onInput={handleInput}
+            onFocusOut={(e) => showAlert(e)}
           />
           {(() => {
             if (navigator.geolocation) {

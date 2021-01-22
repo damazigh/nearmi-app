@@ -1,20 +1,34 @@
 import {
-  RESTORE_FORM_VALUE_COMPLETED,
+  ADDRESS_UPDATED,
+  CREATE_SHOP,
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
-  RESTORE_FORM_VALUE,
 } from '../type';
 
+/**
+ * event used in stepper component for dispatching nextStep hitted on step where an alert is set
+ */
 export const startedNavigationToNextShopStep = () => {
   return { type: NEXT_SHOP_CREATION_STEP };
 };
 
+/**
+ * event used from creation sub step to notify that the previous click on next button was handled correctly
+ */
 export const handledNextStep = () => {
   return { type: HANDLED_NEXT_SHOP_CREATION_STEP };
 };
-export const restoreFormValues = () => {
-  return { type: RESTORE_FORM_VALUE };
+/**
+ * event dispatched when user select an address<br/> addess is stored for later uses
+ * @param {*} addr
+ */
+export const addressUpdated = (addr) => {
+  return { type: ADDRESS_UPDATED, address: addr };
 };
-export const formValuesRestored = () => {
-  return { type: RESTORE_FORM_VALUE_COMPLETED };
+
+/**
+ *
+ */
+export const createShop = () => {
+  return { type: CREATE_SHOP };
 };

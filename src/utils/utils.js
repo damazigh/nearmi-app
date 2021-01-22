@@ -8,3 +8,24 @@ export function format(str, args) {
 export function isNumeric(str) {
   return /^\d+$/.test(str);
 }
+
+export function mapToAddress(addr) {
+  const address = {};
+  address.city = addr.properties?.city;
+  address.longitude = addr.geometry?.coordinates[0];
+  address.latitude = addr.geometry?.coordinates[1];
+  address.postalCode = addr.properties?.postcode;
+  address.line1 = `${addr.properties?.label}`;
+  address.country = 'France';
+  return address;
+}
+
+export function toTime(timeAsStr) {
+  if (timeAsStr) {
+    const tab = timeAsStr.split(':');
+    if (tab.length === 2) {
+      return { hour: tab[0], minute: tab[1] };
+    }
+  }
+  return null;
+}

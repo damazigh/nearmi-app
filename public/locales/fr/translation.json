@@ -59,6 +59,12 @@
     "formWithError": "There are errors in actual form",
     "shopWithoutImage": "Un commerce sans image de couverture ou logo est beaucoup moins attractif envers les clients.<br/> Si vous décidez toute fois de continuer, vous pourrez ajouter une image ultérieurement dans la section d'administration"
   },
+  "alert": {
+    "warn": {
+      "title": "Attention",
+      "unslectedAddress": "L'adresse doit être sélectionnée dans la liste des propositions"
+    }
+  },
   "validation":
   {
     "commons": {
@@ -82,6 +88,7 @@
     "back": "Précédent",
     "continue": "Continuer",
     "cancel": "Annuler",
-    "upload": "Selectionner un fichier"
+    "upload": "Selectionner un fichier",
+    "create": "Créer"
   }
 }

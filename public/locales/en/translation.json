@@ -42,7 +42,7 @@
           "lunchClosure": "Closes (for lunch) at",
           "lunchReopen": "Re-opens (for lunch) at",
           "otherSettings": "Other settings",
-          "notSchedulingAppointment": "Shop don't schedule customer appointement",
+          "notSchedulingAppointment": "Shop doesn't schedule customer appointement",
           "schedulingAppointment": "Shop schedule customer appointement",
           "automaticConfirmationOrder": "Order are accepted automatically",
           "manualConfrimationOrder": "Order have to be accepted manually"
@@ -56,6 +56,12 @@
     "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field",
     "formWithError": "There are errors in actual form",
     "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section"
+  },
+  "alert": {
+    "warn": {
+      "title": "Warning",
+      "unslectedAddress": "Address has to be selected from proposal list"
+    }
   },
   "validation":
   {
@@ -75,6 +81,7 @@
     "back": "Back",
     "continue": "Continue",
     "cancel": "Cancel",
-    "upload": "Select file"
+    "upload": "Select file",
+    "create": "Create"
   }
 }

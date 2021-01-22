@@ -14,15 +14,12 @@ import {
 import { Upload } from '../../upload/upload';
 import { AlertDialog } from '../../dialog/alert.dialog';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  shopCreationNextStepSelector,
-  shopCreationRestoreValues,
-} from '../../../redux/selector/shop.selector';
+import { shopCreationNextStepSelector } from '../../../redux/selector/shop.selector';
 import { handledNextStep } from '../../../redux/action/shop.actions';
 
 export default function GeneralStep(props) {
   const methods = useFormContext();
-  const { reset, setValue } = methods;
+  const { setValue } = methods;
   const [regNumVal, setRegNumVal] = useState('');
   const { t } = useTranslation();
   const nextStep = useSelector(shopCreationNextStepSelector);
