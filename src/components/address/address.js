@@ -93,7 +93,10 @@ export default function Address() {
     setAnchorEl(null);
     setOpen(false);
     setData([]);
-    dispatch(addressUpdated(mapToAddress(item)));
+    const address = mapToAddress(item);
+    dispatch(addressUpdated(address));
+    sessionStorage.setItem('address', JSON.stringify(address));
+    // TODO enlever le dispatch et se base sur le session storage
     if (item && item.properties && item.properties.label) {
       setAddr(item.properties.label);
     }

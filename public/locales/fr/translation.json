@@ -50,6 +50,9 @@
           "manualConfrimationOrder": "Valider les commandes avant des les accepter"
         }
       }
+    },
+    "displayShop": {
+      "about": "Prestation image of shop"
     }
   },
   "feedback": {

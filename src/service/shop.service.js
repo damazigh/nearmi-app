@@ -31,7 +31,16 @@ const create = () => {
   return shopAxios.post('/api/shop/v1/create', shop);
 };
 
+const search = () => {
+  const savedAddress = JSON.parse(sessionStorage.getItem('address'));
+  const { longitude, latitude } = savedAddress;
+  const address = { longitude, latitude };
+  console.log('built address' + JSON.stringify(address));
+  return shopAxios.post(`/api/shop/v1/search?limit=${10}`, { address });
+};
+
 const ShopService = {
   create: create,
+  search: search,
 };
 export default ShopService;

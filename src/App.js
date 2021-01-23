@@ -11,6 +11,7 @@ import Secured from './security/secured.wrapper';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './security/keycloak';
 import Loading from './components/loading/loading';
+import NearbyShop from './pages/shop/nearby.shop';
 
 const theme = createMuiTheme({
   palette: {
@@ -61,6 +62,9 @@ function App() {
                     <Secured>
                       <CreateShop />
                     </Secured>
+                  </Route>
+                  <Route exact path="/shop">
+                    <NearbyShop />
                   </Route>
                 </Switch>
               </Grid>
