@@ -21,21 +21,33 @@ import { addressUpdated } from '../../redux/action/shop.actions';
 import { mapToAddress } from '../../utils/utils';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-export default function Address() {
+export default function Address(props) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [addr, setAddr] = useState('');
   const { showSnack } = useSnackBars();
+  const [searchTriggered, setSearchTriggered] = useState(false);
   const dispatch = useDispatch();
 
-  const showAlert = (e) => {
-    if (!addr) {
-      <Alert severity="warning">
-        <AlertTitle>{t('alert.warn.title')}</AlertTitle>
-        {t('alert.warn.unslectedAddress')}
-      </Alert>;
+  const showAlert = () => {
+    if (!addr && searchTriggered) {
+      return (
+        <Alert severity="warning">
+          <AlertTitle>{t('alert.warn.title')}</AlertTitle>
+          {t('alert.warn.unslectedAddress')}
+        </Alert>
+      );
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (!searchTriggered) {
+      setSearchTriggered(true);
+    }
+    if (!!props.onSearch && addr) {
+      props.onSearch();
     }
   };
 
@@ -52,6 +64,7 @@ export default function Address() {
           if (res.data.features && res.data.features.length > 0) {
             const feature = res.data.features[0];
             setAddr(feature.properties.label);
+            sessionStorage.setItem('address', JSON.stringify(addr));
           } else {
             showSnack(t('feedback.unknownGeolocation'), 'warn');
           }
@@ -141,6 +154,7 @@ export default function Address() {
           }
         })()}
       </div>
+      <div>{showAlert()}</div>
       <Paper elevation={5} className="m-t-alt1">
         <div className="flex addr">
           <InputBase
@@ -152,7 +166,6 @@ export default function Address() {
             }}
             value={addr}
             onInput={handleInput}
-            onFocusOut={(e) => showAlert(e)}
           />
           {(() => {
             if (navigator.geolocation) {
@@ -178,7 +191,7 @@ export default function Address() {
             aria-label={t('pages.main.searchBtnTitle')}
             title={t('pages.main.searchBtnTitle')}
           >
-            <SearchIcon />
+            <SearchIcon onClick={(e) => handleSearchClick()} />
           </IconButton>
         </div>
       </Paper>

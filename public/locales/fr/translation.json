@@ -19,9 +19,7 @@
       "steps": {
         "step1": "Infromations générales",
         "step2": "Horaire d'ouverture",
-        "step3": "Adresse",
-        "completed": "Toutes les étapes ont été complétées"
-
+        "step3": "Adresse"
       },
       "components": {
         "generalStep": {
@@ -60,7 +58,10 @@
     "searchAddressUnavailable": "Le service de recherche d'adresse est indisponible, veuillez réessayer ultérieurement",
     "unknownGeolocation": "Géolocalisation inconnue, essayez de recherche votre adresse avec le champ de recherche d'adresse",
     "formWithError": "There are errors in actual form",
-    "shopWithoutImage": "Un commerce sans image de couverture ou logo est beaucoup moins attractif envers les clients.<br/> Si vous décidez toute fois de continuer, vous pourrez ajouter une image ultérieurement dans la section d'administration"
+    "shopWithoutImage": "Un commerce sans image de couverture ou logo est beaucoup moins attractif envers les clients.<br/> Si vous décidez toute fois de continuer, vous pourrez ajouter une image ultérieurement dans la section d'administration",
+    "shopCreated": "Le commerce a été créé avec succès",
+    "shopCreationError": "Une erreur interne est survenue lors de la création"
+
   },
   "alert": {
     "warn": {

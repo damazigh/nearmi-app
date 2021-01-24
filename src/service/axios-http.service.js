@@ -2,9 +2,11 @@ import axios from 'axios';
 
 
 const authorizationInterceptor = (config) => {
-  console.info('je suis dans l intercepteur');
   const token = `Bearer ${localStorage.getItem('accessToken')}`;
-  config.headers.Authorization =  token;
+  if (token) {
+    config.headers.Authorization =  token;
+  }
+  
   return config;
 }
 

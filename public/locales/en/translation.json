@@ -18,8 +18,7 @@
       "steps": {
         "step1": "General information",
         "step2": "Shop openning hours",
-        "step3": "address",
-        "completed": "All steps are completed"
+        "step3": "address"
       },
       "components": {
         "generalStep": {
@@ -55,7 +54,9 @@
     "searchAddressUnavailable": "Search address service is unavailable, please try later",
     "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field",
     "formWithError": "There are errors in actual form",
-    "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section"
+    "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section",
+    "created": "Shop created with success",
+    "creationError": "Something went wrong when trying to create shop"
   },
   "alert": {
     "warn": {

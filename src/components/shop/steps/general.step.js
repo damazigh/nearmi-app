@@ -108,7 +108,7 @@ export default function GeneralStep(props) {
               </Grid>
               <Grid item md={6} sm={6} xs={11}>
                 <TextFieldControl
-                  name="shopshorDesc"
+                  name="shopshortDesc"
                   required
                   className="full-width"
                   label={t('pages.createShop.components.generalStep.shortDesc')}

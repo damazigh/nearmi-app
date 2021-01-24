@@ -1,12 +1,27 @@
 .m-top {
   margin-top: var(--margin-alt-3);
 }
+.m-bottom {
+  margin-bottom: var(--margin-alt-3);
+}
+.test {
+  margin: var(--margin-alt-4);
+}
 .img-height {
   height: 150px;
 }
 @media screen and (min-width: 600px) {
-  .m-right {
-    margin-left: var(--margin-alt-2);
-    margin-left: var(--margin-alt-2);
+  .card-height {
+    height: var(--size-alt-1);
   }
+}
+
+.expand {
+  transform: 'rotate(0deg)';
+  margin-left: 'auto';
+  transition-duration: 200ms;
+}
+
+.expandOpen {
+  transform: 'rotate(180deg)';
 }

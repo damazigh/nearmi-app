@@ -57,8 +57,13 @@ export default function ShopStepper() {
 
   const handleCreate = () => {
     ShopService.create()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        showSnack(t('feedback.shopCreated'), 'success');
+        sessionStorage.removeItem('step_0');
+        sessionStorage.removeItem('step_1');
+        sessionStorage.removeItem('step_2');
+      })
+      .catch((err) => showSnack(t('feedback.shopCreationError'), 'error'));
   };
 
   // go to previous step

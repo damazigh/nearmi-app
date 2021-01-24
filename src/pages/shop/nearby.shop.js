@@ -28,8 +28,9 @@ export default function NearbyShop() {
   };
   return (
     <>
-      <Grid container>{buildItems()}</Grid>
-      <span>toto</span>
+      <Grid container alignItems="stretch">
+        {buildItems()}
+      </Grid>
     </>
   );
 }
