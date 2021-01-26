@@ -38,6 +38,13 @@ export default function ShopCard(props) {
     return !!props.item.description;
   };
 
+  const buildImgUrl = () => {
+    return (
+      process.env.REACT_APP_SHOP_ENDPOINT +
+      `/api/shop/v1/${props.item.id}/image`
+    );
+  };
+
   return (
     <Grid item xs={12} md={4} sm={4} elevation={8}>
       <div className="full-height test">
@@ -45,7 +52,7 @@ export default function ShopCard(props) {
           <CardActionArea>
             <CardMedia
               title="presentation image"
-              image="/image-test.jpg"
+              image={props.item.hasImage ? buildImgUrl() : '/image-test.jpg'}
               className="img-height"
             />
             <CardContent>
