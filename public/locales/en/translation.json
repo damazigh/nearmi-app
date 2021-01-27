@@ -55,8 +55,9 @@
     "unknownGeolocation": "Geolocation unknown, please try to search your address with address search field",
     "formWithError": "There are errors in actual form",
     "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section",
-    "created": "Shop created with success",
-    "creationError": "Something went wrong when trying to create shop"
+    "shopCreated": "Shop created with success",
+    "shopCreationError": "Something went wrong when trying to create shop",
+    "searhShopFetchError": "Cannot fetch shop for your location, try later"
   },
   "alert": {
     "warn": {

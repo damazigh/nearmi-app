@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
-
+import RoomIcon from '@material-ui/icons/Room';
 import './shop.card.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +58,19 @@ export default function ShopCard(props) {
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {props.item.name}
+              </Typography>
+              <Typography variant="body2">
+                <div className="flex">
+                  <RoomIcon color="primary" fontSize="small" />
+                  <span>
+                    <strong>
+                      {Math.round(
+                        (props.item.distance / 1000 + Number.EPSILON) * 100
+                      ) / 100}
+                      Km
+                    </strong>
+                  </span>
+                </div>
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 {props.item.description}
