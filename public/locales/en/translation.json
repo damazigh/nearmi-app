@@ -47,6 +47,19 @@
           "manualConfrimationOrder": "Order have to be accepted manually"
         }
       }
+    },
+    "profile": {
+      "myShops":"My shops",
+      "myShopsSecondary": "View and manage your shops",
+      "myInformation": "My informations",
+      "components": {
+        "shopAdminList": {
+          "regNumber": "Registration n°",
+          "name": "Name",
+          "created": "Created",
+          "shortDesc": "short description"
+        }
+      }
     }
   },
   "feedback": {

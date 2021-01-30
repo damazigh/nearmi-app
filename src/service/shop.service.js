@@ -10,7 +10,7 @@ const create = () => {
   if (generalStep) {
     shop.name = generalStep.shopName;
     shop.description = generalStep.shopLongDesc;
-    shop.shortDesc = generalStep.shopshortDesc;
+    shop.shortDescription = generalStep.shopshortDesc;
     shop.registrationNumber = generalStep.shopRegNum;
   }
   // fill settings step properties
@@ -38,8 +38,13 @@ const search = () => {
   return shopAxios.post(`/api/shop/v1/search?limit=${10}`, { address });
 };
 
+const userShops = () => {
+  return shopAxios.get('/api/shop/v1/mine');
+};
+
 const ShopService = {
   create: create,
   search: search,
+  userShops: userShops,
 };
 export default ShopService;

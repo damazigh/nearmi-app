@@ -10,8 +10,9 @@ import CreateShop from './pages/shop/create.shop';
 import Secured from './security/secured.wrapper';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './security/keycloak';
-import Loading from './components/loading/loading';
+import { LinearLoading } from './components/loading/loading';
 import NearbyShop from './pages/shop/nearby.shop';
+import Profile from './pages/profile/profile';
 
 const theme = createMuiTheme({
   palette: {
@@ -46,7 +47,7 @@ function App() {
     <div>
       <ReactKeycloakProvider
         authClient={keycloak}
-        LoadingComponent={<Loading />}
+        LoadingComponent={<LinearLoading />}
         onEvent={handleKcEvents}
       >
         <ThemeProvider theme={theme}>
@@ -65,6 +66,11 @@ function App() {
                   </Route>
                   <Route exact path="/shop">
                     <NearbyShop />
+                  </Route>
+                  <Route exact path="/profile">
+                    <Secured>
+                      <Profile />
+                    </Secured>
                   </Route>
                 </Switch>
               </Grid>

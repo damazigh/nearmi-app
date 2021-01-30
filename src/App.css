@@ -24,6 +24,9 @@
 .justify-end {
   justify-content: flex-end;
 }
+.ai-center {
+  align-items: center;
+}
 .full-width {
   width: 100% !important;
 }
@@ -59,6 +62,9 @@
   .m-t-alt1 {
     margin-top: var(--margin-alt-2);
   }
+}
+.m-t-alt2 {
+  margin-top: var(--margin-alt-1);
 }
 .no-vertical-padding {
   padding-top: 0px !important;
