@@ -97,6 +97,8 @@
     "continue": "Continue",
     "cancel": "Cancel",
     "upload": "Select file",
-    "create": "Create"
+    "create": "Create",
+    "view": "View",
+    "delete": "Delete"
   }
 }

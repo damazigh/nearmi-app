@@ -28,7 +28,7 @@ const create = () => {
   }
   const address = JSON.parse(sessionStorage.getItem('step_2')); // address
   shop.address = address;
-  return shopAxios.post('/api/shop/v1/create', shop);
+  return shopAxios.post('/api/shop/v1/pro/create', shop);
 };
 
 const search = () => {
@@ -38,13 +38,13 @@ const search = () => {
   return shopAxios.post(`/api/shop/v1/search?limit=${10}`, { address });
 };
 
-const userShops = () => {
-  return shopAxios.get('/api/shop/v1/mine');
+const usersShop = () => {
+  return shopAxios.get('/api/shop/v1/pro/mine');
 };
 
 const ShopService = {
   create: create,
   search: search,
-  userShops: userShops,
+  usersShop: usersShop,
 };
 export default ShopService;

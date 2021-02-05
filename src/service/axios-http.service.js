@@ -12,7 +12,6 @@ const authorizationInterceptor = (config) => {
 
 const userAxios = axios.create({
   baseURL:  process.env.REACT_APP_USER_ENDPOINT,
-  headers: {'Content-Type' : 'application/json'}
 });
 
 const shopAxios = axios.create({

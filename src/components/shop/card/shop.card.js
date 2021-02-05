@@ -46,7 +46,7 @@ export default function ShopCard(props) {
   };
 
   return (
-    <Grid item xs={12} md={4} sm={6} elevation={8}>
+    <Grid item xs={12} md={4} sm={6} elevation={0}>
       <div className="full-height test">
         <Card className="card-height">
           <CardActionArea>

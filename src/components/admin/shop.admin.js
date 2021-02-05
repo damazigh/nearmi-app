@@ -5,11 +5,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import '../../utils/table.responsive.css';
 import { useTranslation } from 'react-i18next';
 import ShopService from '../../service/shop.service';
 import { LoadingWrapper } from '../loading/loading';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 /**
  * shops list that belongs to connected user
@@ -19,7 +20,7 @@ export default function ShopAdminList(props) {
   const [shops, setShops] = useState([]);
 
   useEffect(() => {
-    ShopService.userShops().then((res) => setShops(res.data));
+    ShopService.usersShop().then((res) => setShops(res.data));
   }, []);
 
   const buildBodyItem = () => {
@@ -48,6 +49,20 @@ export default function ShopAdminList(props) {
             >
               {shops[i].shortDescription}
             </TableCell>
+            <TableCell data-label={t('actions.view')}>
+              <VisibilityIcon
+                color="primary"
+                fontSize="small"
+                className="pointer icon-effect"
+              />
+            </TableCell>
+            <TableCell data-label={t('action.delete')}>
+              <DeleteForeverIcon
+                color="primary"
+                fontSize="small"
+                className="pointer icon-effect"
+              />
+            </TableCell>
           </TableRow>
         );
         res.push(item);
@@ -75,6 +90,8 @@ export default function ShopAdminList(props) {
                 <TableCell align="left">
                   {t('pages.profile.components.shopAdminList.shortDesc')}
                 </TableCell>
+                <TableCell align="left">{t('actions.view')}</TableCell>
+                <TableCell align="left">{t('actions.delete')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>{buildBodyItem()}</TableBody>
