@@ -8,6 +8,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import { Grid } from '@material-ui/core';
 import Account from '../account/account';
 import NavItem from './navitem';
+import { useSelector, useDispatch } from 'react-redux';
+import { shouldDisplaytoolbarMenuIcon } from '../../redux/selector/account.selector';
+import { toolbarMenuIconToggled } from '../../redux/action/account.action';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +31,9 @@ function Navbar() {
   const buildIconBtn = (icon) => {
     return <IconButton>{icon}</IconButton>;
   };
+  const showMenuIcon = useSelector(shouldDisplaytoolbarMenuIcon);
+  const dispatch = useDispatch();
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -37,13 +43,18 @@ function Navbar() {
         <Toolbar>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                aria-label="menu"
-              >
-                <MenuIcon />
-              </IconButton>
+              {showMenuIcon ? (
+                <IconButton
+                  edge="start"
+                  className={classes.menuButton}
+                  aria-label="menu"
+                  onClick={(e) => dispatch(toolbarMenuIconToggled())}
+                >
+                  <MenuIcon />
+                </IconButton>
+              ) : (
+                <></>
+              )}
             </Grid>
 
             <Grid item xs={6} className="flex justify-end">

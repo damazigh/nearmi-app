@@ -1,10 +1,26 @@
-import { ANONYMOUS, LNG_CHANGE, USER_AUTHENTICATED } from '../type';
+import {
+  LNG_CHANGE,
+  TOOLBAR_MENU_ICON_DISPLAY,
+  TOOLBAR_MENU_ICON_HANDLED,
+  TOOLBAR_MENU_ICON_TOGGLED,
+} from '../type';
 
 export const languageChanges = (lng) => ({ type: LNG_CHANGE, lng: lng });
-export const userAuthenticated = (user) => ({
-  type: USER_AUTHENTICATED,
-  user: user,
+/**
+ * show hide tool bar menu icon
+ */
+export const toolbarMenuIconDisplay = (dis) => ({
+  type: TOOLBAR_MENU_ICON_DISPLAY,
+  displayed: dis,
 });
-export const anonymous = () => ({
-  type: ANONYMOUS,
+
+/**
+ * dispatch event to allow handling the click on menu icon
+ */
+export const toolbarMenuIconToggled = () => ({
+  type: TOOLBAR_MENU_ICON_TOGGLED,
+});
+
+export const toolbarMenuIconHandled = () => ({
+  type: TOOLBAR_MENU_ICON_HANDLED,
 });

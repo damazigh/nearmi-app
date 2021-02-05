@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import ShopService from '../../service/shop.service';
 import { LoadingWrapper } from '../loading/loading';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { useHistory } from 'react-router-dom';
 
 /**
  * shops list that belongs to connected user
@@ -18,10 +19,15 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 export default function ShopAdminList(props) {
   const { t } = useTranslation();
   const [shops, setShops] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     ShopService.usersShop().then((res) => setShops(res.data));
   }, []);
+
+  const view = (id) => {
+    history.push(`/shop/${id}`);
+  };
 
   const buildBodyItem = () => {
     const res = [];
@@ -54,9 +60,10 @@ export default function ShopAdminList(props) {
                 color="primary"
                 fontSize="small"
                 className="pointer icon-effect"
+                onClick={(e) => view(shops[i].id)}
               />
             </TableCell>
-            <TableCell data-label={t('action.delete')}>
+            <TableCell data-label={t('actions.delete')}>
               <DeleteForeverIcon
                 color="primary"
                 fontSize="small"

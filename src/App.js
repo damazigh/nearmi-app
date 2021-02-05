@@ -13,6 +13,7 @@ import keycloak from './security/keycloak';
 import { LinearLoading } from './components/loading/loading';
 import NearbyShop from './pages/shop/nearby.shop';
 import Profile from './pages/profile/profile';
+import DetailShop from './pages/shop/detail.shop';
 
 const theme = createMuiTheme({
   palette: {
@@ -70,6 +71,11 @@ function App() {
                   <Route exact path="/profile">
                     <Secured>
                       <Profile />
+                    </Secured>
+                  </Route>
+                  <Route exact path="/shop/:id">
+                    <Secured>
+                      <DetailShop />
                     </Secured>
                   </Route>
                 </Switch>
