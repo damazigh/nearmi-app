@@ -42,9 +42,19 @@ const usersShop = () => {
   return shopAxios.get('/api/shop/v1/pro/mine');
 };
 
+const proShopDetail = (id) => {
+  return shopAxios.get(`/api/shop/v1/pro/${id}`);
+};
+
+const buildImagePath = (id, name) => {
+  return `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/${id}/image/${name}`;
+};
+
 const ShopService = {
   create: create,
   search: search,
   usersShop: usersShop,
+  proShopDetail: proShopDetail,
+  buildImagePath: buildImagePath,
 };
 export default ShopService;

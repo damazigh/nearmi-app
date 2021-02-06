@@ -70,7 +70,8 @@
     "shopWithoutImage": "A shop without image is less attractive for customers, please consider adding one.\n Note: you can add it later in admin  section",
     "shopCreated": "Shop created with success",
     "shopCreationError": "Something went wrong when trying to create shop",
-    "searhShopFetchError": "Cannot fetch shop for your location, try later"
+    "searhShopFetchError": "Cannot fetch shop for your location, try later",
+    "shopAdminAlert_1": "Customer will see product section as you see them above"
   },
   "alert": {
     "warn": {

@@ -14,3 +14,7 @@ export const shopCreationRestoreValues = (state) =>
  * susbcribe to address update
  */
 export const addressSelector = (state) => state.shopReducer.address;
+/**
+ * get managed shop by pro user
+ */
+export const getManagedShop = (state) => state.shopReducer.shop;

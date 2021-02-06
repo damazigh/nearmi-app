@@ -5,6 +5,7 @@ import {
   NEXT_SHOP_CREATION_STEP,
   RESTORE_FORM_VALUE,
   RESTORE_FORM_VALUE_COMPLETED,
+  UPDATE_MANAGED_SHOP,
 } from '../type';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     submitCreation: false,
   },
   address: null,
+  shop: null,
 };
 let newState = null;
 export default function shopReducer(state = initialState, action) {
@@ -34,6 +36,10 @@ export default function shopReducer(state = initialState, action) {
     case CREATE_SHOP:
       newState = Object.assign({}, state);
       newState.creation.submitCreation = true;
+      return newState;
+    case UPDATE_MANAGED_SHOP:
+      newState = Object.assign({}, state);
+      newState.shop = action.data;
       return newState;
     default:
       return initialState;

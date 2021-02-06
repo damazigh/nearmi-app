@@ -14,6 +14,7 @@ import { LinearLoading } from './components/loading/loading';
 import NearbyShop from './pages/shop/nearby.shop';
 import Profile from './pages/profile/profile';
 import DetailShop from './pages/shop/detail.shop';
+import { ROLE_PROFESSIONAL } from './utils/roles.constants';
 
 const theme = createMuiTheme({
   palette: {
@@ -74,7 +75,7 @@ function App() {
                     </Secured>
                   </Route>
                   <Route exact path="/shop/:id">
-                    <Secured>
+                    <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
                       <DetailShop />
                     </Secured>
                   </Route>

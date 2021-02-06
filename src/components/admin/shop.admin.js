@@ -12,6 +12,7 @@ import ShopService from '../../service/shop.service';
 import { LoadingWrapper } from '../loading/loading';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 /**
  * shops list that belongs to connected user
@@ -20,6 +21,7 @@ export default function ShopAdminList(props) {
   const { t } = useTranslation();
   const [shops, setShops] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     ShopService.usersShop().then((res) => setShops(res.data));

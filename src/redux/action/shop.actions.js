@@ -3,6 +3,7 @@ import {
   CREATE_SHOP,
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
+  UPDATE_MANAGED_SHOP,
 } from '../type';
 
 /**
@@ -31,4 +32,12 @@ export const addressUpdated = (addr) => {
  */
 export const createShop = () => {
   return { type: CREATE_SHOP };
+};
+
+/**
+ * update the managed shop (event related to pro user managing his shops)
+ * @param {*} shop
+ */
+export const updateManagedShop = (shop) => {
+  return { type: UPDATE_MANAGED_SHOP, data: shop };
 };

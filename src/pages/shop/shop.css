@@ -1,0 +1,11 @@
+@media screen and (max-width: 600px) {
+  .header-side-margin {
+    margin-right: var(--margin-alt-1);
+  }
+}
+.hdr-txt-tm {
+  margin-top: var(--margin-alt-3);
+}
+.hdr-txt-mx-h {
+  max-height: 200px;
+}

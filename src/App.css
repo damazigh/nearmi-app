@@ -77,3 +77,9 @@
 .icon-effect:hover {
   filter: hue-rotate(70deg);
 }
+.dir-row-reverse {
+  flex-direction: row-reverse;
+}
+.w-auto {
+  width: auto;
+}
