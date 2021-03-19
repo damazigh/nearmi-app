@@ -1,6 +1,6 @@
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 600px) {
   .header-side-margin {
-    margin-right: var(--margin-alt-1);
+    padding-right: 15px;
   }
 }
 .hdr-txt-tm {

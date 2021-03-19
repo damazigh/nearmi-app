@@ -39,75 +39,27 @@ export default function ProductHeader(props) {
   const history = useHistory();
   const theme = useTheme();
   const { id } = useParams();
+  const loadedImage = [];
 
   useEffect(() => {
     if (!props.shop) {
       history.push('/profile');
     }
   }, []);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const loadImage = (id, meta) => {
+    if (loadedImage.some((cached) => cached.meta === meta)) {
+      return loadedImage.find((cached) => cached.meta === meta).image;
+    } else {
+      const img = (
+        <img
+          className={classes.img}
+          src={ShopService.buildImagePath(id, meta)}
+        />
+      );
+      loadedImage.push({ meta: meta, image: img });
+      return img;
+    }
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
-
-  return (
-    <div className={classes.root}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {props.shop.metadata.map((meta, index) => (
-          <div key={index}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img
-                className={classes.img}
-                src={ShopService.buildImagePath(id, meta)}
-                alt="image de couverture"
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="relative"
-        variant="text"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
-    </div>
-  );
+  return <div></div>;
 }

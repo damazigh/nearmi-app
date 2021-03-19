@@ -29,3 +29,12 @@ export function toTime(timeAsStr) {
   }
   return null;
 }
+
+export function checkImage(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(path);
+    img.onerror = () => reject();
+    img.src = path;
+  });
+}

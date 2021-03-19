@@ -47,44 +47,44 @@ function App() {
 
   return (
     <div>
-      <ReactKeycloakProvider
+      {/*<ReactKeycloakProvider
         authClient={keycloak}
         LoadingComponent={<LinearLoading />}
         onEvent={handleKcEvents}
-      >
-        <ThemeProvider theme={theme}>
-          <SnackBarProvider>
-            <BrowserRouter>
-              <Navbar />
-              <Grid className="container">
-                <Switch>
-                  <Route exact path="/home">
-                    <Home />
-                  </Route>
-                  <Route exact path="/shop/create">
-                    <Secured>
-                      <CreateShop />
-                    </Secured>
-                  </Route>
-                  <Route exact path="/shop">
-                    <NearbyShop />
-                  </Route>
-                  <Route exact path="/profile">
-                    <Secured>
-                      <Profile />
-                    </Secured>
-                  </Route>
-                  <Route exact path="/shop/:id">
-                    <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
-                      <DetailShop />
-                    </Secured>
-                  </Route>
-                </Switch>
-              </Grid>
-            </BrowserRouter>
-          </SnackBarProvider>
-        </ThemeProvider>
-      </ReactKeycloakProvider>
+      > */}
+      <ThemeProvider theme={theme}>
+        <SnackBarProvider>
+          <BrowserRouter>
+            <Navbar />
+            <Grid className="container">
+              <Switch>
+                <Route exact path="/home">
+                  <Home />
+                </Route>
+                <Route exact path="/shop/create">
+                  <Secured>
+                    <CreateShop />
+                  </Secured>
+                </Route>
+                <Route exact path="/shop">
+                  <NearbyShop />
+                </Route>
+                <Route exact path="/profile">
+                  <Secured>
+                    <Profile />
+                  </Secured>
+                </Route>
+                <Route exact path="/shop/:id">
+                  <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
+                    <DetailShop />
+                  </Secured>
+                </Route>
+              </Switch>
+            </Grid>
+          </BrowserRouter>
+        </SnackBarProvider>
+      </ThemeProvider>
+      {/*</ReactKeycloakProvider>*/}
     </div>
   );
 }

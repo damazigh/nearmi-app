@@ -11,6 +11,7 @@ import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import './shop.css';
 import { Alert } from '@material-ui/lab';
 import { useTranslation } from 'react-i18next';
+import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
 
 export default function DetailShop() {
   const [detail, setDetail] = useState(null);
@@ -35,18 +36,18 @@ export default function DetailShop() {
   return (
     <>
       <LoadingWrapper loading={loading}>
-        <div id="content" className="flex">
+        <div id="content" className="flex hdr-txt-tm">
           <header>
             <Grid container className="dir-row-reverse">
-              <Grid item xs={12} sm={5} md={5} className="flex-end">
+              <Grid item xs={12} sm={4} md={4} className="flex-end">
                 <ProductHeader shop={detail} />
               </Grid>
               <Grid
                 item
                 xs={12}
-                md={7}
-                sm={7}
-                className="header-side-margin hdr-txt-tm hdr-txt-mx-h"
+                md={8}
+                sm={8}
+                className="header-side-margin hdr-txt-mx-h"
               >
                 <Typography gutterBottom variant="h5" component="h1">
                   {detail?.name}
@@ -56,17 +57,12 @@ export default function DetailShop() {
                   {detail?.description}
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} className="m-t-alt1">
-                <Divider />
-              </Grid>
             </Grid>
           </header>
         </div>
-        <Grid container className="m-t-alt1">
-          <Grid item xs={12} md={6} className="flex jc-center">
-            <Alert severity="info">
-              <p>{t('feedback.shopAdminAlert_1')}</p>
-            </Alert>
+        <Grid container md={8} sm={8} className="m-t-alt1 header-side-margin">
+          <Grid item md={12} xs={12} className="flex jc-center m-t-alt2">
+            <DetailProWrapper detail={detail}/>
           </Grid>
         </Grid>
         <AnchorDrawer
