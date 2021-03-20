@@ -6,7 +6,7 @@ import './App.css';
 import Home from './pages/home/home';
 import { Grid } from '@material-ui/core';
 import { SnackBarProvider } from './components/snackbar/snackbar-provider';
-import CreateShop from './pages/shop/create.shop';
+import CreateShop from './pages/s hop/create.shop';
 import Secured from './security/secured.wrapper';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './security/keycloak';
@@ -47,11 +47,11 @@ function App() {
 
   return (
     <div>
-      {/*<ReactKeycloakProvider
+      <ReactKeycloakProvider
         authClient={keycloak}
         LoadingComponent={<LinearLoading />}
         onEvent={handleKcEvents}
-      > */}
+      >
       <ThemeProvider theme={theme}>
         <SnackBarProvider>
           <BrowserRouter>
@@ -84,7 +84,6 @@ function App() {
           </BrowserRouter>
         </SnackBarProvider>
       </ThemeProvider>
-      {/*</ReactKeycloakProvider>*/}
     </div>
   );
 }
