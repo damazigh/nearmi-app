@@ -1,5 +1,6 @@
 import {
   ADDRESS_UPDATED,
+  SHOP_CONFIG_LOADED,
   CREATE_SHOP,
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
@@ -40,4 +41,12 @@ export const createShop = () => {
  */
 export const updateManagedShop = (shop) => {
   return { type: UPDATE_MANAGED_SHOP, data: shop };
+};
+
+/**
+ * dispatch the loaded shop configuration (should happens once at app loading)
+ * @param {*} config
+ */
+export const shopConfLoaded = (config) => {
+  return { type: SHOP_CONFIG_LOADED, data: config };
 };

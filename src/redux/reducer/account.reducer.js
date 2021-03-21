@@ -31,7 +31,7 @@ function accountReducer(state = initialState, action) {
       newState.toolbarMenuIconToggled = false;
       return newState;
     default:
-      return initialState;
+      return state;
   }
 }
 export default accountReducer;

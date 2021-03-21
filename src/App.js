@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Navbar from './components/navbar/navbar';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -15,6 +16,8 @@ import NearbyShop from './pages/shop/nearby.shop';
 import Profile from './pages/profile/profile';
 import DetailShop from './pages/shop/detail.shop';
 import { ROLE_PROFESSIONAL } from './utils/roles.constants';
+import ShopService from './service/shop.service';
+import { shopConfLoaded } from './redux/action/shop.actions';
 
 const theme = createMuiTheme({
   palette: {
@@ -31,6 +34,14 @@ const theme = createMuiTheme({
   },
 });
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    ShopService.loadConfig().then((res) => {
+      dispatch(shopConfLoaded(res.data));
+    });
+  }, []);
+
   const handleKcEvents = (event, error) => {
     switch (event) {
       case 'onAuthSuccess':

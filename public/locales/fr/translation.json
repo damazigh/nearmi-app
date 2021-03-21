@@ -61,7 +61,8 @@
     "shopWithoutImage": "Un commerce sans image de couverture ou logo est beaucoup moins attractif envers les clients.<br/> Si vous décidez toute fois de continuer, vous pourrez ajouter une image ultérieurement dans la section d'administration",
     "shopCreated": "Le commerce a été créé avec succès",
     "shopCreationError": "Une erreur interne est survenue lors de la création",
-    "searhShopFetchError": "Erreur lors de la récupération des commerces à proximité"
+    "searhShopFetchError": "Erreur lors de la récupération des commerces à proximité",
+    "shopRemainingImage": "Il vous reste {0} image(s) avant d'atteindre la limite autorisée"
   },
   "alert": {
     "warn": {

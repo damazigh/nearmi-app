@@ -60,9 +60,9 @@ export default function DetailShop() {
             </Grid>
           </header>
         </div>
-        <Grid container md={8} sm={8} className="m-t-alt1 header-side-margin">
+        <Grid container md={12} sm={12} className="m-t-alt1 header-side-margin">
           <Grid item md={12} xs={12} className="flex jc-center m-t-alt2">
-            <DetailProWrapper detail={detail}/>
+            <DetailProWrapper detail={detail} />
           </Grid>
         </Grid>
         <AnchorDrawer

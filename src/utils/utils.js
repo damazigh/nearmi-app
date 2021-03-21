@@ -38,3 +38,7 @@ export function checkImage(path) {
     img.src = path;
   });
 }
+
+export function rangeRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}

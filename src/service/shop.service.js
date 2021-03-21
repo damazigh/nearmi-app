@@ -50,11 +50,18 @@ const buildImagePath = (id, name) => {
   return `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/${id}/image/${name}`;
 };
 
+const loadConfig = () => {
+  return shopAxios.get(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/config`
+  );
+};
+
 const ShopService = {
   create: create,
   search: search,
   usersShop: usersShop,
   proShopDetail: proShopDetail,
   buildImagePath: buildImagePath,
+  loadConfig: loadConfig,
 };
 export default ShopService;

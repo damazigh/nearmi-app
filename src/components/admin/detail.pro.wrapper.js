@@ -8,6 +8,8 @@ import CategoryIcon from '@material-ui/icons/Category';
 import Gallery from '../images/gallery/gallery';
 import ShopService from '../../service/shop.service';
 import { useHistory } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
+import ShopAdminGallery from '../shop/admin/gallery.shop.admin';
 
 export default function DetailProWrapper(props) {
   const [value, setValue] = useState(0);
@@ -29,7 +31,7 @@ export default function DetailProWrapper(props) {
         return <></>;
       case 1:
         return (
-          <Gallery
+          <ShopAdminGallery
             metadata={props.detail.metadata}
             buildSrc={ShopService.buildImagePath}
           />
@@ -39,21 +41,27 @@ export default function DetailProWrapper(props) {
 
   return (
     <>
-      <Paper square className="m-t-alt2 full-width">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="icon tabs example"
-        >
-          <Tab icon={<ListIcon />} aria-label="phone" />
-          <Tab icon={<ImageIcon />} aria-label="favorite"></Tab>
-          <Tab icon={<CategoryIcon />} aria-label="person" />
-        </Tabs>
-      </Paper>
-      <div>{displayContent()}</div>
+      <Grid container md={12} xs={12}>
+        <Grid item md={12} xs={12}>
+          <Paper square className="m-t-alt2 full-width">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              indicatorColor="primary"
+              textColor="primary"
+              aria-label="icon tabs example"
+            >
+              <Tab icon={<ListIcon />} aria-label="phone" />
+              <Tab icon={<ImageIcon />} aria-label="favorite"></Tab>
+              <Tab icon={<CategoryIcon />} aria-label="person" />
+            </Tabs>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          {displayContent()}
+        </Grid>
+      </Grid>
     </>
   );
 }

@@ -18,3 +18,10 @@ export const addressSelector = (state) => state.shopReducer.address;
  * get managed shop by pro user
  */
 export const getManagedShop = (state) => state.shopReducer.shop;
+
+/**
+ * get maximum limit of authorized image to upload for one shop
+ * @param {*} state
+ */
+export const getMaxImageForShopSelector = (state) =>
+  state.shopReducer.shopConfig.maxImageForShop;

@@ -71,7 +71,9 @@
     "shopCreated": "Shop created with success",
     "shopCreationError": "Something went wrong when trying to create shop",
     "searhShopFetchError": "Cannot fetch shop for your location, try later",
-    "shopAdminAlert_1": "Customer will see product section as you see them above"
+    "shopAdminAlert_1": "Customer will see product section as you see them above",
+    "shopRemainingImage": "You have {0} image left before reaching authorized limit"
+
   },
   "alert": {
     "warn": {
