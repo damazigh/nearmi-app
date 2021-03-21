@@ -17,7 +17,7 @@ const initialState = {
   },
   address: null,
   shop: null,
-  shopConfig: {},
+  shopConfig: null,
 };
 
 let newState = null;

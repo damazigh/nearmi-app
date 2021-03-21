@@ -25,3 +25,10 @@ export const getManagedShop = (state) => state.shopReducer.shop;
  */
 export const getMaxImageForShopSelector = (state) =>
   state.shopReducer.shopConfig.maxImageForShop;
+
+/**
+ * get accepted mime images
+ * @param {*} state
+ */
+export const getAcceptedImgMimeSelector = (state) =>
+  state.shopReducer.shopConfig.acceptedImageMime;

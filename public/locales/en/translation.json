@@ -72,7 +72,9 @@
     "shopCreationError": "Something went wrong when trying to create shop",
     "searhShopFetchError": "Cannot fetch shop for your location, try later",
     "shopAdminAlert_1": "Customer will see product section as you see them above",
-    "shopRemainingImage": "You have {0} image left before reaching authorized limit"
+    "shopRemainingImage": "You have {0} image left before reaching authorized limit",
+    "shopNoRemainingImage": "Image upload limit reached. To upload more image you have to delete at least one of the previous uploaded.",
+    "NotExpectedFileType": "Uploaded file doesn't match expected file type ({0})"
 
   },
   "alert": {

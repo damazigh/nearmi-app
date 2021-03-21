@@ -1,4 +1,4 @@
-import { toTime } from '../utils/utils';
+import { dataURItoBlob, toTime } from '../utils/utils';
 import { shopAxios } from './axios-http.service';
 /**
  * method that handles creation of new shop
@@ -56,6 +56,21 @@ const loadConfig = () => {
   );
 };
 
+const addImage = (id, imgWrapper) => {
+  const formData = new FormData();
+  const image = dataURItoBlob(imgWrapper.data);
+  formData.append('images', image, imgWrapper.name);
+  return shopAxios.put(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/upload/${id}`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+};
+
 const ShopService = {
   create: create,
   search: search,
@@ -63,5 +78,6 @@ const ShopService = {
   proShopDetail: proShopDetail,
   buildImagePath: buildImagePath,
   loadConfig: loadConfig,
+  addImage: addImage,
 };
 export default ShopService;

@@ -62,7 +62,10 @@
     "shopCreated": "Le commerce a été créé avec succès",
     "shopCreationError": "Une erreur interne est survenue lors de la création",
     "searhShopFetchError": "Erreur lors de la récupération des commerces à proximité",
-    "shopRemainingImage": "Il vous reste {0} image(s) avant d'atteindre la limite autorisée"
+    "shopRemainingImage": "Il vous reste {0} image(s) avant d'atteindre la limite autorisée",
+    "shopNoRemainingImage": "vous ne pouvez plus ajouter d'image, pour pouvoir en ajouter supprimer d'abord une de vos anciennes images",
+    "NotExpectedFileType": "Le fichier que vous avez téléchargé ne correspond pas à une {0}"
+    
   },
   "alert": {
     "warn": {
