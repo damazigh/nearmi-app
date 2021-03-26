@@ -24,7 +24,7 @@ package:
   artifacts:
     paths:
       - ./build
-    expires_in: 1 days
+    expire_in: 1 days
   tags:
     - kubernetes
 deploy:
