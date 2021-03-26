@@ -19,10 +19,10 @@ test:
     - kubernetes
 package:
   script:
-    - npm install --silent
-    - export path=$(pwd)/node_modules/.bin:$path
-    - echo $path
-    - npm run build
+    - npm ci --silent
+    - export PATH=$(pwd)/node_modules/.bin:$PATH
+    - echo $PATH
+    - npm run build --timing
   artifacts:
     paths:
       - ./build
