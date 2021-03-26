@@ -25,6 +25,8 @@ package:
     paths:
       - ./build
     expires_in: 1 days
+  tags:
+    - kubernetes
 deploy:
   image:
     name: gcr.io/kaniko-project/executor:debug
