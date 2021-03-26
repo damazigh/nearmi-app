@@ -1,4 +1,4 @@
-image: node:latest
+image: node:14.12.0-buster-slim
 variables:
   APP_IMAGE_NAME: 'nearmi.registry/nearmi/app'
 cache:
