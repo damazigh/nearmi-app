@@ -24,6 +24,7 @@ package:
     - chmod -R +x ./node_modules/.bin
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
+    - sleep 1500
     - npm run build --timing
   artifacts:
     paths:
