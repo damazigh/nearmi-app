@@ -19,6 +19,8 @@ test:
     - kubernetes
 package:
   script:
+    - rm -Rf ./build
+    - npm cache clean --force
     - npm ci --silent
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
