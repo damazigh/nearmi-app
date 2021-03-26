@@ -22,7 +22,7 @@ deploy:
     entrypoint: ['']
   stage: deploy
   before_script:
-    - cp /conf/rootCA.crt /kaniko/ssl/certs/
+    - cp /conf/nearmiRootCA.crt /kaniko/ssl/certs/
   script:
     - |
       echo "building and deploying image to nexus"
