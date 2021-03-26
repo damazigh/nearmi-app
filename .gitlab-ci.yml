@@ -1,10 +1,6 @@
-image: node:14.12.0-buster-slim
+image: node:latest
 variables:
   APP_IMAGE_NAME: 'nearmi.registry/nearmi/app'
-cache:
-  paths:
-    - ./node_modules
-  key: 'nearmi_app_node'
 
 stages:
   - test
@@ -20,11 +16,11 @@ test:
 package:
   script:
     - rm -Rf ./build
+    - rm -Rf ./node_modules
     - npm cache clean --force
     - npm ci --silent
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
-    - sleep 400
     - npm run build --timing
   artifacts:
     paths:
