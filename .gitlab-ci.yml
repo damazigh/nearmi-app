@@ -8,6 +8,7 @@ cache:
 
 stages:
   - test
+  - package
   - deploy
 
 test:
@@ -16,6 +17,14 @@ test:
     - echo "running test for app..."
   tags:
     - kubernetes
+package:
+  script:
+    - npm install --silent
+    - npm run-script build
+  artifacts:
+    paths:
+      - ./build
+    expires_in: 1 days
 deploy:
   image:
     name: gcr.io/kaniko-project/executor:debug
