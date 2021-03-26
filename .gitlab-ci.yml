@@ -1,6 +1,10 @@
 image: node:latest
 variables:
   APP_IMAGE_NAME: 'nearmi.registry/nearmi/app'
+cache:
+  paths:
+    - ./node_modules
+  key: 'nearmi_app_node'
 
 stages:
   - test
@@ -15,10 +19,9 @@ test:
     - kubernetes
 package:
   script:
-    - rm -Rf ./build
-    - rm -Rf ./node_modules
     - npm cache clean --force
     - npm ci --silent
+    - chmod -R +x ./node_modules/.bin
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
     - npm run build --timing
