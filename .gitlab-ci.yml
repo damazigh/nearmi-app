@@ -22,6 +22,7 @@ package:
     - npm install --silent
     - export PATH=./node_modules/.bin:$PATH
     - npm run-script build
+    - cat  /root/.npm/_logs/*.log
   artifacts:
     paths:
       - ./build
