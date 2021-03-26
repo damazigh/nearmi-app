@@ -20,10 +20,9 @@ test:
 package:
   script:
     - npm install --silent
-    - export PATH=./node_modules/.bin:$PATH
-    - sleep 300
-    - npm run-script build
-    - cat  /root/.npm/_logs/*.log
+    - export path=$(pwd)/node_modules/.bin:$path
+    - echo $path
+    - npm run build
   artifacts:
     paths:
       - ./build
