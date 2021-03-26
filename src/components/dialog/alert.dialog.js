@@ -21,49 +21,61 @@ import { useTranslation } from 'react-i18next';
 function transition(p) {
   return <Grow {...p} />;
 }
-export function AlertDialog(props) {
+export function AlertDialog({
+  titleKey,
+  onClose,
+  onCancel,
+  onContinue,
+  isOpen,
+  textContentKey,
+  textContent,
+}) {
   const { t } = useTranslation();
 
   const onCloseHandler = () => {
-    if (props.onClose) {
-      props.onClose();
+    if (onClose) {
+      onClose();
+    } else if (onCancel) {
+      onCancel();
     }
   };
 
-  useEffect(() => console.log('je suis: ' + props.isOpen));
   const defaultTitle = () => {
-    return props.titleKey
-      ? t(props.titleKey)
-      : t('components.alertDialog.defaultTitle');
+    return titleKey ? t(titleKey) : t('components.alertDialog.defaultTitle');
   };
   const handleContinue = () => {
-    if (props.isOpen) {
-      if (props.onContinue) {
-        props.onContinue();
+    if (isOpen) {
+      if (onContinue) {
+        onContinue();
       }
       onCloseHandler();
     }
   };
+  const getContent = () => {
+    if (textContent) {
+      return textContent;
+    }
+    return t(textContentKey);
+  };
 
   const handleCancel = () => {
-    if (props.onCancel) {
-      props.onCancel();
-      console.info('canceled');
+    if (onCancel) {
+      onCancel();
     }
     onCloseHandler();
   };
 
   return (
     <Dialog
-      open={props.isOpen}
-      onClose={onCloseHandler()}
+      open={isOpen}
+      onClose={onCloseHandler}
       aria-labelledby="alert"
       TransitionComponent={transition}
       keepMounted
     >
       <DialogTitle id="alert">{defaultTitle()}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{t(props.textContentKey)}</DialogContentText>
+        <DialogContentText>{getContent()}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={(e) => handleCancel()} color="primary">

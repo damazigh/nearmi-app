@@ -7,6 +7,7 @@ import {
   TOOLBAR_MENU_ICON_DISPLAY,
   TOOLBAR_MENU_ICON_TOGGLED,
   UPDATE_MANAGED_SHOP,
+  UPDATE_VISITIED_SHOP,
 } from '../type';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   address: null,
   shop: null,
   shopConfig: null,
+  visitedShop: null,
 };
 
 let newState = null;
@@ -55,6 +57,11 @@ export default function shopReducer(state = initialState, action) {
     case SHOP_CONFIG_LOADED:
       newState = Object.assign({}, state);
       newState.shopConfig = action.data;
+      return newState;
+    // happens when visiting detailed page of shop
+    case UPDATE_VISITIED_SHOP:
+      newState = Object.assign({}, state);
+      newState.shop = action.shop;
       return newState;
     default:
       return state;

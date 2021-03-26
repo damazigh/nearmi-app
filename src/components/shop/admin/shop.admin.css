@@ -6,3 +6,7 @@
   bottom: 0;
   right: 0;
 }
+
+.btn-spacing {
+  margin-left: var(--margin-alt-3) !important;
+}

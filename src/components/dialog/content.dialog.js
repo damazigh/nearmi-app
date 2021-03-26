@@ -12,29 +12,36 @@ import { useTranslation } from 'react-i18next';
 function transition(p) {
   return <Grow {...p} />;
 }
-export default function ContentDialog(props) {
+export default function ContentDialog({
+  onClose,
+  title,
+  isOpen,
+  children,
+  proceed,
+  hasDialogTitle = true,
+}) {
   const { t } = useTranslation();
 
   const handleClose = () => {
-    if (props.onClose) {
-      props.onClose();
+    if (onClose) {
+      onClose();
     }
   };
 
   return (
     <Dialog
-      title={props.title}
-      open={props.isOpen}
+      title={title}
+      open={isOpen}
       TransitionComponent={transition}
       keepMounted
     >
-      <DialogTitle>{props.title}</DialogTitle>
-      <DialogContent>{props.children}</DialogContent>
+      {hasDialogTitle ? <DialogTitle>{title}</DialogTitle> : null}{' '}
+      <DialogContent>{children}</DialogContent>
       <DialogActions>
         <Button onClick={(e) => handleClose()} color="primary">
           {t('actions.cancel')}
         </Button>
-        <Button onClick={(e) => props.proceed()} color="primary" autoFocus>
+        <Button onClick={(e) => proceed()} color="primary" autoFocus>
           {t('actions.save')}
         </Button>
       </DialogActions>

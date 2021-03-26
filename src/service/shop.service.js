@@ -71,6 +71,16 @@ const addImage = (id, imgWrapper) => {
   );
 };
 
+const deleteImages = (id, images) => {
+  return shopAxios.put(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/delete/${id}?images=${images}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+};
 const ShopService = {
   create: create,
   search: search,
@@ -79,5 +89,6 @@ const ShopService = {
   buildImagePath: buildImagePath,
   loadConfig: loadConfig,
   addImage: addImage,
+  deleteImages: deleteImages,
 };
 export default ShopService;

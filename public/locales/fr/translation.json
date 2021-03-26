@@ -64,8 +64,13 @@
     "searhShopFetchError": "Erreur lors de la récupération des commerces à proximité",
     "shopRemainingImage": "Il vous reste {0} image(s) avant d'atteindre la limite autorisée",
     "shopNoRemainingImage": "vous ne pouvez plus ajouter d'image, pour pouvoir en ajouter supprimer d'abord une de vos anciennes images",
-    "NotExpectedFileType": "Le fichier que vous avez téléchargé ne correspond pas à une {0}"
-    
+    "NotExpectedFileType": "Le fichier que vous avez téléchargé ne correspond pas à une {0}",
+    "imageUploaded": "Image ajoutée avec succès",
+    "imageUploadFailed": "L'ajout de l'image a échoué suite à une erreur inconnue",
+    "imgDeletionWarning": "Vous êtes sur le point de supprimer {0} images",
+    "fetchDataInternalError": "Une erreur est survenue lors de la récupération des informations à partir du serveur",
+    "operationSucceded":"L'opération a réussie",
+    "operationError": "L'opération a échouée"
   },
   "alert": {
     "warn": {
@@ -97,6 +102,7 @@
     "continue": "Continuer",
     "cancel": "Annuler",
     "upload": "Selectionner un fichier",
-    "create": "Créer"
+    "create": "Créer",
+    "save":"Sauvegarder"
   }
 }

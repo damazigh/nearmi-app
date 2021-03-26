@@ -6,6 +6,10 @@
     },
     "alertDialog": {
       "defaultTitle": "Are you sure you want to continue ?"
+    },
+    "gallery": {
+      "editionMode": "Edition mode",
+      "visualizationMode": "Visualization mode"
     }
   },
   "pages": {
@@ -74,7 +78,13 @@
     "shopAdminAlert_1": "Customer will see product section as you see them above",
     "shopRemainingImage": "You have {0} image left before reaching authorized limit",
     "shopNoRemainingImage": "Image upload limit reached. To upload more image you have to delete at least one of the previous uploaded.",
-    "NotExpectedFileType": "Uploaded file doesn't match expected file type ({0})"
+    "NotExpectedFileType": "Uploaded file doesn't match expected file type ({0})",
+    "imageUploaded": "Image uploaded with success",
+    "imageUploadFailed": "Failed to upload image. An unexpected error occured",
+    "imgDeletionWarning": "You are going to delete {0} images",
+    "fetchDataInternalError": "An internal error occured when fetching data from server",
+    "operationSucceded":"Operation succedeed",
+    "operationError": "Operation failed"
 
   },
   "alert": {
@@ -104,6 +114,7 @@
     "upload": "Select file",
     "create": "Create",
     "view": "View",
-    "delete": "Delete"
+    "delete": "Delete",
+    "save": "Save"
   }
 }

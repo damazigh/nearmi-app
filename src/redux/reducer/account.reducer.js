@@ -3,12 +3,14 @@ import {
   TOOLBAR_MENU_ICON_DISPLAY,
   TOOLBAR_MENU_ICON_HANDLED,
   TOOLBAR_MENU_ICON_TOGGLED,
+  UPDATE_LOADING,
 } from '../type';
 
 const initialState = {
   currentLanguage: 'en',
   toolbarMenuIconDisplayed: false,
   toolbarMenuIconToggled: false,
+  isLoading: false,
 };
 
 let newState = null;
@@ -29,6 +31,10 @@ function accountReducer(state = initialState, action) {
     case TOOLBAR_MENU_ICON_HANDLED:
       newState = Object.assign({}, state);
       newState.toolbarMenuIconToggled = false;
+      return newState;
+    case UPDATE_LOADING:
+      newState = Object.assign({}, state);
+      newState.isLoading = action.loading;
       return newState;
     default:
       return state;

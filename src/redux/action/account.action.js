@@ -3,6 +3,7 @@ import {
   TOOLBAR_MENU_ICON_DISPLAY,
   TOOLBAR_MENU_ICON_HANDLED,
   TOOLBAR_MENU_ICON_TOGGLED,
+  UPDATE_LOADING,
 } from '../type';
 
 export const languageChanges = (lng) => ({ type: LNG_CHANGE, lng: lng });
@@ -23,4 +24,9 @@ export const toolbarMenuIconToggled = () => ({
 
 export const toolbarMenuIconHandled = () => ({
   type: TOOLBAR_MENU_ICON_HANDLED,
+});
+
+export const updateLoadingState = (loading) => ({
+  type: UPDATE_LOADING,
+  loading: loading,
 });

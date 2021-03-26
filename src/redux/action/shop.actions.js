@@ -5,6 +5,7 @@ import {
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
   UPDATE_MANAGED_SHOP,
+  UPDATE_VISITIED_SHOP,
 } from '../type';
 
 /**
@@ -50,3 +51,12 @@ export const updateManagedShop = (shop) => {
 export const shopConfLoaded = (config) => {
   return { type: SHOP_CONFIG_LOADED, data: config };
 };
+/**
+ * update the visited shop in the store with the given shop
+ * in param
+ * @param {*} shop
+ */
+export const updateVistedShop = (shop) => ({
+  type: UPDATE_VISITIED_SHOP,
+  shop: shop,
+});

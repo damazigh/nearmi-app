@@ -12,21 +12,26 @@ import './shop.css';
 import { Alert } from '@material-ui/lab';
 import { useTranslation } from 'react-i18next';
 import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
+import useSnackBars from '../../components/snackbar/use-snackbar';
+import { updateVistedShop } from '../../redux/action/shop.actions';
+import { getVisitedShopSelector } from '../../redux/selector/shop.selector';
 
 export default function DetailShop() {
-  const [detail, setDetail] = useState(null);
   const dispatch = useDispatch();
   const menuIconDisplayed = useSelector(shouldDisplaytoolbarMenuIcon);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { t } = useTranslation();
+  const { showSnack } = useSnackBars();
+  const detail = useSelector(getVisitedShopSelector);
 
   useEffect(() => {
     if (!menuIconDisplayed) {
       dispatch(toolbarMenuIconDisplay(true));
     }
     ShopService.proShopDetail(id)
-      .then((res) => setDetail(res.data))
+      .then((res) => dispatch(updateVistedShop(res.data)))
+      .catch((err) => showSnack(t('feedback.fetchDataInternalError'), 'error'))
       .finally(() => setLoading(false));
   }, []);
 

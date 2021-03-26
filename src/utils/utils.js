@@ -82,6 +82,33 @@ export function dataURItoBlob(dataURI) {
   }
   return new Blob([ia], { type: mimeString });
 }
+
+/**
+ * dispatch event for a given selector
+ * @param {*} selector
+ * @param {*} eventType
+ */
+export function dispatchCustomEvent(selector, eventType) {
+  const event = new Event(eventType);
+  const elt = document.querySelector(selector);
+  if (elt) {
+    console.info('dispatched event' + eventType);
+    elt.dispatchEvent(event);
+  }
+}
+
+export function attachEvtListener(selector, eventType, callback) {
+  const elt = document.querySelector(selector);
+  if (elt) {
+    elt.addEventListener(eventType, callback);
+  }
+}
+export function removeEvtListener(selector, eventType, callback) {
+  const elt = document.querySelector(selector);
+  if (elt) {
+    elt.removeEventListener(eventType, callback);
+  }
+}
 /**================ not exported functions ================*/
 function convertMimeToConst(mime) {
   switch (mime) {

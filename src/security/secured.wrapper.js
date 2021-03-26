@@ -5,7 +5,6 @@ export default function Secured(props) {
   const { keycloak } = useKeycloak();
 
   const checkRoles = () => {
-    console.log(keycloak.tokenParsed);
     if (props.requiredRoles && props.requiredRoles.length > 0) {
       props.requiredRoles.forEach((rr) =>
         hasRole(keycloak.tokenParsed.realm_access.roles, rr, handleMissingRole)

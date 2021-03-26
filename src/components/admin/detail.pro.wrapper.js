@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ListIcon from '@material-ui/icons/List';
 import ImageIcon from '@material-ui/icons/Image';
 import CategoryIcon from '@material-ui/icons/Category';
-import Gallery from '../images/gallery/gallery';
 import ShopService from '../../service/shop.service';
 import { useHistory } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import ShopAdminGallery from '../shop/admin/gallery.shop.admin';
+import { getVisitedShopSelector } from '../../redux/selector/shop.selector';
+import { LoadingWrapper } from '../loading/loading';
 
-export default function DetailProWrapper(props) {
+export default function DetailProWrapper({ detail }) {
   const [value, setValue] = useState(0);
   const history = useHistory();
-
-  useEffect(() => {
-    if (!props.detail) {
-      history.push('/profile');
-    }
-  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -32,7 +28,7 @@ export default function DetailProWrapper(props) {
       case 1:
         return (
           <ShopAdminGallery
-            metadata={props.detail.metadata}
+            metadata={detail.metadata}
             buildSrc={ShopService.buildImagePath}
           />
         );
@@ -40,7 +36,7 @@ export default function DetailProWrapper(props) {
   };
 
   return (
-    <>
+    <LoadingWrapper loading={!detail}>
       <Grid container md={12} xs={12}>
         <Grid item md={12} xs={12}>
           <Paper square className="m-t-alt2 full-width">
@@ -62,6 +58,6 @@ export default function DetailProWrapper(props) {
           {displayContent()}
         </Grid>
       </Grid>
-    </>
+    </LoadingWrapper>
   );
 }

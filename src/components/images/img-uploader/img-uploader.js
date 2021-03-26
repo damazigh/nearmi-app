@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import Cropper from 'react-cropper';
-import './img-uploader.css';
 import 'cropperjs/dist/cropper.css';
-import { IMAGE_JPEG_MIME_HEADER } from '../../../utils/mime.constants';
-import useSnackBars from '../../snackbar/use-snackbar';
-import { checkIfMimeAccepted, format } from '../../../utils/utils';
+import React, { useEffect, useState } from 'react';
+import Cropper from 'react-cropper';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { getAcceptedImgMimeSelector } from '../../../redux/selector/shop.selector';
+import { CUSTOM_EVT_IMG_UPLOADER_UPLOAD } from '../../../utils/events-custom.constants';
+import {
+  attachEvtListener,
+  checkIfMimeAccepted,
+  format,
+  removeEvtListener,
+} from '../../../utils/utils';
+import useSnackBars from '../../snackbar/use-snackbar';
+import './img-uploader.css';
+
 /**
  * Cropper component for resizing image and pre-visualize them
  * base on library react-cropper
- * @param { object } props {}
+ * @param crop : state to detect when crop the image
+ * @param cleanup: cleanup function
  */
-export default function ImgUploader(props) {
+export default function ImgUploader({ crop, uploadImageHandler }) {
   const [cropper, setCropper] = useState();
   const [image, setImage] = useState();
   const { showSnack } = useSnackBars();
@@ -21,7 +28,18 @@ export default function ImgUploader(props) {
   const acceptedImageMime = useSelector(getAcceptedImgMimeSelector);
 
   useEffect(() => {
-    setImage(null);
+    attachEvtListener(
+      '#uploadImage',
+      CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
+      handleCrop
+    );
+    return () => {
+      removeEvtListener(
+        '#uploadImage',
+        CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
+        handleCrop
+      );
+    };
   }, []);
   /**
    * get uploaded files
@@ -66,15 +84,15 @@ export default function ImgUploader(props) {
    */
   const getCropData = () => {
     if (typeof cropper !== 'undefined') {
-      const cropped = {
+      return {
         data: cropper.getCroppedCanvas().toDataURL(),
         name: document
           .querySelector('#uploadImage')
           .value.split(/(\\|\/)/g)
           .pop(),
       };
-      sessionStorage.setItem('cropped', JSON.stringify(cropped));
     }
+    return null;
   };
 
   /**
@@ -109,8 +127,11 @@ export default function ImgUploader(props) {
    * handle click on crop
    */
   const handleCrop = () => {
-    if (image && props.crop) {
-      getCropData();
+    if (image && crop) {
+      const data = getCropData();
+      uploadImageHandler(data, () => {
+        setImage(null);
+      });
     }
   };
   /**
@@ -119,7 +140,6 @@ export default function ImgUploader(props) {
   return (
     <div>
       <input type="file" id="uploadImage" onChange={onChange} />
-      {handleCrop()}
       {displayCropperIfImageSet()}
     </div>
   );

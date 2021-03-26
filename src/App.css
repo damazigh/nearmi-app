@@ -89,3 +89,10 @@
 .m-auto {
   margin: auto;
 }
+
+.fixed {
+  position: fixed;
+}
+.fd-column {
+  flex-direction: column;
+}

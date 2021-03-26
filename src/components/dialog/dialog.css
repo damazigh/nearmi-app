@@ -1,0 +1,19 @@
+/**
+THIS FILE INCLUDES CSS FOR DIALOG COMPONENt
+*/
+/**IMGAGE VIEWER DIALOG CSS*/
+@media (min-width: 600px) {
+  .img-v-mw {
+    min-width: 500px !important;
+  }
+}
+@media (max-width: 600px) {
+  .img-v-mw {
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+.close-btn {
+  max-width: 15px;
+}
+/**END IMAGE VIEWER DIALOG CSS*/
