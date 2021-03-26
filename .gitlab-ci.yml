@@ -24,6 +24,7 @@ package:
     - npm ci --silent
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
+    - sleep 400
     - npm run build --timing
   artifacts:
     paths:
