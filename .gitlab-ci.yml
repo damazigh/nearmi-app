@@ -27,7 +27,6 @@ package:
     - npm run build --timing || true
     - ls -lart ./build
     - echo "archiving..."
-    - sleep 80
   artifacts:
     paths:
       - ./build
