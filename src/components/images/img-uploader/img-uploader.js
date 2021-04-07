@@ -13,14 +13,15 @@ import {
 } from '../../../utils/utils';
 import useSnackBars from '../../snackbar/use-snackbar';
 import './img-uploader.css';
+import Logger from 'js-logger';
 
 /**
  * Cropper component for resizing image and pre-visualize them
  * base on library react-cropper
- * @param crop : state to detect when crop the image
  * @param cleanup: cleanup function
+ *
  */
-export default function ImgUploader({ crop, uploadImageHandler }) {
+export default function ImgUploader({ uploadImageHandler }) {
   const [cropper, setCropper] = useState();
   const [image, setImage] = useState();
   const { showSnack } = useSnackBars();
@@ -28,19 +29,28 @@ export default function ImgUploader({ crop, uploadImageHandler }) {
   const acceptedImageMime = useSelector(getAcceptedImgMimeSelector);
 
   useEffect(() => {
+    Logger.debug(
+      '[ImgUploader] - attaching callback handleCrop to event ' +
+        CUSTOM_EVT_IMG_UPLOADER_UPLOAD
+    );
     attachEvtListener(
       '#uploadImage',
       CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
       handleCrop
     );
     return () => {
+      Logger.debug('[ImgUploader] -  cleanup component image uploader');
+      Logger.debug(
+        '[ImgUploader] - removing callback handleCrop to event ' +
+          CUSTOM_EVT_IMG_UPLOADER_UPLOAD
+      );
       removeEvtListener(
         '#uploadImage',
         CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
         handleCrop
       );
     };
-  }, []);
+  }, [image, cropper]);
   /**
    * get uploaded files
    * @param {*} e
@@ -55,6 +65,7 @@ export default function ImgUploader({ crop, uploadImageHandler }) {
     }
     const reader = new FileReader();
     reader.onload = () => {
+      Logger.debug('[ImgUploader] - image state setted after on load');
       setImage(reader.result);
     };
     reader.onloadend = (e) => {
@@ -73,6 +84,7 @@ export default function ImgUploader({ crop, uploadImageHandler }) {
             'error'
           );
           setImage(null);
+          document.querySelector('#uploadImage').value = '';
         }
       }
     };
@@ -127,12 +139,11 @@ export default function ImgUploader({ crop, uploadImageHandler }) {
    * handle click on crop
    */
   const handleCrop = () => {
-    if (image && crop) {
-      const data = getCropData();
-      uploadImageHandler(data, () => {
-        setImage(null);
-      });
-    }
+    Logger.debug('[ImgUploader] - handle crop triggered !');
+    const data = getCropData();
+    uploadImageHandler(data, () => {
+      setImage(null);
+    });
   };
   /**
    * render function

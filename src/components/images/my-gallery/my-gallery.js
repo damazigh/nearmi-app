@@ -63,14 +63,14 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
           w = rangeRandom(5, 7);
           h = rangeRandom(2, 3);
         } else {
-          w = rangeRandom(2, 5);
+          w = rangeRandom(2, 3);
           h = 3;
         }
 
         const opt = {
           src: ShopService.buildImagePath(id, m.name),
-          width: w,
-          height: h,
+          height: 1.5,
+          width: 2.3,
           name: m.name,
         };
         i++;
@@ -78,10 +78,6 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
       });
     }
     return [];
-  };
-
-  const toggleSelectAll = () => {
-    setSelectAll(!selectAll);
   };
 
   const imageRenderer = useCallback(

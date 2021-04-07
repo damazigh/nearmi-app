@@ -56,6 +56,11 @@ const loadConfig = () => {
   );
 };
 
+/**
+ * add an image to shop
+ * @param {*} id shop id
+ * @param {*} imgWrapper which contains image as url data and image name
+ */
 const addImage = (id, imgWrapper) => {
   const formData = new FormData();
   const image = dataURItoBlob(imgWrapper.data);
@@ -71,6 +76,11 @@ const addImage = (id, imgWrapper) => {
   );
 };
 
+/**
+ * delete a list of images attached to specific shop
+ * @param {*} id shop's id
+ * @param {*} images images list
+ */
 const deleteImages = (id, images) => {
   return shopAxios.put(
     `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/delete/${id}?images=${images}`,
@@ -81,6 +91,10 @@ const deleteImages = (id, images) => {
     }
   );
 };
+
+/**
+ * exported service object
+ */
 const ShopService = {
   create: create,
   search: search,

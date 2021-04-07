@@ -10,6 +10,14 @@
     "gallery": {
       "editionMode": "Edition mode",
       "visualizationMode": "Visualization mode"
+    },
+    "productCategoryList": {
+      "label": "Label",
+      "created": "Created at",
+      "addCategorie": {
+        "placeholder": "Category",
+        "title": "Title of category"
+      }
     }
   },
   "pages": {
@@ -84,8 +92,9 @@
     "imgDeletionWarning": "You are going to delete {0} images",
     "fetchDataInternalError": "An internal error occured when fetching data from server",
     "operationSucceded":"Operation succedeed",
-    "operationError": "Operation failed"
-
+    "operationError": "Operation failed",
+    "noItemToDisplay" : "No item to display",
+    "productCategoryDeletionWarning": "You are going to delete category: '{0}'"
   },
   "alert": {
     "warn": {
@@ -115,6 +124,7 @@
     "create": "Create",
     "view": "View",
     "delete": "Delete",
-    "save": "Save"
+    "save": "Save",
+    "addAnother": "Add another"
   }
 }

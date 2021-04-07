@@ -7,9 +7,8 @@ import { useParams } from 'react-router-dom';
 import ShopService from '../../service/shop.service';
 import { LoadingWrapper } from '../../components/loading/loading';
 import ProductHeader from '../../components/product/product.header';
-import { Divider, Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import './shop.css';
-import { Alert } from '@material-ui/lab';
 import { useTranslation } from 'react-i18next';
 import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
 import useSnackBars from '../../components/snackbar/use-snackbar';
@@ -35,8 +34,19 @@ export default function DetailShop() {
       .finally(() => setLoading(false));
   }, []);
 
-  const build = (txt, id) => {
-    return { text: txt, id: id };
+  const buildCat = () => {
+    if (
+      detail &&
+      detail.productCategories &&
+      detail.productCategories.length > 0
+    ) {
+      console.log(detail.productCategories);
+      return detail.productCategories
+        .sort((a, b) => (a.order < b.order ? -1 : a.order === b.order ? 0 : 1))
+        .map((a) => ({ text: a.name }));
+    }
+
+    return [];
   };
   return (
     <>
@@ -70,15 +80,7 @@ export default function DetailShop() {
             <DetailProWrapper detail={detail} />
           </Grid>
         </Grid>
-        <AnchorDrawer
-          direction="bottom"
-          items={[
-            build('Catégorie 1', 'id1'),
-            build('Catégorie 2', 'id2'),
-            build('Catégorie 3', 'id3'),
-            build('Catégorie 4', 'id4'),
-          ]}
-        />
+        <AnchorDrawer direction="bottom" items={buildCat()} />
       </LoadingWrapper>
     </>
   );

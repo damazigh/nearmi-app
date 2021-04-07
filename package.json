@@ -28,7 +28,8 @@
     "react-swipeable-views": "0.13.9",
     "react-cropper": "2.1.7",
     "react-photo-gallery": "8.0.0",
-    "react-images": "1.2.0-beta.6"
+    "react-images": "1.2.0-beta.6",
+    "js-logger": "1.6.1"
   },
   "scripts": {
     "start": "env-cmd -f .env react-scripts start --no-cache",

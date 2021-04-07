@@ -18,6 +18,7 @@ import DetailShop from './pages/shop/detail.shop';
 import { ROLE_PROFESSIONAL } from './utils/roles.constants';
 import ShopService from './service/shop.service';
 import { shopConfLoaded } from './redux/action/shop.actions';
+import Logger from 'js-logger';
 
 const theme = createMuiTheme({
   palette: {
@@ -35,6 +36,8 @@ const theme = createMuiTheme({
 });
 function App() {
   const dispatch = useDispatch();
+  Logger.useDefaults();
+  Logger.setLevel(Logger.DEBUG);
 
   useEffect(() => {
     ShopService.loadConfig().then((res) => {

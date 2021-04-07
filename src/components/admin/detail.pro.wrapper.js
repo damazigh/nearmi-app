@@ -9,9 +9,9 @@ import CategoryIcon from '@material-ui/icons/Category';
 import ShopService from '../../service/shop.service';
 import { useHistory } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
-import ShopAdminGallery from '../shop/admin/gallery.shop.admin';
-import { getVisitedShopSelector } from '../../redux/selector/shop.selector';
+import ShopAdminGallery from '../shop/detail/gallery.shop.detail';
 import { LoadingWrapper } from '../loading/loading';
+import ShopCategoryProduct from '../shop/detail/category-product.shop.detail';
 
 export default function DetailProWrapper({ detail }) {
   const [value, setValue] = useState(0);
@@ -32,6 +32,8 @@ export default function DetailProWrapper({ detail }) {
             buildSrc={ShopService.buildImagePath}
           />
         );
+      case 2:
+        return <ShopCategoryProduct detail={detail} />;
     }
   };
 

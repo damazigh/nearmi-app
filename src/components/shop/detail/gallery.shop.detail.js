@@ -26,6 +26,7 @@ import useSnackBars from '../../snackbar/use-snackbar';
 import { dispatchCustomEvent } from '../../../utils/utils';
 import { CUSTOM_EVT_IMG_UPLOADER_UPLOAD } from '../../../utils/events-custom.constants';
 import { updateVistedShop } from '../../../redux/action/shop.actions';
+import './shop.admin.css';
 
 export default function ShopAdminGallery(props) {
   const { t } = useTranslation();
@@ -33,8 +34,6 @@ export default function ShopAdminGallery(props) {
   const [open, setOpen] = useState(false);
   // get max authorized image from redux store
   const maxImageForShop = useSelector(getMaxImageForShopSelector);
-  // detect when the uploaded image should be cropped
-  const [crop, setCrop] = useState(false);
   // gallery mode
   const [mode, setMode] = useState(GALLERY_VISUALIZATION_MODE);
   // track selected images in parent component
@@ -49,7 +48,7 @@ export default function ShopAdminGallery(props) {
   const { showSnack } = useSnackBars();
   // dispatch action to redux store
   const dispatch = useDispatch();
-  //
+  // history hook (for redirection)
   const history = useHistory();
 
   useEffect(() => {
@@ -79,7 +78,6 @@ export default function ShopAdminGallery(props) {
    */
   const proceed = () => {
     if (document.querySelector('#uploadImage').value) {
-      setCrop(true);
       dispatchCustomEvent('#uploadImage', CUSTOM_EVT_IMG_UPLOADER_UPLOAD);
     }
   };
@@ -162,7 +160,6 @@ export default function ShopAdminGallery(props) {
         if (internalCleanup) {
           internalCleanup();
         }
-        setCrop(false);
         setOpen(false);
       });
   };
@@ -240,10 +237,7 @@ export default function ShopAdminGallery(props) {
               onClose={() => setOpen(false)}
               proceed={proceed}
             >
-              <ImgUploader
-                crop={crop}
-                uploadImageHandler={uploadImageHandler}
-              />
+              <ImgUploader uploadImageHandler={uploadImageHandler} />
             </ContentDialog>
           </div>
           <div id="deleteImagesPopup">

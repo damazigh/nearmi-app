@@ -10,3 +10,7 @@
 .btn-spacing {
   margin-left: var(--margin-alt-3) !important;
 }
+
+.dialog-min-width {
+  min-width: 400px !important;
+}
