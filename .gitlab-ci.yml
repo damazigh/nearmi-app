@@ -24,7 +24,9 @@ package:
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
     - env-cmd -f ./.env react-scripts build || true
+    - ls -lart ./build
     - echo "archiving..."
+    - sleep 80
   artifacts:
     paths:
       - ./build
