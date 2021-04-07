@@ -23,7 +23,8 @@ package:
     - chmod -R +x ./node_modules/.bin
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
-    - env-cmd -f ./.env react-scripts build
+    - env-cmd -f ./.env react-scripts build || true
+    - echo "archiving..."
   artifacts:
     paths:
       - ./build
