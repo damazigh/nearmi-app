@@ -48,6 +48,7 @@ deploy:
   script:
     - |
       echo "building and deploying image to nexus"
+      ls -lart
       TAG=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"nearmi.registry\":{\"username\":\"${NEXUS_LOGIN}\",\"password\":\"${NEXUS_PASSWORD}\"}}}" > /kaniko/.docker/config.json
