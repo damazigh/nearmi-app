@@ -2,7 +2,7 @@
 FROM nginx:stable-alpine
 RUN ls -lart
 RUN pwd
-COPY build /usr/share/nginx/html
+COPY /builds/nearmi1/nearmi-app/build /usr/share/nginx/html
 RUN ls -lart /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
