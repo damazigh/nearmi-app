@@ -23,6 +23,7 @@ package:
     - chmod -R +x ./node_modules/.bin
     - export PATH=$(pwd)/node_modules/.bin:$PATH
     - echo $PATH
+    - RUN npm  install react-scripts@3.4.1 -g --silent
     - env-cmd -f ./.env react-scripts build || true
     - ls -lart ./build
     - echo "archiving..."
