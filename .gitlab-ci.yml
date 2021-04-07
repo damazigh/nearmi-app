@@ -18,6 +18,9 @@ test:
   tags:
     - kubernetes
 package:
+  stage: package
+  dependencies:
+    - test
   script:
     - npm ci --silent
     - chmod -R +x ./node_modules/.bin
@@ -38,6 +41,8 @@ deploy:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: ['']
   stage: deploy
+  dependencies:
+    - package
   before_script:
     - cp /conf/nearmiRootCA.crt /kaniko/ssl/certs/
   script:
