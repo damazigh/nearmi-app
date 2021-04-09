@@ -5,6 +5,7 @@
   --margin-alt-2: 5px;
   --margin-alt-3: 10px;
   --margin-alt-4: 8px;
+  --margin-alt-5: 4px;
   --color-primary: #80cbc4;
   --color-secondary: #80d8ff;
   --color-appbar: #fafafa;
@@ -58,17 +59,26 @@
 
 @media (min-width: 768px) {
   .m-t-alt1 {
-    margin-top: var(--margin-alt-3);
+    margin-top: var(--margin-alt-3) !important;
   }
 }
 @media (max-width: 768px) {
   .m-t-alt1 {
-    margin-top: var(--margin-alt-2);
+    margin-top: var(--margin-alt-2) !important;
   }
 }
+
 .m-t-alt2 {
   margin-top: var(--margin-alt-1);
 }
+.m-t-alt5 {
+  margin-top: var(--margin-alt-5) !important;
+}
+
+.m-r-alt1 {
+  margin-right: var(--margin-alt-4) !important;
+}
+
 .no-verticl-padding {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
@@ -95,4 +105,16 @@
 }
 .fd-column {
   flex-direction: column;
+}
+.fz-medium {
+  font-size: medium !important;
+}
+.unstyle-link {
+  text-decoration: none;
+  color: initial;
+}
+.h1 {
+  font-weight: normal;
+  font-size: 1.8em;
+  color: rgba(0, 0, 0, 0.59);
 }

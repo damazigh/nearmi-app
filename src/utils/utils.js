@@ -109,6 +109,14 @@ export function removeEvtListener(selector, eventType, callback) {
     elt.removeEventListener(eventType, callback);
   }
 }
+
+export function navigateToAnchor(anchor) {
+  const elt = document.querySelector(`#${anchor}`);
+  if (elt) {
+    elt.scrollIntoView();
+    console.log('scroooool');
+  }
+}
 /**================ not exported functions ================*/
 function convertMimeToConst(mime) {
   switch (mime) {

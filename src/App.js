@@ -54,6 +54,9 @@ function App() {
       case 'onReady':
         if (keycloak.authenticated) {
           localStorage.setItem('accessToken', keycloak.token);
+        } else {
+          console.log('#### not authenticated');
+          delete localStorage.accessToken;
         }
         break;
     }

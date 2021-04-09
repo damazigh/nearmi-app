@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import ListIcon from '@material-ui/icons/List';
-import ImageIcon from '@material-ui/icons/Image';
-import CategoryIcon from '@material-ui/icons/Category';
-import ShopService from '../../service/shop.service';
-import { useHistory } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
-import ShopAdminGallery from '../shop/detail/gallery.shop.detail';
+import Paper from '@material-ui/core/Paper';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import CategoryIcon from '@material-ui/icons/Category';
+import ImageIcon from '@material-ui/icons/Image';
+import ListIcon from '@material-ui/icons/List';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import ShopService from '../../service/shop.service';
 import { LoadingWrapper } from '../loading/loading';
+import ListProduct from '../product/list.product';
 import ShopCategoryProduct from '../shop/detail/category-product.shop.detail';
+import ShopAdminGallery from '../shop/detail/gallery.shop.detail';
 
 export default function DetailProWrapper({ detail }) {
   const [value, setValue] = useState(0);
@@ -24,7 +24,7 @@ export default function DetailProWrapper({ detail }) {
   const displayContent = () => {
     switch (value) {
       case 0:
-        return <></>;
+        return <ListProduct detail={detail} />;
       case 1:
         return (
           <ShopAdminGallery

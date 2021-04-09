@@ -11,6 +11,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toolbarMenuIconClick } from '../../redux/selector/account.selector';
 import { toolbarMenuIconHandled } from '../../redux/action/account.action';
+import { navigateToAnchor } from '../../utils/utils';
+import { HashLink } from 'react-router-hash-link';
 
 const useStyles = makeStyles({
   fullList: {
@@ -25,7 +27,7 @@ export default function AnchorDrawer(props) {
   const dispatch = useDispatch();
 
   const handleOnClick = (id) => {
-    history.push(`#${id}`);
+    //navigateToAnchor(id);
     dispatch(toolbarMenuIconHandled());
   };
 
@@ -43,7 +45,12 @@ export default function AnchorDrawer(props) {
                 key={i}
                 onClick={(e) => handleOnClick(item.text)}
               >
-                <ListItemText>{item.text}</ListItemText>
+                <HashLink
+                  to={`${document.location.pathname}#${item.text}`}
+                  className="unstyle-link"
+                >
+                  <ListItemText>{item.text}</ListItemText>
+                </HashLink>
               </ListItem>
             );
           })}
@@ -54,7 +61,13 @@ export default function AnchorDrawer(props) {
 
   return (
     <React.Fragment>
-      <SwipeableDrawer anchor={props.direction} open={open}>
+      <SwipeableDrawer
+        anchor={props.direction}
+        open={open}
+        hideBackdrop={true}
+        onClick={() => dispatch(toolbarMenuIconHandled())}
+        onOpen={() => {}}
+      >
         {list()}
       </SwipeableDrawer>
     </React.Fragment>

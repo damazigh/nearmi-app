@@ -27,6 +27,7 @@ import { dispatchCustomEvent } from '../../../utils/utils';
 import { CUSTOM_EVT_IMG_UPLOADER_UPLOAD } from '../../../utils/events-custom.constants';
 import { updateVistedShop } from '../../../redux/action/shop.actions';
 import './shop.admin.css';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 
 export default function ShopAdminGallery(props) {
   const { t } = useTranslation();
@@ -164,6 +165,17 @@ export default function ShopAdminGallery(props) {
       });
   };
 
+  const updateRootImage = () => {
+    setIsLoading(true);
+    if (selected && selected.length === 1) {
+      ShopService.markAsRoot(id, selected[0]).then(() => {
+        ShopService.proShopDetail(id)
+          .then((res) => dispatch(updateVistedShop(res.data)))
+          .finally(() => setIsLoading(false));
+      });
+    }
+  };
+
   return (
     <LoadingWrapper loading={isLoading}>
       <Grid container className="m-t-alt1 jc-center">
@@ -190,6 +202,19 @@ export default function ShopAdminGallery(props) {
                   }}
                 >
                   {t('actions.delete')}
+                </Button>
+              ) : null}
+              {mode === GALLERY_EDITION_MODE &&
+              selected &&
+              selected.length === 1 ? (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className="btn-spacing"
+                  endIcon={<DoneAllIcon />}
+                  onClick={updateRootImage}
+                >
+                  Image de fond
                 </Button>
               ) : null}
             </Grid>

@@ -1,65 +1,34 @@
-import { makeStyles, Paper, useTheme } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-import MobileStepper from '@material-ui/core/MobileStepper';
+import { Grid, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ShopService from '../../service/shop.service';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: '100%',
-    flexGrow: 1,
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-  },
-  img: {
-    height: 200,
-    display: 'block',
-    minWidth: '100%',
-    overflow: 'hidden',
-    width: '100%',
-  },
-}));
-
-export default function ProductHeader(props) {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = props.shop.metadata.length;
-  const history = useHistory();
-  const theme = useTheme();
+export default function ProductHeader({ detail }) {
   const { id } = useParams();
-  const loadedImage = [];
 
-  useEffect(() => {
-    if (!props.shop) {
-      history.push('/profile');
-    }
-  }, []);
-  const loadImage = (id, meta) => {
-    if (loadedImage.some((cached) => cached.meta === meta)) {
-      return loadedImage.find((cached) => cached.meta === meta).image;
-    } else {
-      const img = (
-        <img
-          className={classes.img}
-          src={ShopService.buildImagePath(id, meta)}
-        />
-      );
-      loadedImage.push({ meta: meta, image: img });
-      return img;
-    }
-  };
+  return (
+    <Grid container>
+      <Grid item xs={12} md={12} sm={12}>
+        {detail &&
+          detail.metadata &&
+          detail.metadata
+            .filter((m) => m.root === true)
+            .map((m) => (
+              <img
+                src={ShopService.buildImagePath(id, m.name)}
+                className="full-height full-width"
+              />
+            ))}
+      </Grid>
+      <Grid>
+        <Typography gutterBottom variant="h5" component="h1">
+          {detail?.name}
+        </Typography>
 
-  return <div></div>;
+        <Typography variant="body2" color="textSecondary" component="p">
+          {detail?.description}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
 }

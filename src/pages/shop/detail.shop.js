@@ -53,26 +53,7 @@ export default function DetailShop() {
       <LoadingWrapper loading={loading}>
         <div id="content" className="flex hdr-txt-tm">
           <header>
-            <Grid container className="dir-row-reverse">
-              <Grid item xs={12} sm={4} md={4} className="flex-end">
-                <ProductHeader shop={detail} />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={8}
-                sm={8}
-                className="header-side-margin hdr-txt-mx-h"
-              >
-                <Typography gutterBottom variant="h5" component="h1">
-                  {detail?.name}
-                </Typography>
-
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {detail?.description}
-                </Typography>
-              </Grid>
-            </Grid>
+            <ProductHeader detail={detail} />
           </header>
         </div>
         <Grid container md={12} sm={12} className="m-t-alt1 header-side-margin">

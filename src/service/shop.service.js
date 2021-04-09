@@ -92,6 +92,17 @@ const deleteImages = (id, images) => {
   );
 };
 
+const markAsRoot = (shopId, name) => {
+  return shopAxios.put(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/${shopId}/image/mark-root/${name}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+};
+
 /**
  * exported service object
  */
@@ -104,5 +115,6 @@ const ShopService = {
   loadConfig: loadConfig,
   addImage: addImage,
   deleteImages: deleteImages,
+  markAsRoot: markAsRoot,
 };
 export default ShopService;
