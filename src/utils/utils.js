@@ -110,11 +110,10 @@ export function removeEvtListener(selector, eventType, callback) {
   }
 }
 
-export function navigateToAnchor(anchor) {
-  const elt = document.querySelector(`#${anchor}`);
+export function focusElt(id) {
+  const elt = document.querySelector('#' + id);
   if (elt) {
-    elt.scrollIntoView();
-    console.log('scroooool');
+    elt.focus();
   }
 }
 /**================ not exported functions ================*/

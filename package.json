@@ -19,6 +19,7 @@
     "react": "^17.0.1",
     "react-cropper": "2.1.7",
     "react-dom": "",
+    "react-draggable": "^4.4.3",
     "react-hook-form": "6.14.1",
     "react-i18next": "11.7.3",
     "react-images": "1.2.0-beta.6",

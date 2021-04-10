@@ -47,8 +47,8 @@
   justify-content: flex-end;
 }
 .container {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 15px !important;
+  margin-right: 15px !important;
 }
 .pre-wrap {
   white-space: pre-wrap;

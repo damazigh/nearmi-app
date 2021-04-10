@@ -12,8 +12,10 @@ import { shopAxios } from './axios-http.service';
  */
 const listProductCategory = (shopId) => {
   return shopAxios.get(
-    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/${shopId}/product/category`,
-    { headers: { 'Content-Type': 'application/json' } }
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/${shopId}/product/category`,
+    {
+      headers: { 'Content-Type': ['application/json'] },
+    }
   );
 };
 

@@ -1,3 +1,17 @@
-.img-header {
-  height: 200px;
+@media screen and (min-width: 768px) {
+  .img-header-wrapper {
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 418px) and (max-width: 768px) {
+  .img-header-wrapper {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 418px) {
+  .img-header-wrapper {
+    height: 250px;
+  }
 }

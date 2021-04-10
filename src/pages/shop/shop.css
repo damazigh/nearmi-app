@@ -4,8 +4,5 @@
   }
 }
 .hdr-txt-tm {
-  margin-top: var(--margin-alt-3);
-}
-.hdr-txt-mx-h {
-  max-height: 200px;
+  margin-top: 1px;
 }

@@ -19,6 +19,7 @@ import { ROLE_PROFESSIONAL } from './utils/roles.constants';
 import ShopService from './service/shop.service';
 import { shopConfLoaded } from './redux/action/shop.actions';
 import Logger from 'js-logger';
+import CreateUpdateProduct from './components/product/create-update.product';
 
 const theme = createMuiTheme({
   palette: {
@@ -73,28 +74,41 @@ function App() {
           <SnackBarProvider>
             <BrowserRouter>
               <Navbar />
-              <Grid className="container">
+              <Grid container>
                 <Switch>
                   <Route exact path="/home">
-                    <Home />
+                    <Grid item xs={12} md={12} sm={12} className="container">
+                      <Home />
+                    </Grid>
                   </Route>
                   <Route exact path="/shop/create">
                     <Secured>
-                      <CreateShop />
+                      <Grid item xs={12} md={12} sm={12} className="container">
+                        <CreateShop />
+                      </Grid>
                     </Secured>
                   </Route>
                   <Route exact path="/shop">
-                    <NearbyShop />
+                    <Grid item xs={12} md={12} sm={12} className="container">
+                      <NearbyShop />
+                    </Grid>
                   </Route>
                   <Route exact path="/profile">
                     <Secured>
-                      <Profile />
+                      <Grid item xs={12} md={12} sm={12} className="container">
+                        <Profile />
+                      </Grid>
                     </Secured>
                   </Route>
                   <Route exact path="/shop/:id">
                     <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
                       <DetailShop />
                     </Secured>
+                  </Route>
+                  <Route exact path="/shop/:id/add-product">
+                    <Grid item xs={12} md={12} sm={12} className="container">
+                      <CreateUpdateProduct />
+                    </Grid>
                   </Route>
                 </Switch>
               </Grid>

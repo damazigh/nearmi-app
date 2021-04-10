@@ -51,12 +51,17 @@ export default function DetailShop() {
   return (
     <>
       <LoadingWrapper loading={loading}>
-        <div id="content" className="flex hdr-txt-tm">
-          <header>
+        <div id="content" className="flex full-width hdr-txt-tm">
+          <header className="full-width">
             <ProductHeader detail={detail} />
           </header>
         </div>
-        <Grid container md={12} sm={12} className="m-t-alt1 header-side-margin">
+        <Grid
+          container
+          md={12}
+          sm={12}
+          className="m-t-alt1 header-side-margin container"
+        >
           <Grid item md={12} xs={12} className="flex jc-center m-t-alt2">
             <DetailProWrapper detail={detail} />
           </Grid>

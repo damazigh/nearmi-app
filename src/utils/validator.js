@@ -24,7 +24,9 @@ export function lengthWithoutSpace(str, val) {
  * @returns true if it matches regex false else
  */
 export function numeric(str) {
-  return isNumeric(str);
+  const res = isNumeric(str);
+  console.log(res + ' ' + str);
+  return res;
 }
 
 /**
@@ -63,4 +65,12 @@ export function luhn(str) {
     );
   }
   return false;
+}
+
+export function numericOrEmpty(str) {
+  return !str || numeric(str);
+}
+
+export async function asyncValidator(fn) {
+  return await fn();
 }

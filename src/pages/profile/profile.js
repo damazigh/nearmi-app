@@ -1,14 +1,8 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ShopAdminList from '../../components/admin/shop.admin';
 import { useTranslation } from 'react-i18next';
+import ShopAdminList from '../../components/admin/shop.admin';
+import CollapsibleWrapper from '../../components/collapsible/collapsible.wrapper';
 
 export default function () {
   const { t } = useTranslation();
@@ -21,19 +15,5 @@ export default function () {
         <Typography>Pas encore implémenté</Typography>
       </CollapsibleWrapper>
     </div>
-  );
-}
-
-/**inner component that acts as a collapsible wrapper */
-function CollapsibleWrapper(props) {
-  return (
-    <Accordion className="full-width">
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id={props.id}>
-        <Typography variant="h5" component="h4">
-          {props.summary}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>{props.children}</AccordionDetails>
-    </Accordion>
   );
 }

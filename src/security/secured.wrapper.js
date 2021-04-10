@@ -1,12 +1,12 @@
 import React from 'react';
 import { useKeycloak } from '@react-keycloak/web';
 
-export default function Secured(props) {
+export default function Secured({ requiredRoles, children }) {
   const { keycloak } = useKeycloak();
 
   const checkRoles = () => {
-    if (props.requiredRoles && props.requiredRoles.length > 0) {
-      props.requiredRoles.forEach((rr) =>
+    if (requiredRoles && requiredRoles.length > 0) {
+      requiredRoles.forEach((rr) =>
         hasRole(keycloak.tokenParsed.realm_access.roles, rr, handleMissingRole)
       );
     }
@@ -23,7 +23,7 @@ export default function Secured(props) {
   const renderContent = () => {
     if (keycloak?.authenticated) {
       checkRoles();
-      return <>{props.children}</>;
+      return <>{children}</>;
     }
     return keycloak?.login();
   };

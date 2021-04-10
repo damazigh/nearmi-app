@@ -17,6 +17,8 @@ export default function ImageViewerDialog({ isOpen, imgSrc, onClose }) {
       TransitionComponent={transition}
       keepMounted
       className="no-padding"
+      fullWidth={true}
+      maxWidth="md"
     >
       <div className="flex fd-column flex-end">
         <div className="w-auto fixed">
@@ -30,7 +32,7 @@ export default function ImageViewerDialog({ isOpen, imgSrc, onClose }) {
             src={imgSrc}
             onloadend={() => console.info('end loading')}
             onloadstart={() => console.info('load start')}
-            className="full-width full-height img-v-mw"
+            className="full-width img-v-mw"
           />
         </LoadingWrapper>
       </div>

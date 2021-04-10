@@ -18,6 +18,32 @@
         "placeholder": "Category",
         "title": "Title of category"
       }
+    },
+    "createProduct": {
+      "generalSummary": "Product detail",
+      "productGallery": "Product Gallery",
+      "fields": {
+        "productName": {
+          "label": "Product name",
+          "placeholder": "My stunning product..."
+        },
+        "productDescription": {
+          "label": "Product description",
+          "placeholder": "Multiline product description (optional)"
+        },
+        "productPrice": {
+          "label": "Product price",
+          "placeholder": "15"
+        },
+        "productQuantity": {
+          "label": "Product quantity",
+          "placeholder": "201 (optional field)"
+        },
+        "productCategory": {
+          "label": "Product category",
+          "placeholder": "Some custom category"
+        }
+      }
     }
   },
   "pages": {
@@ -94,7 +120,8 @@
     "operationSucceded":"Operation succedeed",
     "operationError": "Operation failed",
     "noItemToDisplay" : "No item to display",
-    "productCategoryDeletionWarning": "You are going to delete category: '{0}'"
+    "productCategoryDeletionWarning": "You are going to delete category: '{0}'",
+    "leaveWithoutSave": "If you leave before saving, your changes will be lost"
   },
   "alert": {
     "warn": {
@@ -108,7 +135,9 @@
       "required": "Required field",
       "minLength": "Minumum length: {0}",
       "numeric": "Only numeric character allowed",
-      "length": "You need to enter {0} character"
+      "length": "You need to enter {0} character",
+      "numericOrEmpty": "Field must be empty or filled with only numeric character",
+      "unicity": "This value already exists"
     },
     "createShop": {
       "invalidRegNum": "Your registration number is invalid"
