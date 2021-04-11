@@ -116,6 +116,13 @@ export function focusElt(id) {
     elt.focus();
   }
 }
+
+// Reduce a fraction by finding the Greatest Common Divisor and dividing by it.
+export function reduce(numerator, denominator) {
+  const gcd = calcGcd(numerator, denominator);
+  return [numerator / gcd, denominator / gcd];
+}
+
 /**================ not exported functions ================*/
 function convertMimeToConst(mime) {
   switch (mime) {
@@ -125,4 +132,7 @@ function convertMimeToConst(mime) {
     case 'image/jpg':
       return IMAGE_JPEG_MIME_HEADER;
   }
+}
+function calcGcd(a, b) {
+  return b ? calcGcd(b, a % b) : a;
 }

@@ -5,7 +5,6 @@ const authorizationInterceptor = (config) => {
     const token = `Bearer ${localStorage.getItem('accessToken')}`;
     config.headers.Authorization = token;
   }
-  config.headers['Content-Type'] = 'application/json';
   return config;
 };
 

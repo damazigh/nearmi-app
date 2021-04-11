@@ -63,14 +63,22 @@ const loadConfig = () => {
  */
 const addImage = (id, imgWrapper) => {
   const formData = new FormData();
+  console.log(imgWrapper);
   const image = dataURItoBlob(imgWrapper.data);
+  const json = JSON.stringify([imgWrapper.boundaries]);
   formData.append('images', image, imgWrapper.name);
+  formData.append(
+    'boundaries',
+    new Blob([json], {
+      type: 'application/json',
+    })
+  );
   return shopAxios.put(
     `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/upload/${id}`,
     formData,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': undefined,
       },
     }
   );

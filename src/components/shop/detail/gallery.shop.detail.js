@@ -53,7 +53,9 @@ export default function ShopAdminGallery(props) {
   const history = useHistory();
 
   useEffect(() => {
-    console.info('from useffect ' + selected);
+    if (!props.metadata || props.metadata.length === 0) {
+      setMode(GALLERY_EDITION_MODE);
+    }
   });
   // handle alert according to how many image are uploaded
   //and how many more user can upload
@@ -61,10 +63,9 @@ export default function ShopAdminGallery(props) {
     if (maxImageForShop - props.metadata.length > 0) {
       return (
         <Alert severity="info">
-          {format(
-            t('feedback.shopRemainingImage'),
-            (maxImageForShop - props.metadata.length).toString()
-          )}
+          {format(t('feedback.shopRemainingImage'), [
+            (maxImageForShop - props.metadata.length).toString(),
+          ])}
         </Alert>
       );
     }
@@ -120,6 +121,7 @@ export default function ShopAdminGallery(props) {
     setIsLoading(true);
     ShopService.deleteImages(id, selected)
       .then(() => {
+        setSelected((old) => []);
         ShopService.proShopDetail(id)
           .then((res) => {
             dispatch(updateVistedShop(res.data));
@@ -176,50 +178,54 @@ export default function ShopAdminGallery(props) {
     }
   };
 
+  const handleActions = () => {
+    return props.metadata && props.metadata.length > 0 ? (
+      <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
+        <Grid item className="flex" xs={12} md={12} sm={12}>
+          <Button variant="outlined" color="secondary" onClick={switchMode}>
+            {mode === GALLERY_VISUALIZATION_MODE
+              ? t('components.gallery.editionMode')
+              : t('components.gallery.visualizationMode')}
+          </Button>
+          {mode === GALLERY_EDITION_MODE && selected && selected.length > 0 ? (
+            <Button
+              variant="outlined"
+              color="secondary"
+              className="btn-spacing"
+              endIcon={<DeleteForeverIcon />}
+              onClick={(e) => {
+                setIsDeletionPopupOpen(true);
+                console.info('normalement oui');
+              }}
+            >
+              {t('actions.delete')}
+            </Button>
+          ) : null}
+          {mode === GALLERY_EDITION_MODE &&
+          selected &&
+          selected.length === 1 ? (
+            <Button
+              variant="outlined"
+              color="secondary"
+              className="btn-spacing"
+              endIcon={<DoneAllIcon />}
+              onClick={updateRootImage}
+            >
+              Image de fond
+            </Button>
+          ) : null}
+        </Grid>
+      </Secured>
+    ) : null;
+  };
   return (
     <LoadingWrapper loading={isLoading}>
-      <Grid container className="m-t-alt1 jc-center">
+      <Grid container class="m-t-alt1 jc-center flex">
         {handleAlert()}
-        <div className="m-t-alt1">
-          <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
-            <Grid item className="flex">
-              <Button variant="outlined" color="secondary" onClick={switchMode}>
-                {mode === GALLERY_VISUALIZATION_MODE
-                  ? t('components.gallery.editionMode')
-                  : t('components.gallery.visualizationMode')}
-              </Button>
-              {mode === GALLERY_EDITION_MODE &&
-              selected &&
-              selected.length > 0 ? (
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  className="btn-spacing"
-                  endIcon={<DeleteForeverIcon />}
-                  onClick={(e) => {
-                    setIsDeletionPopupOpen(true);
-                    console.info('normalement oui');
-                  }}
-                >
-                  {t('actions.delete')}
-                </Button>
-              ) : null}
-              {mode === GALLERY_EDITION_MODE &&
-              selected &&
-              selected.length === 1 ? (
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  className="btn-spacing"
-                  endIcon={<DoneAllIcon />}
-                  onClick={updateRootImage}
-                >
-                  Image de fond
-                </Button>
-              ) : null}
-            </Grid>
-          </Secured>
-
+      </Grid>
+      <Grid container>
+        <div className="m-t-alt1 full-width">
+          {handleActions()}
           <div className="m-t-alt1">
             <Grid item>
               <MyGallery

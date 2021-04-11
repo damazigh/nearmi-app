@@ -8,7 +8,9 @@ import SelectedImage from './selected-img';
 import { GALLERY_VISUALIZATION_MODE } from '../../../utils/constants';
 import Secured from '../../../security/secured.wrapper';
 import { ROLE_PROFESSIONAL } from '../../../utils/roles.constants';
-
+import { Alert } from '@material-ui/lab';
+import { Grid } from '@material-ui/core';
+import { reduce } from '../../../utils/utils';
 /**
  *
  * @param {*} param0
@@ -37,6 +39,14 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
     };
   }, []);
 
+  const dispalyAlert = () => {
+    return (
+      <Grid container className="flex jc-center">
+        <Alert severity="warning">Aucune image enregistrée</Alert>
+      </Grid>
+    );
+  };
+
   /**
    * build object photos passed to gallery component
    */
@@ -44,34 +54,13 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
     if (metadata && metadata.length > 0) {
       let i = 0;
       return metadata.map((m) => {
-        let recalculatedIdx = i;
-        if (i >= 9) {
-          recalculatedIdx = i % CYCLE;
-        }
-        let h = 1,
-          w = 1;
-        if (recalculatedIdx === 0) {
-          h = 5;
-          w = 4;
-        } else if (recalculatedIdx === 1) {
-          w = 1;
-          h = 1;
-        } else if (
-          (recalculatedIdx > 1 && recalculatedIdx < 5) ||
-          recalculatedIdx === 6
-        ) {
-          w = rangeRandom(5, 7);
-          h = rangeRandom(2, 3);
-        } else {
-          w = rangeRandom(2, 3);
-          h = 3;
-        }
-
+        const ratio = m.width / m.height;
         const opt = {
           src: ShopService.buildImagePath(id, m.name),
-          height: 1.5,
-          width: 2.3,
           name: m.name,
+          aspectRatio: m.width / m.height,
+          width: m.width,
+          height: m.height,
         };
         i++;
         return opt;
@@ -100,20 +89,37 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
     <div>
       {mode === GALLERY_VISUALIZATION_MODE ? (
         <>
-          <Gallery direction="row" photos={pictures} onClick={openLightbox} />
-          <ImageViewerDialog
-            imgSrc={ShopService.buildImagePath(id, metadata[currentImage].name)}
-            isOpen={viewerIsOpen}
-            onClose={() => setViewerIsOpen(false)}
-          />
+          {metadata && metadata.length ? (
+            <>
+              <Gallery
+                direction="row"
+                photos={pictures}
+                onClick={openLightbox}
+              />
+              <ImageViewerDialog
+                imgSrc={ShopService.buildImagePath(
+                  id,
+                  metadata[currentImage].name
+                )}
+                isOpen={viewerIsOpen}
+                onClose={() => setViewerIsOpen(false)}
+              />
+            </>
+          ) : (
+            dispalyAlert()
+          )}
         </>
       ) : (
         <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
-          <Gallery
-            direction="row"
-            photos={pictures}
-            renderImage={imageRenderer}
-          />
+          {metadata && metadata.length > 0 ? (
+            <Gallery
+              direction="row"
+              photos={pictures}
+              renderImage={imageRenderer}
+            />
+          ) : (
+            dispalyAlert()
+          )}
         </Secured>
       )}
     </div>

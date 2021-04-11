@@ -64,7 +64,7 @@ export default function ImgUploader({ uploadImageHandler }) {
       files = e.target.files;
     }
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = (e) => {
       Logger.debug('[ImgUploader] - image state setted after on load');
       setImage(reader.result);
     };
@@ -98,6 +98,10 @@ export default function ImgUploader({ uploadImageHandler }) {
     if (typeof cropper !== 'undefined') {
       return {
         data: cropper.getCroppedCanvas().toDataURL(),
+        boundaries: {
+          height: cropper.cropBoxData.height,
+          width: cropper.cropBoxData.width,
+        },
         name: document
           .querySelector('#uploadImage')
           .value.split(/(\\|\/)/g)
