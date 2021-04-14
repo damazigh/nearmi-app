@@ -32,5 +32,14 @@ export const getMaxImageForShopSelector = (state) =>
  */
 export const getAcceptedImgMimeSelector = (state) =>
   state.shopReducer.shopConfig.acceptedImageMime;
-
+/**
+ * get visited shop
+ * @param {*} state redux state
+ */
 export const getVisitedShopSelector = (state) => state.shopReducer.shop;
+/**
+ * get the already fetched product for shop
+ * @param {*} state fetched product for shop
+ */
+export const getfetchedProductsSelector = (state) =>
+  state.shopReducer.loadedProducts;

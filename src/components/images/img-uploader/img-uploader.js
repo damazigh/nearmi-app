@@ -1,5 +1,5 @@
 import 'cropperjs/dist/cropper.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Cropper from 'react-cropper';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -7,9 +7,11 @@ import { getAcceptedImgMimeSelector } from '../../../redux/selector/shop.selecto
 import { CUSTOM_EVT_IMG_UPLOADER_UPLOAD } from '../../../utils/events-custom.constants';
 import {
   attachEvtListener,
+  attachEvtListener2Document,
   checkIfMimeAccepted,
   format,
   removeEvtListener,
+  removeEvtListenerFromDocument,
 } from '../../../utils/utils';
 import useSnackBars from '../../snackbar/use-snackbar';
 import './img-uploader.css';
@@ -29,28 +31,23 @@ export default function ImgUploader({ uploadImageHandler }) {
   const acceptedImageMime = useSelector(getAcceptedImgMimeSelector);
 
   useEffect(() => {
-    Logger.debug(
-      '[ImgUploader] - attaching callback handleCrop to event ' +
-        CUSTOM_EVT_IMG_UPLOADER_UPLOAD
-    );
-    attachEvtListener(
-      '#uploadImage',
-      CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
-      handleCrop
-    );
+    attachEvtListener2Document(CUSTOM_EVT_IMG_UPLOADER_UPLOAD, handleCrop);
     return () => {
-      Logger.debug('[ImgUploader] -  cleanup component image uploader');
-      Logger.debug(
-        '[ImgUploader] - removing callback handleCrop to event ' +
-          CUSTOM_EVT_IMG_UPLOADER_UPLOAD
-      );
-      removeEvtListener(
-        '#uploadImage',
-        CUSTOM_EVT_IMG_UPLOADER_UPLOAD,
-        handleCrop
-      );
+      removeEvtListenerFromDocument(CUSTOM_EVT_IMG_UPLOADER_UPLOAD, handleCrop);
     };
   }, [image, cropper]);
+
+  /**
+   * handle click on crop
+   */
+  const handleCrop = useCallback(() => {
+    Logger.debug('[ImgUploader] - handle crop triggered !');
+    const data = getCropData();
+    uploadImageHandler(data, () => {
+      setImage(null);
+    });
+  });
+
   /**
    * get uploaded files
    * @param {*} e
@@ -139,16 +136,6 @@ export default function ImgUploader({ uploadImageHandler }) {
     return <></>;
   };
 
-  /**
-   * handle click on crop
-   */
-  const handleCrop = () => {
-    Logger.debug('[ImgUploader] - handle crop triggered !');
-    const data = getCropData();
-    uploadImageHandler(data, () => {
-      setImage(null);
-    });
-  };
   /**
    * render function
    */

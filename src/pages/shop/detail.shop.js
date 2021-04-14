@@ -12,8 +12,17 @@ import './shop.css';
 import { useTranslation } from 'react-i18next';
 import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
 import useSnackBars from '../../components/snackbar/use-snackbar';
-import { updateVistedShop } from '../../redux/action/shop.actions';
-import { getVisitedShopSelector } from '../../redux/selector/shop.selector';
+import {
+  updateLoadedProduct,
+  updateVistedShop,
+} from '../../redux/action/shop.actions';
+import {
+  getfetchedProductsSelector,
+  getVisitedShopSelector,
+} from '../../redux/selector/shop.selector';
+import ProductService from '../../service/product.service';
+import { DEFAULT_PAGINATION_PAGE_SIZE } from '../../utils/constants';
+import Logger from 'js-logger';
 
 export default function DetailShop() {
   const dispatch = useDispatch();
@@ -23,6 +32,7 @@ export default function DetailShop() {
   const { t } = useTranslation();
   const { showSnack } = useSnackBars();
   const detail = useSelector(getVisitedShopSelector);
+  const loadedProducts = useSelector(getfetchedProductsSelector);
 
   useEffect(() => {
     if (!menuIconDisplayed) {
@@ -32,6 +42,33 @@ export default function DetailShop() {
       .then((res) => dispatch(updateVistedShop(res.data)))
       .catch((err) => showSnack(t('feedback.fetchDataInternalError'), 'error'))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    dispatch((thunk_dispatch) => {
+      setLoading(true);
+      ProductService.getProducts(
+        id,
+        loadedProducts.offset,
+        loadedProducts.limit
+      )
+        .then((res) => {
+          thunk_dispatch(
+            updateLoadedProduct(
+              res.data,
+              loadedProducts.offset + DEFAULT_PAGINATION_PAGE_SIZE,
+              loadedProducts.limit + 1
+            )
+          );
+        })
+        .catch((err) => {
+          Logger.error('error when fetching product for shop ' + err);
+          showSnack(t('feedback.fetchDataInternalError'), 'error');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
   }, []);
 
   const buildCat = () => {

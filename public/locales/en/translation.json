@@ -44,6 +44,9 @@
           "placeholder": "Some custom category"
         }
       }
+    },
+    "dialogUploader": {
+      "uploadNewImage": "Upload new image"
     }
   },
   "pages": {
@@ -121,7 +124,8 @@
     "operationError": "Operation failed",
     "noItemToDisplay" : "No item to display",
     "productCategoryDeletionWarning": "You are going to delete category: '{0}'",
-    "leaveWithoutSave": "If you leave before saving, your changes will be lost"
+    "leaveWithoutSave": "If you leave before saving, your changes will be lost",
+    "noImages":"No saved images"
   },
   "alert": {
     "warn": {
@@ -154,6 +158,7 @@
     "view": "View",
     "delete": "Delete",
     "save": "Save",
-    "addAnother": "Add another"
+    "addAnother": "Add another",
+    "add": "Add"
   }
 }

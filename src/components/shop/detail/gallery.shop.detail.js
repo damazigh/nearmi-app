@@ -79,9 +79,7 @@ export default function ShopAdminGallery(props) {
    * upload the image to backend
    */
   const proceed = () => {
-    if (document.querySelector('#uploadImage').value) {
-      dispatchCustomEvent('#uploadImage', CUSTOM_EVT_IMG_UPLOADER_UPLOAD);
-    }
+    dispatchCustomEvent(null, CUSTOM_EVT_IMG_UPLOADER_UPLOAD);
   };
 
   /**

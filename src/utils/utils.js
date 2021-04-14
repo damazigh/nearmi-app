@@ -2,6 +2,7 @@ import {
   IMAGE_JPEG_MIME_HEADER,
   IMAGE_PNG_MIME_HEADER,
 } from './mime.constants';
+import Logger from 'js-logger';
 
 export function format(str, args) {
   for (let k in args) {
@@ -90,18 +91,50 @@ export function dataURItoBlob(dataURI) {
  */
 export function dispatchCustomEvent(selector, eventType) {
   const event = new Event(eventType);
-  const elt = document.querySelector(selector);
+  let elt = selector ? document.querySelector(selector) : document;
+  // fallback if selector doesn't exist
+  if (!elt) {
+    Logger.warn(
+      '[utils - dispatchCustomEvent] none element match given selector ' +
+        selector +
+        ' - dispatching to document'
+    );
+    elt = document;
+  }
+  Logger.debug(
+    'dispatch event ' +
+      eventType +
+      ' for selector ' +
+      (elt === document ? 'document' : selector)
+  );
+  elt.dispatchEvent(event);
+}
+
+export function attachEvtListener2Document(eventType, callback) {
+  Logger.debug(
+    '[attachEvtListener2Document] - attaching event ' +
+      eventType +
+      ' to document'
+  );
+  attachEvtToElm(document, eventType, callback);
+}
+export function attachEvtListener(selector, eventType, callback) {
+  Logger.debug(
+    '[attachEvtToElm] - attaching event ' +
+      eventType +
+      ' to selector ' +
+      selector
+  );
+  const elt = document ? document : document.querySelector(selector);
   if (elt) {
-    console.info('dispatched event' + eventType);
-    elt.dispatchEvent(event);
+    attachEvtToElm(document, eventType, callback);
+  } else {
+    Logger.warn('None element matched to selector ' + selector);
   }
 }
 
-export function attachEvtListener(selector, eventType, callback) {
-  const elt = document.querySelector(selector);
-  if (elt) {
-    elt.addEventListener(eventType, callback);
-  }
+export function removeEvtListenerFromDocument(eventType, callback) {
+  document.removeEventListener(eventType, callback);
 }
 export function removeEvtListener(selector, eventType, callback) {
   const elt = document.querySelector(selector);
@@ -117,12 +150,6 @@ export function focusElt(id) {
   }
 }
 
-// Reduce a fraction by finding the Greatest Common Divisor and dividing by it.
-export function reduce(numerator, denominator) {
-  const gcd = calcGcd(numerator, denominator);
-  return [numerator / gcd, denominator / gcd];
-}
-
 /**================ not exported functions ================*/
 function convertMimeToConst(mime) {
   switch (mime) {
@@ -133,6 +160,9 @@ function convertMimeToConst(mime) {
       return IMAGE_JPEG_MIME_HEADER;
   }
 }
-function calcGcd(a, b) {
-  return b ? calcGcd(b, a % b) : a;
+
+function attachEvtToElm(elt, eventType, callback) {
+  if (elt) {
+    elt.addEventListener(eventType, callback);
+  }
 }

@@ -1,3 +1,4 @@
+import { DEFAULT_PAGINATION_PAGE_SIZE } from '../../utils/constants';
 import {
   ADDRESS_UPDATED,
   CREATE_SHOP,
@@ -6,6 +7,7 @@ import {
   SHOP_CONFIG_LOADED,
   TOOLBAR_MENU_ICON_DISPLAY,
   TOOLBAR_MENU_ICON_TOGGLED,
+  UPDATE_LOADED_PRODUCT,
   UPDATE_MANAGED_SHOP,
   UPDATE_VISITIED_SHOP,
 } from '../type';
@@ -20,6 +22,11 @@ const initialState = {
   shop: null,
   shopConfig: null,
   visitedShop: null,
+  loadedProducts: {
+    products: [], //loaded product
+    offset: 0, // actual page index
+    limit: DEFAULT_PAGINATION_PAGE_SIZE, // default page size
+  },
 };
 
 let newState = null;
@@ -62,6 +69,11 @@ export default function shopReducer(state = initialState, action) {
     case UPDATE_VISITIED_SHOP:
       newState = Object.assign({}, state);
       newState.shop = action.shop;
+      return newState;
+    // happens when fetching more product from backend
+    case UPDATE_LOADED_PRODUCT:
+      newState = Object.assign({}, state);
+      newState.loadedProducts = action.loadedProducts;
       return newState;
     default:
       return state;

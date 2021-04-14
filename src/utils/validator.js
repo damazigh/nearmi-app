@@ -72,5 +72,6 @@ export function numericOrEmpty(str) {
 }
 
 export async function asyncValidator(fn) {
-  return await fn();
+  const res = await fn();
+  return res.data;
 }

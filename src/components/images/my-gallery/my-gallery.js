@@ -1,30 +1,37 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import ShopService from '../../../service/shop.service';
-import { rangeRandom } from '../../../utils/utils';
-import { useParams } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Gallery from 'react-photo-gallery';
+import { useParams } from 'react-router-dom';
+import Secured from '../../../security/secured.wrapper';
+import ShopService from '../../../service/shop.service';
+import { GALLERY_VISUALIZATION_MODE } from '../../../utils/constants';
+import { ROLE_PROFESSIONAL } from '../../../utils/roles.constants';
 import ImageViewerDialog from '../../dialog/img-viewer.dialog';
 import SelectedImage from './selected-img';
-import { GALLERY_VISUALIZATION_MODE } from '../../../utils/constants';
-import Secured from '../../../security/secured.wrapper';
-import { ROLE_PROFESSIONAL } from '../../../utils/roles.constants';
-import { Alert } from '@material-ui/lab';
-import { Grid } from '@material-ui/core';
-import { reduce } from '../../../utils/utils';
 /**
  *
  * @param {*} param0
  */
-export default function MyGallery({ metadata, mode, updateSelected }) {
+export default function MyGallery({
+  metadata,
+  mode,
+  updateSelected,
+  inMemory = false,
+}) {
   // current image to open
   const [currentImage, setCurrentImage] = useState(0);
   // viewer image is open
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
+  // shop id
   const { id } = useParams();
+  // set of picture
   const [pictures, setPicture] = useState([]);
-  // const use to define height and width of image
-  const CYCLE = 9;
+  // TODO ajouter séléctionner tout
   const [selectAll, setSelectAll] = useState(false);
+  // translation hook
+  const { t } = useTranslation();
 
   const openLightbox = useCallback((event, { photo, index }) => {
     setCurrentImage(index);
@@ -37,12 +44,12 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
       setCurrentImage(0);
       setPicture([]);
     };
-  }, []);
+  }, [metadata]);
 
   const dispalyAlert = () => {
     return (
       <Grid container className="flex jc-center">
-        <Alert severity="warning">Aucune image enregistrée</Alert>
+        <Alert severity="warning">{t('feedback.noImages')}</Alert>
       </Grid>
     );
   };
@@ -54,11 +61,9 @@ export default function MyGallery({ metadata, mode, updateSelected }) {
     if (metadata && metadata.length > 0) {
       let i = 0;
       return metadata.map((m) => {
-        const ratio = m.width / m.height;
         const opt = {
-          src: ShopService.buildImagePath(id, m.name),
+          src: inMemory ? m.url : ShopService.buildImagePath(id, m.name),
           name: m.name,
-          aspectRatio: m.width / m.height,
           width: m.width,
           height: m.height,
         };

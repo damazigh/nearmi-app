@@ -7,15 +7,17 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import Secured from '../../security/secured.wrapper';
 import ProductCategoryService from '../../service/product-category.service';
+import ProductService from '../../service/product.service';
 import UnicityService from '../../service/unicity.service';
 import { ROLE_PROFESSIONAL } from '../../utils/roles.constants';
-import { format } from '../../utils/utils';
+import { focusElt, format } from '../../utils/utils';
 import { asyncValidator, numeric, numericOrEmpty } from '../../utils/validator';
 import { ControlledCollapsibleWrapper } from '../collapsible/collapsible.wrapper';
 import TextFieldControl from '../control/text-field.ctrl';
 import { AlertDialog } from '../dialog/alert.dialog';
+import GalleryAndUploader from '../gallery-uploader/gallery-uploader';
 import { LoadingWrapper } from '../loading/loading';
-import { focusElt } from '../../utils/utils';
+import useSnackBars from '../snackbar/use-snackbar';
 
 const PRODUCT_DETAIL_PANEL = 'productDetailPanel';
 const PRODUCT_GALLERY_PANEL = 'productGalleryPanel';
@@ -37,6 +39,10 @@ export default function CreateUpdateProduct({ product }) {
   const [isLeaveAlertOpen, setIsLeaveAlertOpen] = useState(false);
   // history hook for redirecting
   const history = useHistory();
+  // getvalues
+  const { getValues, formState, setValue } = methods;
+  // snackbar hook
+  const { showSnack } = useSnackBars();
 
   useEffect(() => {
     if (!productCategories) {
@@ -60,6 +66,69 @@ export default function CreateUpdateProduct({ product }) {
     setExpanded(isExpanded ? panel : false);
   };
 
+  /**
+   * method for handling next or save event
+   */
+  const handleNextOrSave = () => {
+    if (!expanded) {
+      setExpanded(PRODUCT_DETAIL_PANEL);
+    } else {
+      switch (expanded) {
+        case PRODUCT_DETAIL_PANEL:
+          setExpanded(PRODUCT_GALLERY_PANEL);
+          break;
+        case PRODUCT_GALLERY_PANEL:
+          Logger.debug('[add-product] - submitting product');
+          handleSave();
+          break;
+      }
+    }
+  };
+
+  const handleBack = () => {
+    switch (expanded) {
+      case PRODUCT_GALLERY_PANEL:
+        setExpanded(PRODUCT_DETAIL_PANEL);
+        break;
+    }
+  };
+
+  const handleSave = () => {
+    setIsLoading(true);
+    if (formState.isValid && formState.touched) {
+      const values = getValues();
+      const product = {};
+      product.name = values.productName;
+      product.description = values.productDescription;
+      product.price = Number.parseFloat(values.productPrice);
+      if (values.productQuantity) {
+        product.quantity = Number.parseInt(values.productQuantity);
+      } else {
+        product.quantity = null;
+      }
+      const metadata = JSON.parse(sessionStorage.productGalleryMetadata);
+      if (values.productCategory) {
+        const category = productCategories.find(
+          (x) => x.name === values.productCategory
+        );
+        if (category) {
+          product.productCategory = category.id;
+        }
+      }
+      ProductService.createProduct(id, product, metadata)
+        .then((res) => {
+          history.push(`/shop/${id}`);
+          showSnack(t('feedback.operationSucceded'), 'success');
+        })
+        .catch((err) => {
+          Logger.error(
+            'error while submitting new product ' + JSON.stringify(err)
+          );
+          showSnack(t('feedback.operationFailded'));
+        })
+        .finally(() => setIsLoading(false));
+    }
+  };
   return (
     <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
       <LoadingWrapper loading={isLoading}>
@@ -86,7 +155,7 @@ export default function CreateUpdateProduct({ product }) {
                       required: true,
                       minLength: 3,
                       validate: {
-                        unicity: (val) =>
+                        unicity: async (val) =>
                           asyncValidator(() =>
                             UnicityService.productUnicity('name', val, id)
                           ),
@@ -177,6 +246,9 @@ export default function CreateUpdateProduct({ product }) {
                     options={productCategories}
                     getOptionLabel={(option) => option.name}
                     className="full-width"
+                    onInputChange={(e, val) => {
+                      setValue('productCategory', val);
+                    }}
                     renderInput={(params) => (
                       <TextFieldControl
                         {...params}
@@ -188,13 +260,6 @@ export default function CreateUpdateProduct({ product }) {
                         placeholder={t(
                           'components.createProduct.fields.productCategory.placeholder'
                         )}
-                        required
-                        rules={{
-                          required: true,
-                        }}
-                        messages={{
-                          required: t('validation.commons.required'),
-                        }}
                       />
                     )}
                   />
@@ -207,7 +272,7 @@ export default function CreateUpdateProduct({ product }) {
               onChange={() => handleChange(PRODUCT_GALLERY_PANEL)}
               expanded={expanded === PRODUCT_GALLERY_PANEL}
             >
-              <p>pas encore implémenté</p>
+              <GalleryAndUploader inMemory={true} trackMetadata={true} />
             </ControlledCollapsibleWrapper>
 
             <Grid container className="flex dir-row-reverse">
@@ -220,12 +285,21 @@ export default function CreateUpdateProduct({ product }) {
                   {t('actions.cancel')}
                 </Button>
 
-                {expanded !== PRODUCT_DETAIL_PANEL && (
-                  <Button className="button-m-r" variant="contained">
+                {expanded !== PRODUCT_DETAIL_PANEL && expanded && (
+                  <Button
+                    className="button-m-r"
+                    variant="contained"
+                    onClick={handleBack}
+                  >
                     {t('actions.back')}
                   </Button>
                 )}
-                <Button color="primary" variant="contained">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={handleNextOrSave}
+                  disabled={!formState.isValid || !formState.touched}
+                >
                   {expanded === PRODUCT_DETAIL_PANEL
                     ? t('actions.next')
                     : t('actions.save')}
@@ -235,6 +309,7 @@ export default function CreateUpdateProduct({ product }) {
           </form>
         </FormProvider>
       </LoadingWrapper>
+      {/** leave alert dialog */}
       <AlertDialog
         isOpen={isLeaveAlertOpen}
         onContinue={() => history.push(`/shop/${id}`)}

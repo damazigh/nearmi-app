@@ -6,6 +6,7 @@ import {
   NEXT_SHOP_CREATION_STEP,
   UPDATE_MANAGED_SHOP,
   UPDATE_VISITIED_SHOP,
+  UPDATE_LOADED_PRODUCT,
 } from '../type';
 
 /**
@@ -59,4 +60,13 @@ export const shopConfLoaded = (config) => {
 export const updateVistedShop = (shop) => ({
   type: UPDATE_VISITIED_SHOP,
   shop: shop,
+});
+
+export const updateLoadedProduct = (products, offset, limit) => ({
+  type: UPDATE_LOADED_PRODUCT,
+  loadedProducts: {
+    products,
+    offset,
+    limit,
+  },
 });
