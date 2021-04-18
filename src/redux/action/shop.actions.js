@@ -7,6 +7,8 @@ import {
   UPDATE_MANAGED_SHOP,
   UPDATE_VISITIED_SHOP,
   UPDATE_LOADED_PRODUCT,
+  FETCH_MORE_PRODUCT,
+  PRODUCT_DELETED_BY_PRO,
 } from '../type';
 
 /**
@@ -69,4 +71,11 @@ export const updateLoadedProduct = (products, offset, limit) => ({
     offset,
     limit,
   },
+});
+
+export const fetchMoreProduct = () => ({ type: FETCH_MORE_PRODUCT });
+
+export const deletedProduct = (productId) => ({
+  type: PRODUCT_DELETED_BY_PRO,
+  deletedProductId: productId,
 });

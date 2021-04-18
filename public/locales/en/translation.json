@@ -125,7 +125,8 @@
     "noItemToDisplay" : "No item to display",
     "productCategoryDeletionWarning": "You are going to delete category: '{0}'",
     "leaveWithoutSave": "If you leave before saving, your changes will be lost",
-    "noImages":"No saved images"
+    "noImages":"No saved images",
+    "productDeletionWarning": "You are about to delete product named '{0}'"
   },
   "alert": {
     "warn": {

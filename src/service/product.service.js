@@ -54,9 +54,16 @@ const getProducts = (shopId, offset, limit) => {
   );
 };
 
+const deleteProduct = (shopId, productId) => {
+  return shopAxios.delete(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/pro/${shopId}/product/${productId}`
+  );
+};
+
 const ProductService = {
   createInMemoryImage,
   createProduct,
   getProducts,
+  deleteProduct,
 };
 export default ProductService;

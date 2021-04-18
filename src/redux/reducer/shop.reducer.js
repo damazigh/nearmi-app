@@ -2,8 +2,10 @@ import { DEFAULT_PAGINATION_PAGE_SIZE } from '../../utils/constants';
 import {
   ADDRESS_UPDATED,
   CREATE_SHOP,
+  FETCH_MORE_PRODUCT,
   HANDLED_NEXT_SHOP_CREATION_STEP,
   NEXT_SHOP_CREATION_STEP,
+  PRODUCT_DELETED_BY_PRO,
   SHOP_CONFIG_LOADED,
   TOOLBAR_MENU_ICON_DISPLAY,
   TOOLBAR_MENU_ICON_TOGGLED,
@@ -27,6 +29,7 @@ const initialState = {
     offset: 0, // actual page index
     limit: DEFAULT_PAGINATION_PAGE_SIZE, // default page size
   },
+  fetcheMore: 0, // notify component to fetch more product
 };
 
 let newState = null;
@@ -73,7 +76,30 @@ export default function shopReducer(state = initialState, action) {
     // happens when fetching more product from backend
     case UPDATE_LOADED_PRODUCT:
       newState = Object.assign({}, state);
-      newState.loadedProducts = action.loadedProducts;
+      const newLoadedProduct = {};
+      newLoadedProduct.products = [
+        ...state.loadedProducts.products,
+        ...action.loadedProducts.products,
+      ];
+      newLoadedProduct.offset = action.loadedProducts.offset;
+      newLoadedProduct.limit = action.loadedProducts.limit;
+      newState.loadedProducts = newLoadedProduct;
+      return newState;
+    case FETCH_MORE_PRODUCT:
+      newState = Object.assign({}, state);
+      newState.fetcheMore = ++state.fetcheMore;
+      return newState;
+    case PRODUCT_DELETED_BY_PRO:
+      newState = Object.assign({}, state);
+      const nlp = {};
+      nlp.products = [
+        ...state.loadedProducts.products.filter(
+          (p) => p.id !== action.deletedProductId
+        ),
+      ];
+      nlp.offset = state.loadedProducts.offset;
+      nlp.limit = state.loadedProducts.limit;
+      newState.loadedProducts = nlp;
       return newState;
     default:
       return state;

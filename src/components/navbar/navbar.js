@@ -52,9 +52,7 @@ function Navbar() {
                 >
                   <MenuIcon />
                 </IconButton>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </Grid>
 
             <Grid item xs={6} className="flex justify-end">

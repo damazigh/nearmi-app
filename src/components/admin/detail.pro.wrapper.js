@@ -38,7 +38,7 @@ export default function DetailProWrapper({ detail }) {
   };
 
   return (
-    <LoadingWrapper loading={!detail}>
+    <LoadingWrapper loading={!detail} className="container">
       <Grid container md={12} xs={12}>
         <Grid item md={12} xs={12}>
           <Paper square className="m-t-alt2 full-width">

@@ -1,28 +1,28 @@
+import { Grid } from '@material-ui/core';
+import Logger from 'js-logger';
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import AnchorDrawer from '../../components/drawer/anchor.drawer';
-import { toolbarMenuIconDisplay } from '../../redux/action/account.action';
-import { shouldDisplaytoolbarMenuIcon } from '../../redux/selector/account.selector';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import ShopService from '../../service/shop.service';
+import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
+import AnchorDrawer from '../../components/drawer/anchor.drawer';
 import { LoadingWrapper } from '../../components/loading/loading';
 import ProductHeader from '../../components/product/product.header';
-import { Grid, Typography } from '@material-ui/core';
-import './shop.css';
-import { useTranslation } from 'react-i18next';
-import DetailProWrapper from '../../components/admin/detail.pro.wrapper';
 import useSnackBars from '../../components/snackbar/use-snackbar';
+import { toolbarMenuIconDisplay } from '../../redux/action/account.action';
 import {
   updateLoadedProduct,
   updateVistedShop,
 } from '../../redux/action/shop.actions';
+import { shouldDisplaytoolbarMenuIcon } from '../../redux/selector/account.selector';
 import {
+  fetchMoreSelector,
   getfetchedProductsSelector,
   getVisitedShopSelector,
 } from '../../redux/selector/shop.selector';
 import ProductService from '../../service/product.service';
-import { DEFAULT_PAGINATION_PAGE_SIZE } from '../../utils/constants';
-import Logger from 'js-logger';
+import ShopService from '../../service/shop.service';
+import './shop.css';
 
 export default function DetailShop() {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ export default function DetailShop() {
   const { showSnack } = useSnackBars();
   const detail = useSelector(getVisitedShopSelector);
   const loadedProducts = useSelector(getfetchedProductsSelector);
+  const fetchMore = useSelector(fetchMoreSelector);
 
   useEffect(() => {
     if (!menuIconDisplayed) {
@@ -56,8 +57,8 @@ export default function DetailShop() {
           thunk_dispatch(
             updateLoadedProduct(
               res.data,
-              loadedProducts.offset + DEFAULT_PAGINATION_PAGE_SIZE,
-              loadedProducts.limit + 1
+              loadedProducts.offset + 1,
+              loadedProducts.limit
             )
           );
         })
@@ -69,7 +70,7 @@ export default function DetailShop() {
           setLoading(false);
         });
     });
-  }, []);
+  }, [fetchMore]);
 
   const buildCat = () => {
     if (

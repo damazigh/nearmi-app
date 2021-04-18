@@ -43,3 +43,5 @@ export const getVisitedShopSelector = (state) => state.shopReducer.shop;
  */
 export const getfetchedProductsSelector = (state) =>
   state.shopReducer.loadedProducts;
+
+export const fetchMoreSelector = (state) => state.shopReducer.fetchMore;
