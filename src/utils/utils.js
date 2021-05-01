@@ -51,7 +51,7 @@ export function checkImage(path) {
  * @param {*} max
  */
 export function rangeRandom(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 export function checkIfMimeAccepted(acceptedMimes, actualHeader) {

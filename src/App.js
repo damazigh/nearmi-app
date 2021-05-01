@@ -20,6 +20,7 @@ import ShopService from './service/shop.service';
 import { shopConfLoaded } from './redux/action/shop.actions';
 import Logger from 'js-logger';
 import CreateUpdateProduct from './components/product/create-update.product';
+import ProductDetail from './components/product/detail.product';
 
 const theme = createMuiTheme({
   palette: {
@@ -104,6 +105,11 @@ function App() {
                     <Secured requiredRoles={[ROLE_PROFESSIONAL]}>
                       <DetailShop />
                     </Secured>
+                  </Route>
+                  <Route exact path="/shop/:id/products/:productName">
+                    <Grid item xs={12} md={12} sm={12} className="container">
+                      <ProductDetail />
+                    </Grid>
                   </Route>
                   <Route exact path="/shop/:id/add-product">
                     <Grid item xs={12} md={12} sm={12} className="container">

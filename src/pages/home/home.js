@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Address from '../../components/address/address';
+import Tips from '../../components/tips/tips';
 
 export default function Home() {
   const history = useHistory();
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Address onSearch={onSearch} />
+      <Tips />
     </>
   );
 }

@@ -60,10 +60,22 @@ const deleteProduct = (shopId, productId) => {
   );
 };
 
+const getProductByName = (shopId, productName) => {
+  return shopAxios.get(
+    `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/${shopId}/product/${productName}`
+  );
+};
+
+const buildProductImgSrc = (shopId, productName, imageName) => {
+  return `${process.env.REACT_APP_SHOP_ENDPOINT}/api/shop/v1/${shopId}/product/${productName}/image/${imageName}`;
+};
+
 const ProductService = {
   createInMemoryImage,
   createProduct,
   getProducts,
   deleteProduct,
+  getProductByName,
+  buildProductImgSrc,
 };
 export default ProductService;

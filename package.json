@@ -31,7 +31,8 @@
     "react-swipeable-views": "0.13.9",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "react-material-ui-carousel": "2.2.4"
   },
   "scripts": {
     "start": "env-cmd -f .env react-scripts start --no-cache",

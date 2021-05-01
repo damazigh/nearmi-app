@@ -22,3 +22,22 @@ export function LoadingWrapper(props) {
     </>
   );
 }
+
+export function LoadingHiddenWrapper({ loading, children }) {
+  return (
+    <>
+      {(() => {
+        if (loading) {
+          return (
+            <div className="jc-center flex m-t-alt1 full-width">
+              <CircularProgress color="secondary" />
+              <div style={{ display: 'none' }}>{children}</div>
+            </div>
+          );
+        } else {
+          return children;
+        }
+      })()}
+    </>
+  );
+}
