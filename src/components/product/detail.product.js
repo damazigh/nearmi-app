@@ -39,13 +39,15 @@ export default function ProductDetail() {
   const buildBannerItems = () => {
     const totalWidth = product.metadata.reduce((a, b) => a.width + b.width);
     const groups = [];
-    for (let i = 0; i <= product.metadata.length - 2; i = i + 2) {
+    for (let i = 0; i <= product.metadata.length - 1; i = i + 2) {
       const group = {};
       group.name = product.name;
       group.caption = product.description;
       group.price = product.price;
       group.items = [];
-      for (let j = 0; j < 2; j++) {
+      const left =
+        product.metadata.length - i >= 2 ? 2 : product.metadata.length - i;
+      for (let j = 0; j < left; j++) {
         const meta = product.metadata[i + j];
         const item = {};
         item.name = meta.name;
@@ -93,8 +95,9 @@ export default function ProductDetail() {
 
 function Banner({ group, contentPosition = 'left', reservedGridSize }) {
   let items = [];
+  const SIZE = 12 / (group.items.length + 1);
   const content = (
-    <Grid item xs={reservedGridSize} md={reservedGridSize} key="content">
+    <Grid item xs={SIZE} md={SIZE} key="content">
       <CardContent className="Content">
         <Typography className="Title">
           {group.name} - {group.price} €
@@ -113,7 +116,7 @@ function Banner({ group, contentPosition = 'left', reservedGridSize }) {
     const item = group.items[i];
 
     const media = (
-      <Grid item xs={4} key={item.name}>
+      <Grid item xs={SIZE} key={item.name}>
         <CardMedia class="Media" image={item.image}>
           <Typography className="MediaCaption">{item.caption}</Typography>
         </CardMedia>
